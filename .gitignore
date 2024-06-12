@@ -1,0 +1,17 @@
+# Dependency directories
+node_modules/
+.next/
+out/
+/.cache/
+/.next/
+/.npm/
+/.yarn/
+/.pnp/
+/yarn-error.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
