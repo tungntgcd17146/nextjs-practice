@@ -1,5 +1,5 @@
 import { render, screen, describe, expect, it } from "@/src/utils/testUtils";
-import Loading, { Props } from "..";
+import LoadingProgress, { Props } from "..";
 
 const defaultProp = {
   dataTestId: "Loading",
@@ -11,7 +11,7 @@ const setup = (overrideProps = {}) => {
     ...overrideProps,
   };
 
-  return render(<Loading {...props} />);
+  return render(<LoadingProgress {...props} />);
 };
 
 describe("Loading Test", () => {

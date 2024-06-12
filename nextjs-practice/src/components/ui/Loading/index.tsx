@@ -12,7 +12,7 @@ export interface Props extends CircularProgressProps {
   wrapperStyle?: React.CSSProperties
 }
 
-const Loading = ({ helperText = 'Loading...', dataTestId, wrapperStyle, sx, ...rest }: Props) => {
+const LoadingProgress = ({ helperText = 'Loading...', dataTestId, wrapperStyle, sx, ...rest }: Props) => {
   const theme = useTheme()
 
   return (
@@ -37,4 +37,4 @@ const Loading = ({ helperText = 'Loading...', dataTestId, wrapperStyle, sx, ...r
   )
 }
 
-export default memo(Loading)
+export default memo(LoadingProgress)
