@@ -1,3 +1,5 @@
+"use client"
+
 import { memo, useCallback } from 'react'
 import { themes } from '@/src/themes'
 
@@ -9,6 +11,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
 import useScreenWidth from '@/src/hooks/useScreenWidth'
+import { useRouter } from 'next/navigation'
 
 export interface Props {
   headerContent?: string
@@ -31,14 +34,18 @@ const NotFoundPage = ({
   isHiddenActionButton = false
 }: Props) => {
   const { isTablet, isDesktop } = useScreenWidth()
+  const router = useRouter()
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       if (onClick) {
         onClick?.(e)
       }
+
+      router.push('/shop')
     },
-    [onClick]
+
+    [onClick, router]
   )
 
   return (

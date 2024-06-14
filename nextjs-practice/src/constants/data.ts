@@ -1,77 +1,87 @@
-import { FeatureProduct, NavigateItem, ShopSelect, ShopTabs, UserContact } from '@/src/types'
+import {
+  FeatureProduct,
+  NavigateItem,
+  ShopSelect,
+  ShopTabs,
+  TabsNavigation,
+  UserContact,
+} from "@/src/types";
 
 //img
-import Product1 from '@/public/assets/Product1.webp'
-import Product2 from '@/public/assets/Product2.webp'
-import Product3 from '@/public/assets/Product3.webp'
+import Product1 from "@/public/assets/Product1.webp";
+import Product2 from "@/public/assets/Product2.webp";
+import Product3 from "@/public/assets/Product3.webp";
 
 export const tabItems: NavigateItem[] = [
   {
     text: ShopTabs.PRODUCTS,
-    isDisabled: false
+    isDisabled: false,
+    go: TabsNavigation.PRODUCTS,
   },
   {
     text: ShopTabs.FOLLOWERS,
-    isDisabled: false
+    isDisabled: false,
+    go: TabsNavigation.FOLLOWERS,
   },
   {
     text: ShopTabs.FOLLOWING,
-    isDisabled: false
-  }
-]
+    isDisabled: false,
+    go: TabsNavigation.FOLLOWING,
+  },
+];
 
 export const selectOption = [
   {
-    id: '0',
+    id: "0",
     name: ShopSelect.ALL,
-    value: ShopSelect.ALL
+    value: ShopSelect.ALL,
   },
   {
-    id: '1',
+    id: "1",
     name: ShopSelect.RECENT,
-    value: ShopSelect.RECENT
+    value: ShopSelect.RECENT,
   },
   {
-    id: '2',
+    id: "2",
     name: ShopSelect.NEW,
-    value: ShopSelect.NEW
+    value: ShopSelect.NEW,
   },
   {
-    id: '3',
+    id: "3",
     name: ShopSelect.POPULAR,
-    value: ShopSelect.POPULAR
-  }
-]
+    value: ShopSelect.POPULAR,
+  },
+];
 
 export const userImageData = [
   {
     img: Product1,
-    imgTitle: 'product 1'
+    imgTitle: "product 1",
   },
   {
     img: Product2,
-    imgTitle: 'product 2'
+    imgTitle: "product 2",
   },
   {
     img: Product3,
-    imgTitle: 'product 3'
-  }
-]
+    imgTitle: "product 3",
+  },
+];
 
 export const fakeUserContact: UserContact = {
   id: 1,
-  userName: 'Rosetta Gottlieb',
+  userName: "Rosetta Gottlieb",
   productNumber: 12,
   followerNumber: 23,
-  contactStatus: 'follower'
-}
+  contactStatus: "follower",
+};
 
 export const fakeFeatureForProductData: FeatureProduct[] = [
-  { text: '128 prebuilt screens' },
-  { text: 'SaaS landing page ready' },
-  { text: 'Global styleguide' },
-  { text: 'Dark + light more ready' }
-]
+  { text: "128 prebuilt screens" },
+  { text: "SaaS landing page ready" },
+  { text: "Global styleguide" },
+  { text: "Dark + light more ready" },
+];
 
 export const fakeProductOverview = `Meet Node - a crypto NFT marketplace iOS UI design kit for Figma, Sketch, and Adobe XD. The kit includes
 
@@ -83,4 +93,4 @@ product faster.
 Types of screens included: onboarding, connect wallet, home feed, profile, upload, menu, search, product
 detail, notification...
 
-If you have any questions or requests, please feel free to leave them all in the comments section.`
+If you have any questions or requests, please feel free to leave them all in the comments section.`;

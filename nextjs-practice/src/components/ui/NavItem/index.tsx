@@ -6,6 +6,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import { useRouter } from "next/navigation";
 
 export interface Props {
   icon: React.ReactNode;
@@ -40,14 +41,16 @@ const NavItem = ({
   onNavItemClick,
   isSelected,
   isShowText,
+  go,
 }: Props) => {
+  const router = useRouter();
 
   const handleClickItem = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
 
     onNavItemClick?.(e);
+    router.push(go || "");
   };
-
 
   return (
     <ListItem key={index} disablePadding>
@@ -55,7 +58,7 @@ const NavItem = ({
         onClick={handleClickItem}
         data-testid="NavItem_ListItemButton"
         selected={isSelected}
-        sx={(theme) => listItemButtonStyles(theme)}
+        sx={listItemButtonStyles}
       >
         <ListItemIcon
           data-testid="NavItem_ListItemIcon"

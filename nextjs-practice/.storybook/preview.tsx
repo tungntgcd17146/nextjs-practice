@@ -5,7 +5,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { withThemeFromJSXProvider } from "@storybook/addon-themes";
 
 import { defaultTheme } from "../src/materialTheme";
-import { ModeProvider } from "../src/contexts/modeContext/modeProvider";
+import ModeContextProvider from "../src/contexts/modeContext/index";
 
 /* snipped for brevity */
 
@@ -23,9 +23,9 @@ export const decorators = [
   // Decorator for providing the mode (you may need to adjust the actual implementation)
   (Story, context) => {
     return (
-      <ModeProvider>
+      <ModeContextProvider>
         <Story {...context} />
-      </ModeProvider>
+      </ModeContextProvider>
     );
   },
 ];
@@ -39,6 +39,8 @@ const preview: Preview = {
       },
     },
   },
+
+  tags: ["autodocs"]
 };
 
 export default preview;

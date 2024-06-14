@@ -6,7 +6,7 @@ import {
   render,
   screen,
 } from "../../../utils/testUtils";
-import { ModeProvider } from "../modeProvider";
+import { ModeProvider } from "../ModeContext";
 import { useMode } from "../useModeContext";
 
 const TestComponent = () => {

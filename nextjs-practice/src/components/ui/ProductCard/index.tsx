@@ -1,3 +1,5 @@
+"use client";
+
 import { memo, useCallback, useMemo, useState } from "react";
 
 //mui
@@ -103,6 +105,7 @@ const ProductCard = ({
         data-testid="ProductCard_CardActionArea"
         onMouseEnter={handleHoverCard}
         onMouseLeave={handleLeaveCard}
+        onClick={handleViewCard}
       >
         <Box sx={{ position: "relative" }}>
           <CardMedia

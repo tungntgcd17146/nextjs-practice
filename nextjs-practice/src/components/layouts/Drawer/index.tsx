@@ -1,3 +1,5 @@
+"use client";
+
 import { memo, useCallback, useMemo } from "react";
 
 //MUI
@@ -24,6 +26,7 @@ import useScreenWidth from "@/src/hooks/useScreenWidth";
 //types
 import { NavigateItem } from "@/src/types";
 import { useMode } from "@/src/contexts/modeContext/useModeContext";
+import { usePathname } from "next/navigation";
 
 export interface Props {
   isOpen: boolean;
@@ -43,6 +46,7 @@ const Drawer = ({
   const { isMobile, isDesktop, isTablet } = useScreenWidth();
   const theme = useTheme();
   const { isDarkMode } = useMode();
+  const pathname = usePathname();
 
   const handleCloseDrawerOnMobile = useCallback(() => {
     onClose();
@@ -58,7 +62,7 @@ const Drawer = ({
     [isLargerDrawerOnTablet, isDesktop, isMobile],
   );
 
-  const logo = isDarkMode ? DarkLogo : LightLogo;
+  const logo = isDarkMode ? LightLogo : DarkLogo;
 
   const ListItem: React.ReactNode = (
     <Grid
@@ -102,7 +106,7 @@ const Drawer = ({
         )}
         <List>
           {listItems.map((item, index) => {
-            const { text, icon, isSelected, go } = item;
+            const { text, icon, go } = item;
 
             return (
               <NavItem
@@ -114,7 +118,7 @@ const Drawer = ({
                 icon={icon}
                 text={text}
                 index={index}
-                isSelected={isSelected!}
+                isSelected={pathname.includes(go!)}
                 isShowText={shouldShowFullContentOnDrawer}
               />
             );

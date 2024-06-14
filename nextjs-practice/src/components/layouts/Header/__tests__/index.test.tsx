@@ -10,7 +10,7 @@ import {
   it,
 } from "@/src/utils/testUtils";
 import * as useScreenWidth from "@/src/hooks/useScreenWidth";
-import { ModeProvider } from "@/src/contexts/modeContext/modeProvider";
+import { ModeProvider } from "@/src/contexts/modeContext/ModeContext";
 import Header from "..";
 
 const defaultProp = {};
