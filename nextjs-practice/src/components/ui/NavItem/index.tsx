@@ -9,11 +9,11 @@ import ListItemText from "@mui/material/ListItemText";
 import { useRouter } from "next/navigation";
 
 export interface Props {
-  icon: React.ReactNode;
-  text: string;
+  icon?: React.ReactNode;
+  text?: string;
   index?: number;
   onNavItemClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  isSelected: boolean;
+  isSelected?: boolean;
   go?: string;
   isShowText?: boolean;
 }
@@ -60,12 +60,14 @@ const NavItem = ({
         selected={isSelected}
         sx={listItemButtonStyles}
       >
-        <ListItemIcon
-          data-testid="NavItem_ListItemIcon"
-          sx={{ width: "24px", height: "24px" }}
-        >
-          {icon}
-        </ListItemIcon>
+        {icon && (
+          <ListItemIcon
+            data-testid="NavItem_ListItemIcon"
+            sx={{ width: "24px", height: "24px" }}
+          >
+            {icon}
+          </ListItemIcon>
+        )}
         {isShowText && (
           <ListItemText
             data-testid="NavItem_ListItemText"

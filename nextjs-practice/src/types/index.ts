@@ -1,9 +1,10 @@
 export interface NavigateItem {
-  text: string
+  text?: string
   go?: string
   isSelected?: boolean
   isDisabled?: boolean
   icon?: React.ReactNode
+  isDivider?: boolean
 }
 
 export enum ShopTabs {
