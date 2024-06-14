@@ -1,54 +1,72 @@
-import { memo } from 'react'
+"use client"
+
+import { memo } from "react";
 
 //mui
-import Grid from '@mui/material/Grid'
+import Grid from "@mui/material/Grid";
 
 //components
 // import ProductCard from '@/components/ProductCard'
-import ContactItem from '@/components/ContactItem'
+import ContactItem from "@/src/components/ui/ContactItem";
 
 //helper
-import useScreenWidth from '@/hooks/useScreenWidth'
-import { useContactsQuery } from '@/hooks/useContactsQuery'
-import InfiniteScroll from '@/components/InfiniteScroll'
-import PageNotFound from '@/components/PageNotFound'
+import useScreenWidth from "@/src/hooks/useScreenWidth";
+import InfiniteScroll from "@/src/components/ui/InfiniteScroll";
+import PageNotFound from "@/src/components/ui/PageNotFound";
+import { UserContact } from "@/src/types";
 
-export type ContactQuery = 'following' | 'followers'
+export type ContactQuery = "following" | "followers";
 
-export interface Props {
-  tabSelectedText: string
-}
+const contacts: UserContact[] = [
+  {
+    id: 1,
+    userName: "Tung Nguyen",
+    productNumber: 1,
+    followerNumber: 1,
+    contactStatus: "following",
+  },
+  {
+    id: 2,
+    userName: "Chelsie Haley",
+    productNumber: 1,
+    followerNumber: 1,
+    contactStatus: "following",
+  },
+  {
+    id: 3,
+    userName: "Tung Nguyen",
+    productNumber: 1,
+    followerNumber: 1,
+    contactStatus: "following",
+  },
+];
 
-const Contacts = ({ tabSelectedText }: Props) => {
-  const { matchedBreakpoint } = useScreenWidth({ down: 'sm' })
+const Contacts = () => {
+  const { matchedBreakpoint } = useScreenWidth({ down: "sm" });
 
-  const contactsQueryParams = {
-    contactStatus: tabSelectedText
-  }
-
-  const {
-    data: response,
-    isLoading,
-    isError
-  } = useContactsQuery({ keys: ['contacts', tabSelectedText], params: contactsQueryParams })
-
-  const contacts = response?.data
-
-  if (!contacts) return <PageNotFound isBrowserError headerContent='Opp!' body='No item found' />
+  if (!contacts)
+    return (
+      <PageNotFound isBrowserError headerContent="Opp!" body="No item found" />
+    );
 
   return (
-    <InfiniteScroll isLoading={isLoading} isError={isError} isEmptyItem={contacts.length === 0} isHiddenLoadMore>
+    <InfiniteScroll
+      // isLoading={isLoading}
+      // isError={isError}
+      isEmptyItem={contacts.length === 0}
+      isHiddenLoadMore
+    >
       <Grid container={!matchedBreakpoint}>
         {contacts.map((contactItem) => {
           return (
             <Grid key={contactItem.id} xs={12} item>
               <ContactItem user={contactItem} />
             </Grid>
-          )
+          );
         })}
       </Grid>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
-export default memo(Contacts)
+export default memo(Contacts);

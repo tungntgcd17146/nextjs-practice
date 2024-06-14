@@ -118,7 +118,7 @@ const Drawer = ({
                 icon={icon}
                 text={text}
                 index={index}
-                isSelected={pathname === go}
+                isSelected={pathname.includes(go!)}
                 isShowText={shouldShowFullContentOnDrawer}
               />
             );

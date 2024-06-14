@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen } from "@/src/utils/testUtils";
 import { describe, expect, it, vi } from "vitest";
 import SwitchMode, { Props } from "..";
 
 import * as useScreenWidth from "@/src/hooks/useScreenWidth";
-import { ModeProvider } from "@/src/contexts/modeContext/modeProvider";
+import { ModeProvider } from "@/src/contexts/modeContext/ModeContext";
 
 const defaultProp = {
   isLargerDrawerOnTablet: false,

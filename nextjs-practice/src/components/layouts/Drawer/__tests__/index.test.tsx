@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import Drawer, { Props } from "..";
 
 import * as useScreenWidth from "@/src/hooks/useScreenWidth";
-import { ModeProvider } from "@/src/contexts/modeContext/modeProvider";
+import { ModeProvider } from "@/src/contexts/modeContext/ModeContext";
 import { listItems } from "@/src/components/layouts/Header";
 
 const defaultProp = {

@@ -12,6 +12,18 @@ export enum ShopTabs {
   FOLLOWING = 'Following'
 }
 
+export enum TabsNavigation {
+  PRODUCTS = '/shop',
+  FOLLOWERS = '/shop/followers',
+  FOLLOWING = '/shop/following'
+}
+
+export enum TabsValue {
+  PRODUCTS,
+  FOLLOWERS,
+  FOLLOWING
+}
+
 export enum ShopSelect {
   ALL = 'All',
   RECENT = 'Most recent',
