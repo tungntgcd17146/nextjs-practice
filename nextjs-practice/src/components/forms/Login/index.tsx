@@ -25,6 +25,7 @@ import useScreenWidth from "@/src/hooks/useScreenWidth";
 import Logo from "@/src/components/ui/Logo";
 import { useMode } from "@/src/contexts/modeContext/useModeContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export interface Props {}
 
@@ -32,6 +33,7 @@ const Login = () => {
   const theme = useTheme();
   const { isDarkMode } = useMode();
   const { isMobile } = useScreenWidth();
+  const router = useRouter();
 
   const logo = isDarkMode ? LightLogo : DarkLogo;
 
@@ -109,14 +111,14 @@ const Login = () => {
         <Input
           startIcon={<EmailIcon />}
           containerStyles={{ marginBottom: "12px" }}
-          startIconStyles={{color: theme.palette.text.primary}}
+          startIconStyles={{ color: theme.palette.text.primary }}
           sx={{ marginLeft: "12px" }}
           placeholder="Your email"
         />
         <Input
           startIcon={<LockIcon />}
           containerStyles={{ marginBottom: "12px" }}
-          startIconStyles={{color: theme.palette.text.primary}}
+          startIconStyles={{ color: theme.palette.text.primary }}
           sx={{ marginLeft: "12px" }}
           placeholder="Password"
         />
@@ -125,6 +127,10 @@ const Login = () => {
           aria-label="apply-button"
           children="Sign in"
           color="primary"
+          onClick={() => {
+            //TODO: should implement login feature here
+            router.push("/shop");
+          }}
         />
 
         <Typography sx={{ marginBottom: "32px" }} variant="body1">
