@@ -1,33 +1,42 @@
-import { memo, useMemo } from "react";
-import SearchIcon from "@mui/icons-material/Search";
+import { memo } from "react";
 
 import { InputBaseProps, useTheme } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
+import Box from "@mui/material/Box";
 import IconButton from "@/src/components/ui/IconButton";
 
 export interface Props extends InputBaseProps {
+  startIcon?: React.ReactNode;
   endHelper?: React.ReactNode;
   searchWidth?: string;
   onClickEndHelper?: (event: React.MouseEvent<HTMLElement>) => void;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  wrapperStyle?: React.CSSProperties;
+  containerStyles?: React.CSSProperties;
+  startIconStyles?: React.CSSProperties;
 }
 
-const searchIconStyles = { position: "absolute", left: "4px", top: "4px" };
+const defaultStartIconStyles = {
+  position: "absolute",
+  left: "4px",
+  top: "4px",
+};
 
-const SearchInput = ({
+const Input = ({
+  startIconStyles,
+  startIcon,
   endHelper,
   onClickEndHelper,
   onChange,
   searchWidth = "100%",
-  wrapperStyle,
+  sx,
+  containerStyles,
   ...rest
 }: Props) => {
   const theme = useTheme();
 
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         backgroundColor: theme.palette.grey[100],
         color: theme.palette.text.secondary,
         borderRadius: "12px",
@@ -36,24 +45,22 @@ const SearchInput = ({
         paddingRight: "68px",
         position: "relative",
         width: searchWidth,
-        ...wrapperStyle,
+        ...containerStyles,
       }}
     >
-      <IconButton
-        aria-label="search"
-        data-testid="SearchInput_SearchIcon"
-        children={useMemo(
-          () => (
-            <SearchIcon />
-          ),
-          [],
-        )}
-        sx={searchIconStyles}
-      />
+      {startIcon && (
+        <IconButton
+          aria-label="search"
+          data-testid="SearchInput_SearchIcon"
+          children={startIcon}
+          sx={{ ...defaultStartIconStyles, ...startIconStyles }}
+        />
+      )}
       <InputBase
+        required
         onChange={onChange}
         data-testid="SearchInput_InputBase"
-        sx={{ width: "100%", height: "100%", fontSize: "15px" }}
+        sx={{ width: "100%", height: "100%", fontSize: "15px", ...sx }}
         {...rest}
       />
       {endHelper && (
@@ -79,8 +86,8 @@ const SearchInput = ({
           {endHelper}
         </div>
       )}
-    </div>
+    </Box>
   );
 };
 
-export default memo(SearchInput);
+export default memo(Input);

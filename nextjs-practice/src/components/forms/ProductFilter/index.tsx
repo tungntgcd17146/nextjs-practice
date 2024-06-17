@@ -9,11 +9,12 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import Checkboxes from "@/src/components/ui/Checkboxes";
 
 //components
-import SearchInput from "@/src/components/ui/SearchInput";
+import Input from "@/src/components/ui/Input";
 import FilterModalHeader from "./Header";
 import Select from "@/src/components/ui/Select";
 import RangeSlider from "@/src/components/ui/RangeSlider";
 import Button from "@/src/components/ui/Button";
+import SearchIcon from "@mui/icons-material/Search";
 
 //utils
 import useScreenWidth from "@/src/hooks/useScreenWidth";
@@ -264,8 +265,9 @@ const ProductFilter = ({
             onClickHeaderButton={onCloseModal}
           />
 
-          <SearchInput
-            wrapperStyle={commonMarginBottom}
+          <Input
+            startIcon={<SearchIcon />}
+            sx={commonMarginBottom}
             value={searchInput}
             placeholder="Search for products"
             onChange={handleSearch}
