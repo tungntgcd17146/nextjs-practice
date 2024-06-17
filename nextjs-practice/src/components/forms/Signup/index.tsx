@@ -5,39 +5,24 @@ import { memo, useState } from "react";
 //mui
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import { useTheme, Theme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import EmailIcon from "@mui/icons-material/Email";
-import InputBase from "@mui/material/InputBase";
 
 //components
 import DarkLogo from "@/public/assets/DarkLogo.webp";
 import LightLogo from "@/public/assets/LightLogo.webp";
 import SideBar from "@/src/components/forms/Signup/SideBar";
-import Input from "@/src/components/ui/Input";
 import Button from "@/src/components/ui/Button";
-import AppleIcon from "@mui/icons-material/Apple";
-import GoogleIcon from "@mui/icons-material/Google";
 import Link from "next/link";
+import AuthCode from "./AuthCode";
+import AuthEmail from "./AuthEmail";
 
 //utils
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 import Logo from "@/src/components/ui/Logo";
 import { useMode } from "@/src/contexts/modeContext/useModeContext";
 
-
 export interface Props {}
-
-const authInputStyles = (theme: Theme) => ({
-  backgroundColor: theme.palette.grey[100],
-  color: theme.palette.text.secondary,
-  borderRadius: "12px",
-  height: "72px",
-  margin: " 0px 6px",
-  fontSize: 48,
-  fontWeight: 600,
-});
 
 const Signup = () => {
   const theme = useTheme();
@@ -100,89 +85,7 @@ const Signup = () => {
           </Typography>
 
           {/* Signup with email */}
-          {!isAuth && (
-            <>
-              <Typography
-                sx={{
-                  marginBottom: "20px",
-                  color: theme.palette.text.secondary,
-                }}
-                variant="body1"
-              >
-                Sign up with Open account
-              </Typography>
-
-              <Grid
-                item
-                sx={{ marginBottom: "24px" }}
-                justifyContent="space-between"
-                display="flex"
-              >
-                <Button
-                  aria-label="close-reset"
-                  children="Google"
-                  color="inherit"
-                  startIcon={<GoogleIcon />}
-                  sx={{ width: "100%", margin: "0px 4px" }}
-                />
-                <Button
-                  aria-label="apply-button"
-                  children="Apple ID"
-                  color="inherit"
-                  startIcon={<AppleIcon />}
-                  sx={{ width: "100%", margin: "0px 4px" }}
-                />
-              </Grid>
-
-              <Divider
-                sx={{ color: theme.palette.grey[100], marginBottom: "12px" }}
-              />
-
-              <Typography
-                sx={{
-                  marginBottom: "20px",
-                  color: theme.palette.text.secondary,
-                }}
-                variant="body1"
-              >
-                Or continue with email address
-              </Typography>
-
-              <Input
-                startIcon={<EmailIcon />}
-                containerStyles={{ marginBottom: "12px" }}
-                startIconStyles={{ color: theme.palette.text.primary }}
-                sx={{ marginLeft: "12px" }}
-                placeholder="Your email"
-              />
-            </>
-          )}
-
-          {/* Auth code */}
-          {isAuth && (
-            <>
-              <Typography
-                sx={{
-                  marginBottom: "20px",
-                  color: theme.palette.text.secondary,
-                }}
-                variant="body1"
-              >
-                We just send you a verify code. Check your inbox to get them.
-              </Typography>
-
-              <Box
-                display="flex"
-                flexDirection="row"
-                sx={{ marginBottom: "12px" }}
-              >
-                <InputBase sx={(theme) => authInputStyles(theme)} />
-                <InputBase sx={(theme) => authInputStyles(theme)} />
-                <InputBase sx={(theme) => authInputStyles(theme)} />
-                <InputBase sx={(theme) => authInputStyles(theme)} />
-              </Box>
-            </>
-          )}
+          {!isAuth ? <AuthEmail /> : <AuthCode />}
 
           <Button
             sx={{ marginBottom: "32px" }}

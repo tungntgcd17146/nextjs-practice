@@ -39,14 +39,13 @@ const Login = () => {
 
   return (
     <Box
+      display="flex"
+      justifyContent="center"
       sx={{
-        display: "flex",
-        justifyContent: "center",
         backgroundColor: theme.palette.background.paper,
       }}
     >
-      <Grid
-        container
+      <Box
         sx={{
           padding: "24px",
           height: "100vh",
@@ -150,7 +149,7 @@ const Login = () => {
             Sign up
           </Link>
         </Typography>
-      </Grid>
+      </Box>
     </Box>
   );
 };
