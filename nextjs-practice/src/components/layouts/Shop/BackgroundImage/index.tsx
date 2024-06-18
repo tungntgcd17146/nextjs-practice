@@ -1,7 +1,9 @@
 import { memo } from "react";
 
+//img
 import CoverPhoto from "@/public/assets/CoverPhoto.webp";
 import CoverPhotoMobile from "@/public/assets/CoverPhotoMobile.webp";
+
 import Image from "next/image";
 
 import useScreenWidth from "@/src/hooks/useScreenWidth";

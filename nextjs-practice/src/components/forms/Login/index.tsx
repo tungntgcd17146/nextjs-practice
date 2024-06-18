@@ -10,20 +10,23 @@ import { useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
-
-//components
-import DarkLogo from "@/public/assets/DarkLogo.webp";
-import LightLogo from "@/public/assets/LightLogo.webp";
-
-import Input from "@/src/components/ui/Input";
-import Button from "@/src/components/ui/Button";
 import AppleIcon from "@mui/icons-material/Apple";
 import GoogleIcon from "@mui/icons-material/Google";
 
+//images
+import DarkLogo from "@/public/assets/DarkLogo.webp";
+import LightLogo from "@/public/assets/LightLogo.webp";
+
+//components
+import Logo from "@/src/components/ui/Logo";
+import Input from "@/src/components/ui/Input";
+import Button from "@/src/components/ui/Button";
+
 //utils
 import useScreenWidth from "@/src/hooks/useScreenWidth";
-import Logo from "@/src/components/ui/Logo";
 import { useMode } from "@/src/contexts/modeContext/useModeContext";
+
+//next js
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 

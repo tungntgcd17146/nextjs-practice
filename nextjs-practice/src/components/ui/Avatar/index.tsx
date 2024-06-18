@@ -1,7 +1,9 @@
 import { memo } from "react";
 
+//mui
 import Badge from "@mui/material/Badge";
 import { AvatarProps, Avatar as MuiAvatar, styled } from "@mui/material";
+
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
@@ -17,6 +19,7 @@ export interface Props extends AvatarProps {
     vertical: "top" | "bottom";
     horizontal: "left" | "right";
   };
+  imgStyles?: React.CSSProperties;
 }
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -49,6 +52,7 @@ const Avatar = ({
   alt,
   sx,
   badgeSx,
+  imgStyles,
   badgeAnchorOrigin = { vertical: "bottom", horizontal: "right" },
   ...rest
 }: Props) => {
@@ -78,7 +82,7 @@ const Avatar = ({
         onClick={onClick}
         {...rest}
       >
-        <Image alt={alt} src={imgNextSrc} layout="fill" />
+        <Image style={imgStyles} alt={alt} src={imgNextSrc} objectFit="cover" />
       </MuiAvatar>
     );
   }
@@ -93,7 +97,7 @@ const Avatar = ({
       sx={badgeSx}
     >
       <MuiAvatar sx={{ ...avtCommonStyle, ...sx }} {...rest}>
-        <Image alt={alt} src={imgNextSrc} layout="fill" />
+        <Image style={imgStyles} alt={alt} src={imgNextSrc} objectFit="cover" />
       </MuiAvatar>
     </StyledBadge>
   );

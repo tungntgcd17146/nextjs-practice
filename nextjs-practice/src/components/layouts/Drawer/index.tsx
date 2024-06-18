@@ -24,7 +24,7 @@ import SwitchMode from "@/src/components/ui/SwitchMode";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 
 //types
-import { NavigateItem } from "@/src/types";
+import { NavigateItem } from "@/src/types/navigation";
 import { useMode } from "@/src/contexts/modeContext/useModeContext";
 import { usePathname } from "next/navigation";
 

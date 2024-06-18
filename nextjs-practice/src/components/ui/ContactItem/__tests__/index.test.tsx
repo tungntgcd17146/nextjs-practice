@@ -8,7 +8,7 @@ import {
   fireEvent,
 } from "@/src/utils/testUtils";
 import ContactItem, { Props } from "..";
-import { fakeUserContact } from "@/src/constants/data";
+import { fakeUserContact } from "@/src/mocks/commonData";
 
 const defaultProp = {
   user: fakeUserContact,

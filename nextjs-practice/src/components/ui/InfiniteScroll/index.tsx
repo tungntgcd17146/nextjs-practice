@@ -1,72 +1,82 @@
-import React, { memo, useCallback } from 'react'
-import Button from '@/src/components/ui/Button'
-import Loading from '@/src/components/ui/Loading'
-import PageNotFound from '@/src/components/ui/PageNotFound'
+import React, { memo, useCallback } from "react";
+
+import Button from "@/src/components/ui/Button";
+import Loading from "@/src/components/ui/LoadingProgress";
+import PageNotFound from "@/src/components/ui/PageNotFound";
 
 //mui
-import Grid from '@mui/material/Grid'
+import Grid from "@mui/material/Grid";
 
 export interface Props {
-  maxHeight?: string
-  children?: React.ReactNode
-  isLoading?: boolean
-  isError?: boolean
-  isEmptyItem?: boolean
-  isHiddenLoadMore?: boolean
-  onClickLoadMore?: () => void
+  maxHeight?: string;
+  children?: React.ReactNode;
+  isLoading?: boolean;
+  isError?: boolean;
+  isEmptyItem?: boolean;
+  isHiddenLoadMore?: boolean;
+  onClickLoadMore?: () => void;
 }
 
 const InfiniteScroll = ({
-  maxHeight = 'auto',
+  maxHeight = "auto",
   children,
   isLoading,
   isError,
   isEmptyItem,
   onClickLoadMore,
-  isHiddenLoadMore = false
+  isHiddenLoadMore = false,
 }: Props) => {
   const handleClickLoadMore = useCallback(() => {
-    onClickLoadMore?.()
-  }, [onClickLoadMore])
+    onClickLoadMore?.();
+  }, [onClickLoadMore]);
 
   if (isLoading) {
-    return <Loading dataTestId='InfiniteScroll_Loading' />
+    return <Loading dataTestId="InfiniteScroll_Loading" />;
   }
 
   if (isError) {
-    return <PageNotFound isBrowserError headerContent='Opp!' body='Error page' />
+    return (
+      <PageNotFound isBrowserError headerContent="Opp!" body="Error page" />
+    );
   }
 
   if (isEmptyItem) {
-    return <PageNotFound isHiddenActionButton isBrowserError headerContent='Opp!' body='No item found' />
+    return (
+      <PageNotFound
+        isHiddenActionButton
+        isBrowserError
+        headerContent="Opp!"
+        body="No item found"
+      />
+    );
   }
 
   return (
     <div
       style={{
-        overflowY: 'auto',
+        overflowY: "auto",
         maxHeight: maxHeight,
-        width: '100%',
-        scrollbarColor: 'dark',
-        scrollbarWidth: 'thin'
+        width: "100%",
+        scrollbarColor: "dark",
+        scrollbarWidth: "thin",
       }}
     >
       {children}
 
       {!isHiddenLoadMore && (
-        <Grid xs={12} sx={{ textAlign: 'center', marginTop: '24px' }} item>
+        <Grid xs={12} sx={{ textAlign: "center", marginTop: "24px" }} item>
           <Button
-            aria-label='load-more'
-            data-testid='InfiniteScroll_LoadMoreButton'
-            children='Load more'
-            color='inherit'
-            size='small'
+            aria-label="load-more"
+            data-testid="InfiniteScroll_LoadMoreButton"
+            children="Load more"
+            color="inherit"
+            size="small"
             onClick={handleClickLoadMore}
           />
         </Grid>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default memo(InfiniteScroll)
+export default memo(InfiniteScroll);

@@ -1,8 +1,12 @@
 import React, { memo, useState } from "react";
+
+//mui
 import { Modal, Fade } from "@mui/material";
 
 import LightProductDetail from "@/public/assets/ProductDetailImgLight.webp";
+
 import useScreenWidth from "@/src/hooks/useScreenWidth";
+
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 

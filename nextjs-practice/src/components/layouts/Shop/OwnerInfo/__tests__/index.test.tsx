@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { fireEvent, render, screen } from '@/utils/testUtils'
+import { fireEvent, render, screen } from '@/src/utils/testUtils'
 import { describe, expect, it, vi } from 'vitest'
 import OwnerInfo from '../'
-import * as useScreenWidth from '@/hooks/useScreenWidth'
-import Customer1 from '/assets/customer1.webp'
+import * as useScreenWidth from '@/src/hooks/useScreenWidth'
+import Customer1 from '@/public/assets/customer1.webp'
 
 const defaultProp = {
   name: 'Chelsie Haley',

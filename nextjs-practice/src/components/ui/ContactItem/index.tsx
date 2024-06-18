@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { memo, useCallback, useEffect, useState } from "react";
 import { themes } from "@/src/themes";
@@ -18,11 +18,11 @@ import Avatar from "@/src/components/ui/Avatar";
 import Button from "@/src/components/ui/Button";
 
 //utils
-import { userImageData } from "@/src/constants/data";
+import { userImageData } from "@/src/mocks/commonData";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 
 //types
-import { UserContact } from "@/src/types";
+import { UserContact } from "@/src/types/contact";
 import Image from "next/image";
 
 export interface Props {

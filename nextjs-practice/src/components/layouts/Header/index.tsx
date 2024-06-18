@@ -13,12 +13,6 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AddIcon from "@mui/icons-material/Add";
 import Popper from "@mui/material/Popper";
 import Hidden from "@mui/material/Hidden";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
-import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
-import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 
 //components
 import Drawer from "@/src/components/layouts/Drawer/";
@@ -30,42 +24,11 @@ import Input from "@/src/components/ui/Input";
 
 import { themes } from "@/src/themes";
 
-//types
-import { NavigateItem } from "@/src/types";
-import MenuPopup from "@/src/components/layouts/MenuPopup";
+//constants
+import { navigationItems } from "@/src/mocks/sideNavigation";
 
-export const listItems: NavigateItem[] = [
-  {
-    text: "Home",
-    icon: <HomeOutlinedIcon />,
-    go: "/home",
-  },
-  {
-    text: "Products",
-    icon: <DiamondOutlinedIcon />,
-    go: "/products",
-  },
-  {
-    text: "Customers",
-    icon: <AccountCircleOutlinedIcon />,
-    go: "/customers",
-  },
-  {
-    text: "Shop",
-    icon: <StorefrontOutlinedIcon />,
-    go: "/shop",
-  },
-  {
-    text: "Income",
-    icon: <DonutSmallOutlinedIcon />,
-    go: "/income",
-  },
-  {
-    text: "Promote",
-    icon: <RecommendOutlinedIcon />,
-    go: "/promote",
-  },
-];
+//types
+import MenuPopup from "@/src/components/layouts/MenuPopup";
 
 const iconButtonStyles = (theme: Theme) => ({
   ":hover": { color: theme.palette.text.secondary },
@@ -146,7 +109,7 @@ const Header = () => {
         isOpen={isOpenDrawer}
         onOpen={handleOpenDrawer}
         onClose={handleCloseDrawer}
-        listItems={listItems}
+        listItems={navigationItems}
       />
 
       <div

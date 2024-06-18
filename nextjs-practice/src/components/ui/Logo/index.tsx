@@ -1,6 +1,7 @@
+import { memo } from "react";
+
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
-import { memo } from "react";
 
 interface Props {
   logoImage: string | StaticImport;

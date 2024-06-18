@@ -15,9 +15,10 @@ import IconButton from "@/src/components/ui/IconButton";
 import ProductFilter from "@/src/components/forms/ProductFilter";
 
 //utils
-import { selectOption, tabItems } from "@/src/constants/data";
+import { selectOption } from "@/src/mocks/productFilter";
+import { tabItems } from "@/src/mocks/shopTab";
 import { usePathname } from "next/navigation";
-import { TabsNavigation, TabsValue } from "@/src/types";
+import { TabsNavigation, TabsValue } from "@/src/types/navigation";
 
 const filterButtonStyles = (theme: Theme) => ({
   marginLeft: "16px",

@@ -5,14 +5,14 @@ import Drawer, { Props } from "..";
 
 import * as useScreenWidth from "@/src/hooks/useScreenWidth";
 import { ModeProvider } from "@/src/contexts/modeContext/ModeContext";
-import { listItems } from "@/src/components/layouts/Header";
+import { navigationItems } from "@/src/mocks/sideNavigation";
 
 const defaultProp = {
   isOpen: true,
   onClose: vi.fn(),
   onChangeMode: vi.fn(),
   onOpen: vi.fn(),
-  listItems: listItems,
+  listItems: navigationItems,
 } as Props;
 
 const setup = (overrideProps = {}) => {
@@ -22,9 +22,9 @@ const setup = (overrideProps = {}) => {
   };
 
   return render(
-      <ModeProvider>
-        <Drawer {...props} />
-      </ModeProvider>,
+    <ModeProvider>
+      <Drawer {...props} />
+    </ModeProvider>,
   );
 };
 
@@ -69,7 +69,7 @@ describe("Drawer Test", () => {
     setup();
 
     expect(screen.queryAllByTestId("NavItem_ListItemButton").length).toEqual(
-      listItems.length + 1,
+      navigationItems.length + 1,
     );
   });
 

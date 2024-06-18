@@ -7,11 +7,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { useTheme, Theme } from "@mui/material";
-import CardActionArea from "@mui/material/CardActionArea";
 import Box from "@mui/material/Box";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import Typography from "@mui/material/Typography";
 
 //components
 import Rating from "@/src/components/ui/Rating";
@@ -100,97 +100,85 @@ const ProductCard = ({
         backgroundImage: "none",
         margin: "32px 12px 0px 12px",
       }}
+      onMouseEnter={handleHoverCard}
+      onMouseLeave={handleLeaveCard}
     >
-      <CardActionArea
-        data-testid="ProductCard_CardActionArea"
-        onMouseEnter={handleHoverCard}
-        onMouseLeave={handleLeaveCard}
-        onClick={handleViewCard}
-      >
-        <Box sx={{ position: "relative" }}>
-          <CardMedia
-            children={<Image src={Branch1} alt="brand img" layout="fill" />}
-            sx={{
-              height: "200px",
-              width: "100%",
-              borderRadius: "12px",
-              opacity: isExpandedCard ? 0.2 : "none",
-            }}
+      <Box sx={{ position: "relative" }}>
+        <CardMedia
+          children={<Image src={Branch1} alt="brand img" layout="fill" />}
+          sx={{
+            height: "200px",
+            width: "100%",
+            borderRadius: "12px",
+            opacity: isExpandedCard ? 0.2 : "none",
+          }}
+        />
+        <Box
+          hidden={!isExpandedCard}
+          sx={{
+            position: "absolute",
+            width: "100%",
+            top: "40%",
+            textAlign: "center",
+          }}
+        >
+          <IconButton
+            aria-label="product-edit-icon"
+            data-testid="ProductCard_IconButton_edit"
+            children={useMemo(
+              () => (
+                <EditOutlinedIcon />
+              ),
+              [],
+            )}
+            sx={imgIconCommonStyle}
+            onClick={handleEditCard}
           />
-          <Box
-            hidden={!isExpandedCard}
-            sx={{
-              position: "absolute",
-              width: "100%",
-              top: "40%",
-              textAlign: "center",
-            }}
-          >
-            <IconButton
-              aria-label="product-edit-icon"
-              data-testid="ProductCard_IconButton_edit"
-              children={useMemo(
-                () => (
-                  <EditOutlinedIcon />
-                ),
-                [],
-              )}
-              sx={imgIconCommonStyle}
-              onClick={handleEditCard}
-            />
-            <IconButton
-              aria-label="product-delete-icon"
-              data-testid="ProductCard_IconButton_delete"
-              children={useMemo(
-                () => (
-                  <DeleteOutlineOutlinedIcon />
-                ),
-                [],
-              )}
-              sx={imgIconCommonStyle}
-              onClick={handleDeleteCard}
-            />
-            <IconButton
-              aria-label="product-view-icon"
-              data-testid="ProductCard_IconButton_view"
-              children={useMemo(
-                () => (
-                  <ArrowForwardOutlinedIcon />
-                ),
-                [],
-              )}
-              sx={imgIconCommonStyle}
-              onClick={handleViewCard}
-            />
-          </Box>
+          <IconButton
+            aria-label="product-delete-icon"
+            data-testid="ProductCard_IconButton_delete"
+            children={useMemo(
+              () => (
+                <DeleteOutlineOutlinedIcon />
+              ),
+              [],
+            )}
+            sx={imgIconCommonStyle}
+            onClick={handleDeleteCard}
+          />
+          <IconButton
+            aria-label="product-view-icon"
+            data-testid="ProductCard_IconButton_view"
+            children={useMemo(
+              () => (
+                <ArrowForwardOutlinedIcon />
+              ),
+              [],
+            )}
+            sx={imgIconCommonStyle}
+            onClick={handleViewCard}
+          />
         </Box>
-        <CardContent sx={{ display: "flex", flexDirection: "column" }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
+      </Box>
+      <CardContent sx={{ display: "flex", flexDirection: "column" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography
+            variant="subtitle1"
+            sx={{ color: theme.palette.text.secondary }}
           >
-            <p
-              style={{
-                color: theme.palette.text.secondary,
-                fontSize: "15px",
-                fontStyle: "normal",
-                fontWeight: "600",
-                lineHeight: "24px",
-                letterSpacing: "-0.15px",
-                margin: 0,
-              }}
-            >
-              {productName} ({productCategory})
-            </p>
+            {productName} ({productCategory})
+          </Typography>
 
-            <Chip price={productPrice} variant="filled" />
-          </Box>
-          <Rating ratingPoint={productRating} counter={productRatingCount} />
-        </CardContent>
-      </CardActionArea>
+          <Chip price={productPrice} variant="filled" />
+        </Box>
+        <Rating ratingPoint={productRating} counter={productRatingCount} />
+      </CardContent>
     </Card>
   );
 };

@@ -3,6 +3,7 @@ import { memo } from "react";
 import { InputBaseProps, useTheme } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
+
 import IconButton from "@/src/components/ui/IconButton";
 
 export interface Props extends InputBaseProps {

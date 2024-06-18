@@ -5,8 +5,11 @@ import { memo, useMemo } from "react";
 import Avatar from "@/src/components/ui/Avatar";
 import IconButton from "@/src/components/ui/IconButton";
 import Button from "@/src/components/ui/Button";
+
+//img
 import Customer1 from "@/public/assets/customer1.webp";
 
+//mui
 import { useTheme } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -18,6 +21,7 @@ import Divider from "@mui/material/Divider";
 
 import { themes } from "@/src/themes";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
+
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 export interface Props {

@@ -1,57 +1,10 @@
-import {
-  FeatureProduct,
-  NavigateItem,
-  ShopSelect,
-  ShopTabs,
-  TabsNavigation,
-  UserContact,
-} from "@/src/types";
+import { UserContact } from "@/src/types/contact";
+import { FeatureProduct } from "@/src/types/product";
 
 //img
 import Product1 from "@/public/assets/Product1.webp";
 import Product2 from "@/public/assets/Product2.webp";
 import Product3 from "@/public/assets/Product3.webp";
-
-export const tabItems: NavigateItem[] = [
-  {
-    text: ShopTabs.PRODUCTS,
-    isDisabled: false,
-    go: TabsNavigation.PRODUCTS,
-  },
-  {
-    text: ShopTabs.FOLLOWERS,
-    isDisabled: false,
-    go: TabsNavigation.FOLLOWERS,
-  },
-  {
-    text: ShopTabs.FOLLOWING,
-    isDisabled: false,
-    go: TabsNavigation.FOLLOWING,
-  },
-];
-
-export const selectOption = [
-  {
-    id: "0",
-    name: ShopSelect.ALL,
-    value: ShopSelect.ALL,
-  },
-  {
-    id: "1",
-    name: ShopSelect.RECENT,
-    value: ShopSelect.RECENT,
-  },
-  {
-    id: "2",
-    name: ShopSelect.NEW,
-    value: ShopSelect.NEW,
-  },
-  {
-    id: "3",
-    name: ShopSelect.POPULAR,
-    value: ShopSelect.POPULAR,
-  },
-];
 
 export const userImageData = [
   {
@@ -73,7 +26,7 @@ export const fakeUserContact: UserContact = {
   userName: "Rosetta Gottlieb",
   productNumber: 12,
   followerNumber: 23,
-  contactStatus: "follower",
+  contactStatus: "followers",
 };
 
 export const fakeFeatureForProductData: FeatureProduct[] = [
@@ -94,3 +47,58 @@ Types of screens included: onboarding, connect wallet, home feed, profile, uploa
 detail, notification...
 
 If you have any questions or requests, please feel free to leave them all in the comments section.`;
+
+export const singleProduct = {
+  productName: "test",
+  productCategory: "test",
+  productPrice: 12,
+  productRating: 0,
+  productRatingCount: 0,
+};
+
+export const contacts: UserContact[] = [
+  {
+    id: 1,
+    userName: "Tung Nguyen",
+    productNumber: 1,
+    followerNumber: 1,
+    contactStatus: "following",
+  },
+  {
+    id: 2,
+    userName: "Chelsie Haley",
+    productNumber: 1,
+    followerNumber: 1,
+    contactStatus: "following",
+  },
+  {
+    id: 3,
+    userName: "Tung Nguyen",
+    productNumber: 1,
+    followerNumber: 1,
+    contactStatus: "following",
+  },
+];
+
+export const products = [
+  {
+    id: 1,
+    productName: "Product 1",
+    productCategory: "Illustration",
+    productPrice: 88,
+    productRating: 4.9,
+    productRatingCount: 1251,
+    popularity: "Most recent",
+    createdAt: "2022-01-10T12:00:00Z",
+  },
+  {
+    id: 2,
+    productName: "Product 2",
+    productCategory: "Illustration",
+    productPrice: 88,
+    productRating: 4.9,
+    productRatingCount: 1251,
+    popularity: "Most recent",
+    createdAt: "2022-01-10T12:00:00Z",
+  },
+];
