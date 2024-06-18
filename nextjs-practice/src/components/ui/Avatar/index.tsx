@@ -11,7 +11,7 @@ export interface Props extends AvatarProps {
   size: "small" | "medium" | "large";
   avtBackground?: string;
   BadgeIcon?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   badgeSx?: React.CSSProperties;
   badgeAnchorOrigin?: {
     vertical: "top" | "bottom";
@@ -78,7 +78,7 @@ const Avatar = ({
         onClick={onClick}
         {...rest}
       >
-        <Image alt={alt} src={imgNextSrc} layout='fill'/>
+        <Image alt={alt} src={imgNextSrc} layout="fill" />
       </MuiAvatar>
     );
   }
@@ -93,7 +93,7 @@ const Avatar = ({
       sx={badgeSx}
     >
       <MuiAvatar sx={{ ...avtCommonStyle, ...sx }} {...rest}>
-        <Image alt={alt} src={imgNextSrc} layout='fill'/>
+        <Image alt={alt} src={imgNextSrc} layout="fill" />
       </MuiAvatar>
     </StyledBadge>
   );

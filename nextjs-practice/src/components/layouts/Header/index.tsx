@@ -26,12 +26,13 @@ import IconButton from "@/src/components/ui/IconButton";
 import Avatar from "@/src/components/ui/Avatar";
 import Customer1 from "@/public/assets/customer1.webp";
 import Button from "@/src/components/ui/Button";
-import SearchInput from "@/src/components/ui/SearchInput";
+import Input from "@/src/components/ui/Input";
 
 import { themes } from "@/src/themes";
 
 //types
 import { NavigateItem } from "@/src/types";
+import MenuPopup from "@/src/components/layouts/MenuPopup";
 
 export const listItems: NavigateItem[] = [
   {
@@ -75,6 +76,8 @@ const Header = () => {
   const [searchIconAnchorEl, setSearchIconAnchorEl] =
     useState<null | HTMLElement>(null);
 
+  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+
   const { isMobile, isTablet, isDesktop } = useScreenWidth();
   const theme = useTheme();
 
@@ -84,6 +87,17 @@ const Header = () => {
     },
     [searchIconAnchorEl],
   );
+
+  const handleClickAvatar = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      setMenuAnchorEl(searchIconAnchorEl ? null : event.currentTarget);
+    },
+    [searchIconAnchorEl],
+  );
+
+  const handleCloseMenu = useCallback(() => {
+    setMenuAnchorEl(null);
+  }, []);
 
   const openSearchInputPopup = Boolean(searchIconAnchorEl);
 
@@ -110,7 +124,8 @@ const Header = () => {
       }}
     >
       <Hidden mdDown>
-        <SearchInput
+        <Input
+          startIcon={<SearchIcon />}
           data-testid="Header_SearchInput"
           searchWidth="356px"
           placeholder="Search or type a command"
@@ -157,7 +172,8 @@ const Header = () => {
               sx={{ backgroundColor: theme.palette.grey[200], width: "100%" }}
             >
               <Box sx={{ padding: " 12px 16px" }}>
-                <SearchInput
+                <Input
+                  startIcon={<SearchIcon />}
                   data-testid="Header_SearchInput_Mobile"
                   placeholder="Search or type a command"
                 />
@@ -210,7 +226,9 @@ const Header = () => {
           size="small"
           imgNextSrc={Customer1}
           alt="Customer1"
+          onClick={handleClickAvatar}
         />
+        <MenuPopup anchorEl={menuAnchorEl} onCloseModal={handleCloseMenu} />
       </div>
     </Box>
   );
