@@ -35,10 +35,10 @@ const AuthCode = () => {
       </Typography>
 
       <Box display="flex" flexDirection="row" sx={{ marginBottom: "12px" }}>
-        <InputBase sx={(theme) => authInputStyles(theme)} />
-        <InputBase sx={(theme) => authInputStyles(theme)} />
-        <InputBase sx={(theme) => authInputStyles(theme)} />
-        <InputBase sx={(theme) => authInputStyles(theme)} />
+        <InputBase sx={authInputStyles} />
+        <InputBase sx={authInputStyles} />
+        <InputBase sx={authInputStyles} />
+        <InputBase sx={authInputStyles} />
       </Box>
     </>
   );

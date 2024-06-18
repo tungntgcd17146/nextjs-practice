@@ -48,7 +48,7 @@ const SideBar = () => {
         <Box display="flex" sx={{ marginBottom: "20px" }}>
           <CheckCircleOutlineIcon sx={{ color: themes.colors.green[600] }} />
           <Typography
-            sx={(theme) => optionMessageStyles(theme)}
+            sx={optionMessageStyles}
             variant="body1"
           >
             Unlimited product updates
@@ -57,7 +57,7 @@ const SideBar = () => {
         <Box display="flex" sx={{ marginBottom: "20px" }}>
           <CheckCircleOutlineIcon sx={{ color: themes.colors.green[600] }} />
           <Typography
-            sx={(theme) => optionMessageStyles(theme)}
+            sx={optionMessageStyles}
             variant="body1"
           >
             Pro tips
@@ -66,7 +66,7 @@ const SideBar = () => {
         <Box display="flex" sx={{ marginBottom: "20px" }}>
           <CheckCircleOutlineIcon sx={{ color: themes.colors.green[600] }} />
           <Typography
-            sx={(theme) => optionMessageStyles(theme)}
+            sx={optionMessageStyles}
             variant="body1"
           >
             Free forever
@@ -75,7 +75,7 @@ const SideBar = () => {
         <Box display="flex" sx={{ marginBottom: "20px" }}>
           <CheckCircleOutlineIcon sx={{ color: themes.colors.green[600] }} />
           <Typography
-            sx={(theme) => optionMessageStyles(theme)}
+            sx={optionMessageStyles}
             variant="body1"
           >
             Full author options
