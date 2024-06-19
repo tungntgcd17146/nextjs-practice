@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 
 //mui
@@ -12,7 +12,6 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AddIcon from "@mui/icons-material/Add";
 import Popper from "@mui/material/Popper";
-import Hidden from "@mui/material/Hidden";
 
 //components
 import Drawer from "@/src/components/layouts/Drawer/";
@@ -41,7 +40,12 @@ const Header = () => {
 
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
 
-  const { isMobile, isTablet, isDesktop } = useScreenWidth();
+  const {
+    isMobile,
+    isTablet,
+    isDesktop,
+    matchedBreakpoint: isDownLg,
+  } = useScreenWidth({ down: "lg" });
   const theme = useTheme();
 
   const handleClickMobileSearchIcon = useCallback(
@@ -86,22 +90,20 @@ const Header = () => {
         backgroundColor: theme.palette.background.paper,
       }}
     >
-      <Hidden mdDown>
+      {isMobile ? (
+        <IconButton
+          aria-label="open"
+          data-testid="Header_MenuIcon"
+          children={<DragHandleIcon />}
+          onClick={handleOpenDrawer}
+        />
+      ) : (
         <Input
           startIcon={<SearchIcon />}
           data-testid="Header_SearchInput"
           searchWidth="356px"
           placeholder="Search or type a command"
           endHelper="⌘ F"
-        />
-      </Hidden>
-
-      {isMobile && (
-        <IconButton
-          aria-label="open"
-          data-testid="Header_MenuIcon"
-          children={<DragHandleIcon />}
-          onClick={handleOpenDrawer}
         />
       )}
       <Drawer
@@ -145,41 +147,26 @@ const Header = () => {
           </>
         )}
 
-        <Hidden lgDown>
+        {!isDownLg && (
           <Button
             aria-label="create"
             sx={{ width: "120px" }}
-            startIcon={useMemo(
-              () => (
-                <AddIcon />
-              ),
-              [],
-            )}
+            startIcon={<AddIcon />}
             children="Create"
             color="primary"
           />
-        </Hidden>
+        )}
         <IconButton
           aria-label="chat-icon"
           badgeContent={0}
-          children={useMemo(
-            () => (
-              <ChatBubbleOutlineIcon />
-            ),
-            [],
-          )}
+          children={<ChatBubbleOutlineIcon />}
           size="large"
           sx={iconButtonStyles}
         />
         <IconButton
           aria-label="notification-icon"
           badgeContent={0}
-          children={useMemo(
-            () => (
-              <NotificationsNoneIcon />
-            ),
-            [],
-          )}
+          children={<NotificationsNoneIcon />}
           size="large"
           sx={iconButtonStyles}
         />

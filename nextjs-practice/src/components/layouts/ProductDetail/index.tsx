@@ -3,7 +3,6 @@
 import { themes } from "@/src/themes";
 
 //mui
-import Hidden from "@mui/material/Hidden";
 import Grid from "@mui/material/Grid";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
@@ -25,6 +24,8 @@ import { Product } from "@/src/types/product";
 
 import { useRouter } from "next/navigation";
 
+import useScreenWidth from "@/src/hooks/useScreenWidth";
+
 interface Props {
   product: Product;
 }
@@ -32,6 +33,7 @@ interface Props {
 const ProductDetail = ({ product }: Props) => {
   const router = useRouter();
   const theme = useTheme();
+  const { isMobile } = useScreenWidth();
 
   const handleClose = () => {
     router.push(`/shop`);
@@ -93,7 +95,7 @@ const ProductDetail = ({ product }: Props) => {
           }}
         />
 
-        <Hidden mdDown>
+        {!isMobile && (
           <Grid
             sx={{ marginLeft: "24px" }}
             display="flex"
@@ -149,7 +151,7 @@ const ProductDetail = ({ product }: Props) => {
               children={<FavoriteOutlinedIcon />}
             />
           </Grid>
-        </Hidden>
+        )}
       </Grid>
     </Box>
   );
