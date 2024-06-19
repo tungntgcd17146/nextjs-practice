@@ -12,10 +12,13 @@ import PageNotFound from "@/src/components/ui/PageNotFound";
 
 //helper
 import useScreenWidth from "@/src/hooks/useScreenWidth";
+import { UserContact } from '@/src/types/contact';
 
-import { contacts } from "@/src/mocks/commonData";
+interface Props {
+  contacts: UserContact[];
+}
 
-const Contacts = () => {
+const Contacts = ({ contacts }: Props) => {
   const { matchedBreakpoint } = useScreenWidth({ down: "sm" });
 
   if (!contacts)

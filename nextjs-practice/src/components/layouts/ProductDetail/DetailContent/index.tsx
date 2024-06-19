@@ -48,6 +48,7 @@ const DetailContent = ({
   productOverview = fakeProductOverview,
   productFeature = fakeFeatureForProductData,
 }: Props) => {
+  //TODO: idea fetch detail info here to show stream content
   const theme = useTheme();
   const { isDesktop, isMobile } = useScreenWidth();
   const { isDarkMode } = useMode();
