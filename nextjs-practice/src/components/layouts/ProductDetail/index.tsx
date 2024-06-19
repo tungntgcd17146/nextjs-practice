@@ -125,10 +125,8 @@ const ProductDetail = ({ product }: Props) => {
                   },
                 } as React.CSSProperties
               }
-              imgStyles={{
-                width: "20px",
-                height: "unset",
-              }}
+              imgWidth={20}
+              imgHeight={32}
               badgeAnchorOrigin={{ vertical: "top", horizontal: "left" }}
               BadgeIcon="3"
               avtBackground={theme.palette.grey[200]}

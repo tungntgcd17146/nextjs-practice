@@ -105,8 +105,9 @@ const ProductCard = ({
     >
       <Box sx={{ position: "relative" }}>
         <CardMedia
-          children={<Image src={Branch1} alt="brand img" layout="fill" />}
+          children={<Image src={Branch1} alt="brand img" fill sizes="100%" />}
           sx={{
+            position: "relative",
             height: "200px",
             width: "100%",
             borderRadius: "12px",

@@ -21,10 +21,7 @@ export interface Props {
   anchorEl: HTMLElement | null;
 }
 
-const MenuPopup = ({
-  anchorEl,
-  onCloseModal,
-}: Props) => {
+const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
   //disable apply and reset button when all value is default
   const theme = useTheme();
   const { isMobile } = useScreenWidth();
@@ -37,7 +34,7 @@ const MenuPopup = ({
   }, [onCloseModal]);
 
   return (
-    <div>
+    <>
       <Backdrop
         sx={{
           color: themes.colors.white[500],
@@ -78,6 +75,7 @@ const MenuPopup = ({
 
               return isDivider ? (
                 <Divider
+                  key={index}
                   sx={{ color: theme.palette.grey[100], marginBottom: "12px" }}
                 />
               ) : (
@@ -96,7 +94,7 @@ const MenuPopup = ({
           </List>
         </Grid>
       </Popover>
-    </div>
+    </>
   );
 };
 

@@ -17,10 +17,10 @@ const TestComponent = () => {
   };
 
   return (
-    <div>
+    <>
       <p>Dark Mode: {isDarkMode ? "Enabled" : "Disabled"}</p>
       <button onClick={handleToggleMode}>Toggle Dark Mode</button>
-    </div>
+    </>
   );
 };
 

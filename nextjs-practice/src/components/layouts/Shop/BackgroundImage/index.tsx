@@ -17,7 +17,6 @@ const BackgroundImage = () => {
         style={{
           width: "100%",
           height: "252px",
-          objectFit: "cover",
           position: "relative",
         }}
       >
@@ -25,7 +24,8 @@ const BackgroundImage = () => {
           data-testid="BackgroundImage_Mobile"
           src={CoverPhotoMobile}
           alt="CoverPhotoMobile.webp"
-          layout="fill"
+          fill
+          sizes="100%"
         />
       </div>
     );
@@ -36,7 +36,6 @@ const BackgroundImage = () => {
       style={{
         width: "100%",
         height: "400px",
-        objectFit: "cover",
         position: "relative",
       }}
     >
@@ -44,7 +43,8 @@ const BackgroundImage = () => {
         data-testid="BackgroundImage"
         src={CoverPhoto}
         alt="CoverPhoto.webp"
-        layout="fill"
+        fill
+        sizes="100%"
       />
     </div>
   );

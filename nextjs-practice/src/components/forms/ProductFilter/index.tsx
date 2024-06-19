@@ -180,7 +180,7 @@ const ProductFilter = ({
   }, []);
 
   return (
-    <div>
+    <>
       <Backdrop
         sx={{
           color: themes.colors.white[500],
@@ -294,7 +294,7 @@ const ProductFilter = ({
           </Grid>
         </Grid>
       </Popover>
-    </div>
+    </>
   );
 };
 

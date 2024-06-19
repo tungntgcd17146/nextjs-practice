@@ -121,7 +121,7 @@ const Header = () => {
       >
         {/* search input on mobile */}
         {isMobile && (
-          <div>
+          <>
             <IconButton
               aria-label="search-mobile"
               data-testid="Header_SearchInputIcon_Mobile"
@@ -142,7 +142,7 @@ const Header = () => {
                 />
               </Box>
             </Popper>
-          </div>
+          </>
         )}
 
         <Hidden lgDown>
