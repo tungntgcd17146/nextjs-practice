@@ -28,10 +28,8 @@ const Contacts = ({ contacts }: Props) => {
 
   return (
     <InfiniteScroll
-      // isLoading={isLoading}
-      // isError={isError}
       isEmptyItem={contacts.length === 0}
-      isHiddenLoadMore
+      isHiddenActionButton
     >
       <Grid container={!matchedBreakpoint}>
         {contacts.map((contactItem) => {

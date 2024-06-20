@@ -19,14 +19,14 @@ export default async function Page({
 
   const fetchAllProducts = async (
     currentPage: number,
-    PRODUCTS_PER_PAGE: number,
+    productPerPage: number,
   ) => {
     const pageNumbers = Array.from({ length: currentPage }, (_, i) => i + 1);
 
     const allProductsPromises = pageNumbers.map((pageNumber) =>
       fetchProducts({
         _page: pageNumber,
-        _limit: PRODUCTS_PER_PAGE,
+        _limit: productPerPage,
       }),
     );
 

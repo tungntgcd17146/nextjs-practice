@@ -14,6 +14,7 @@ export interface Props {
   isError?: boolean;
   isEmptyItem?: boolean;
   isHiddenLoadMore?: boolean;
+  isHiddenActionButton?: boolean;
   onClickLoadMore?: () => void;
   onClickShowLess?: () => void;
 }
@@ -27,6 +28,7 @@ const InfiniteScroll = ({
   onClickLoadMore,
   onClickShowLess,
   isHiddenLoadMore = false,
+  isHiddenActionButton = false,
 }: Props) => {
   const handleClickLoadMore = useCallback(() => {
     onClickLoadMore?.();
@@ -65,31 +67,32 @@ const InfiniteScroll = ({
     >
       <Box sx={{ opacity: isLoadingSkeleton ? 0.3 : 1 }}>{children}</Box>
 
-      {!isHiddenLoadMore ? (
-        <Grid xs={12} sx={{ textAlign: "center", marginTop: "24px" }} item>
-          <Button
-            disabled={isLoadingSkeleton}
-            aria-label="load-more"
-            data-testid="InfiniteScroll_LoadMoreButton"
-            children={isLoadingSkeleton ? "Loading..." : "Load more"}
-            color="inherit"
-            size="small"
-            onClick={handleClickLoadMore}
-          />
-        </Grid>
-      ) : (
-        <Grid xs={12} sx={{ textAlign: "center", marginTop: "24px" }} item>
-          <Button
-            disabled={isLoadingSkeleton}
-            aria-label="load-more"
-            data-testid="InfiniteScroll_LoadMoreButton"
-            children={isLoadingSkeleton ? "Loading..." : "Show less"}
-            color="inherit"
-            size="small"
-            onClick={onClickShowLess}
-          />
-        </Grid>
-      )}
+      {!isHiddenActionButton &&
+        (!isHiddenLoadMore ? (
+          <Grid xs={12} sx={{ textAlign: "center", marginTop: "24px" }} item>
+            <Button
+              disabled={isLoadingSkeleton}
+              aria-label="load-more"
+              data-testid="InfiniteScroll_LoadMoreButton"
+              children={isLoadingSkeleton ? "Loading..." : "Load more"}
+              color="inherit"
+              size="small"
+              onClick={handleClickLoadMore}
+            />
+          </Grid>
+        ) : (
+          <Grid xs={12} sx={{ textAlign: "center", marginTop: "24px" }} item>
+            <Button
+              disabled={isLoadingSkeleton}
+              aria-label="load-more"
+              data-testid="InfiniteScroll_LoadMoreButton"
+              children={isLoadingSkeleton ? "Loading..." : "Show less"}
+              color="inherit"
+              size="small"
+              onClick={onClickShowLess}
+            />
+          </Grid>
+        ))}
     </Box>
   );
 };
