@@ -4,7 +4,7 @@ export const get = async <T>(
   path: string,
   queyParams?: object,
   configOptions?: RequestInit,
-): Promise<T> => {
+): Promise<{ data: T; countItems: number }> => {
   const params = new URLSearchParams({ ...queyParams });
 
   const response = await fetch(`${BASE_URL}${path}?${params}`, configOptions);
@@ -15,5 +15,7 @@ export const get = async <T>(
 
   const data = await response.json();
 
-  return data as T;
+  const countItems = Number(response.headers.get("x-total-count"));
+
+  return { data: data as T, countItems };
 };

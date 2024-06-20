@@ -6,13 +6,53 @@ import LoadingProgress from "@/src/components/ui/LoadingProgress";
 
 //services
 import { fetchProducts } from "@/src/services/productsService";
+import { PRODUCTS_PER_PAGE } from "@/src/constants/common";
 
-export default async function Page() {
-  const products = await fetchProducts();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    page?: string;
+  };
+}) {
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const fetchAllProducts = async (
+    currentPage: number,
+    PRODUCTS_PER_PAGE: number,
+  ) => {
+    const pageNumbers = Array.from({ length: currentPage }, (_, i) => i + 1);
+
+    const allProductsPromises = pageNumbers.map((pageNumber) =>
+      fetchProducts({
+        _page: pageNumber,
+        _limit: PRODUCTS_PER_PAGE,
+      }),
+    );
+
+    const allProductsResults = await Promise.all(allProductsPromises);
+
+    const initialItems = allProductsResults.flatMap((result) => result.data);
+
+    // Assuming all pages will have the same totalCount value in the response headers
+    const totalCount =
+      allProductsResults.length > 0 ? allProductsResults[0].countItems : 0;
+
+    return { initialItems, totalCount };
+  };
+
+  const { initialItems, totalCount } = await fetchAllProducts(
+    currentPage,
+    PRODUCTS_PER_PAGE,
+  );
 
   return (
     <Suspense fallback={<LoadingProgress />}>
-      <Products products={products} />
+      <Products
+        products={initialItems}
+        totalCount={totalCount}
+        initPage={currentPage}
+      />
     </Suspense>
   );
 }
