@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 
 // type
-import { NavigateItem } from "@/src/types";
+import { NavigateItem } from "@/src/types/navigation";
 import { useRouter } from "next/navigation";
 
 export interface Props {

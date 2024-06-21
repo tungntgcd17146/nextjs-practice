@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 
 //mui
@@ -12,13 +12,6 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AddIcon from "@mui/icons-material/Add";
 import Popper from "@mui/material/Popper";
-import Hidden from "@mui/material/Hidden";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
-import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
-import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 
 //components
 import Drawer from "@/src/components/layouts/Drawer/";
@@ -30,42 +23,11 @@ import Input from "@/src/components/ui/Input";
 
 import { themes } from "@/src/themes";
 
-//types
-import { NavigateItem } from "@/src/types";
-import MenuPopup from "@/src/components/layouts/MenuPopup";
+//constants
+import { navigationItems } from "@/src/mocks/sideNavigation";
 
-export const listItems: NavigateItem[] = [
-  {
-    text: "Home",
-    icon: <HomeOutlinedIcon />,
-    go: "/home",
-  },
-  {
-    text: "Products",
-    icon: <DiamondOutlinedIcon />,
-    go: "/products",
-  },
-  {
-    text: "Customers",
-    icon: <AccountCircleOutlinedIcon />,
-    go: "/customers",
-  },
-  {
-    text: "Shop",
-    icon: <StorefrontOutlinedIcon />,
-    go: "/shop",
-  },
-  {
-    text: "Income",
-    icon: <DonutSmallOutlinedIcon />,
-    go: "/income",
-  },
-  {
-    text: "Promote",
-    icon: <RecommendOutlinedIcon />,
-    go: "/promote",
-  },
-];
+//types
+import MenuPopup from "@/src/components/layouts/MenuPopup";
 
 const iconButtonStyles = (theme: Theme) => ({
   ":hover": { color: theme.palette.text.secondary },
@@ -78,7 +40,12 @@ const Header = () => {
 
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
 
-  const { isMobile, isTablet, isDesktop } = useScreenWidth();
+  const {
+    isMobile,
+    isTablet,
+    isDesktop,
+    matchedBreakpoint: isDownLg,
+  } = useScreenWidth({ down: "lg" });
   const theme = useTheme();
 
   const handleClickMobileSearchIcon = useCallback(
@@ -123,7 +90,14 @@ const Header = () => {
         backgroundColor: theme.palette.background.paper,
       }}
     >
-      <Hidden mdDown>
+      {isMobile ? (
+        <IconButton
+          aria-label="open"
+          data-testid="Header_MenuIcon"
+          children={<DragHandleIcon />}
+          onClick={handleOpenDrawer}
+        />
+      ) : (
         <Input
           startIcon={<SearchIcon />}
           data-testid="Header_SearchInput"
@@ -131,22 +105,13 @@ const Header = () => {
           placeholder="Search or type a command"
           endHelper="⌘ F"
         />
-      </Hidden>
-
-      {isMobile && (
-        <IconButton
-          aria-label="open"
-          data-testid="Header_MenuIcon"
-          children={<DragHandleIcon />}
-          onClick={handleOpenDrawer}
-        />
       )}
       <Drawer
         data-testid="Header_Drawer"
         isOpen={isOpenDrawer}
         onOpen={handleOpenDrawer}
         onClose={handleCloseDrawer}
-        listItems={listItems}
+        listItems={navigationItems}
       />
 
       <div
@@ -158,7 +123,7 @@ const Header = () => {
       >
         {/* search input on mobile */}
         {isMobile && (
-          <div>
+          <>
             <IconButton
               aria-label="search-mobile"
               data-testid="Header_SearchInputIcon_Mobile"
@@ -179,44 +144,29 @@ const Header = () => {
                 />
               </Box>
             </Popper>
-          </div>
+          </>
         )}
 
-        <Hidden lgDown>
+        {!isDownLg && (
           <Button
             aria-label="create"
             sx={{ width: "120px" }}
-            startIcon={useMemo(
-              () => (
-                <AddIcon />
-              ),
-              [],
-            )}
+            startIcon={<AddIcon />}
             children="Create"
             color="primary"
           />
-        </Hidden>
+        )}
         <IconButton
           aria-label="chat-icon"
           badgeContent={0}
-          children={useMemo(
-            () => (
-              <ChatBubbleOutlineIcon />
-            ),
-            [],
-          )}
+          children={<ChatBubbleOutlineIcon />}
           size="large"
           sx={iconButtonStyles}
         />
         <IconButton
           aria-label="notification-icon"
           badgeContent={0}
-          children={useMemo(
-            () => (
-              <NotificationsNoneIcon />
-            ),
-            [],
-          )}
+          children={<NotificationsNoneIcon />}
           size="large"
           sx={iconButtonStyles}
         />

@@ -1,8 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { fireEvent, render, screen, describe, expect, it, vi } from "@/src/utils/testUtils";
+import {
+  fireEvent,
+  render,
+  screen,
+  describe,
+  expect,
+  it,
+  vi,
+} from "@/src/utils/testUtils";
 import Tabs, { Props } from "..";
 
-import { selectOption } from "@/src/constants/data";
+import { selectOption } from "@/src/mocks/productFilter";
 
 const defaultProp = {
   options: selectOption,

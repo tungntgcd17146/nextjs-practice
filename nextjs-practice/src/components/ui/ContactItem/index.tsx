@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { memo, useCallback, useEffect, useState } from "react";
 import { themes } from "@/src/themes";
@@ -10,7 +10,7 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import Hidden from "@mui/material/Hidden";
+import Box from "@mui/material/Box";
 
 //components
 import User1 from "@/public/assets/User1.webp";
@@ -18,11 +18,11 @@ import Avatar from "@/src/components/ui/Avatar";
 import Button from "@/src/components/ui/Button";
 
 //utils
-import { userImageData } from "@/src/constants/data";
+import { userImageData } from "@/src/mocks/commonData";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 
 //types
-import { UserContact } from "@/src/types";
+import { UserContact } from "@/src/types/contact";
 import Image from "next/image";
 
 export interface Props {
@@ -47,7 +47,9 @@ const ContactItem = ({
     }
   }, [user.contactStatus]);
 
-  const { isMobile } = useScreenWidth();
+  const { isMobile, matchedBreakpoint: isHideImageList } = useScreenWidth({
+    down: "lg",
+  });
 
   const handleClickFollow = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -168,14 +170,21 @@ const ContactItem = ({
 
         <Grid item lg={6} display="flex" justifyContent="flex-end">
           {/* group img */}
-          <Hidden lgDown>
-            <ImageList sx={{ width: "480px", height: "128px" }} cols={3}>
+          {!isHideImageList && (
+            <ImageList
+              sx={{
+                width: "480px",
+                height: "128px",
+              }}
+              cols={3}
+            >
               {userImageData.map((item, index) => (
                 <ImageListItem key={index}>
-                  <div
+                  <Box
                     style={{
                       width: "100%",
-                      height: "115px",
+                      height: "125px",
+                      position: "relative",
                     }}
                   >
                     <Image
@@ -184,12 +193,13 @@ const ContactItem = ({
                       alt={item.imgTitle}
                       style={{ borderRadius: "12px" }}
                       loading="lazy"
+                      sizes="100%"
                     />
-                  </div>
+                  </Box>
                 </ImageListItem>
               ))}
             </ImageList>
-          </Hidden>
+          )}
         </Grid>
       </Grid>
 

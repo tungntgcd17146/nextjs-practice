@@ -10,65 +10,18 @@ import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import NavItem from "@/src/components/ui/NavItem/";
 import Divider from "@mui/material/Divider";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
 
 //utils
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 import { themes } from "@/src/themes";
-import { NavigateItem } from "@/src/types";
+import { menuItems } from "@/src/mocks/menuPopup";
 
-export const listItems: NavigateItem[] = [
-  {
-    text: "Profile",
-  },
-  {
-    text: "Edit Profile",
-  },
-  {
-    isDivider: true,
-  },
-  {
-    text: "Analytics",
-    icon: <HomeOutlinedIcon />,
-  },
-  {
-    text: "Affiliate center",
-    icon: <DiamondOutlinedIcon />,
-  },
-  {
-    text: "Explore creator",
-    icon: <AccountCircleOutlinedIcon />,
-  },
-  {
-    isDivider: true,
-  },
-  {
-    text: "Upgrade to Pro",
-    icon: <DonutSmallOutlinedIcon />,
-  },
-  {
-    isDivider: true,
-  },
-  {
-    text: "Account Settings",
-  },
-  {
-    text: "Log out",
-    go: "/",
-  },
-];
 export interface Props {
   onCloseModal: () => void;
   anchorEl: HTMLElement | null;
 }
 
-const MenuPopup = ({
-  anchorEl,
-  onCloseModal,
-}: Props) => {
+const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
   //disable apply and reset button when all value is default
   const theme = useTheme();
   const { isMobile } = useScreenWidth();
@@ -81,7 +34,7 @@ const MenuPopup = ({
   }, [onCloseModal]);
 
   return (
-    <div>
+    <>
       <Backdrop
         sx={{
           color: themes.colors.white[500],
@@ -117,11 +70,12 @@ const MenuPopup = ({
       >
         <Grid container display="flex" flexDirection="column">
           <List>
-            {listItems.map((item, index) => {
+            {menuItems.map((item, index) => {
               const { text, icon, go, isDivider } = item;
 
               return isDivider ? (
                 <Divider
+                  key={index}
                   sx={{ color: theme.palette.grey[100], marginBottom: "12px" }}
                 />
               ) : (
@@ -140,7 +94,7 @@ const MenuPopup = ({
           </List>
         </Grid>
       </Popover>
-    </div>
+    </>
   );
 };
 

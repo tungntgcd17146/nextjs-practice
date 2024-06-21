@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { render, screen } from '@/utils/testUtils'
+import { render, screen } from '@/src/utils/testUtils'
 import { describe, expect, it, vi } from 'vitest'
 import BackgroundImage from '../'
-import * as useScreenWidth from '@/hooks/useScreenWidth'
+import * as useScreenWidth from '@/src/hooks/useScreenWidth'
 
 const defaultProp = {}
 

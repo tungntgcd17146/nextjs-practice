@@ -5,6 +5,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Grid sx={{ display: "flex", flexDirection: "column" }}>
       <Header />
+
       {children}
     </Grid>
   );
