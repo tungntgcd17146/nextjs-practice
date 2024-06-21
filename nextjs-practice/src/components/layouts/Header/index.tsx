@@ -28,6 +28,7 @@ import { navigationItems } from "@/src/mocks/sideNavigation";
 
 //types
 import MenuPopup from "@/src/components/layouts/MenuPopup";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const iconButtonStyles = (theme: Theme) => ({
   ":hover": { color: theme.palette.text.secondary },
@@ -37,8 +38,13 @@ const Header = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);
   const [searchIconAnchorEl, setSearchIconAnchorEl] =
     useState<null | HTMLElement>(null);
+  const [searchInput, setSearchInput] = useState("");
 
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const {
     isMobile,
@@ -53,6 +59,34 @@ const Header = () => {
       setSearchIconAnchorEl(searchIconAnchorEl ? null : event.currentTarget);
     },
     [searchIconAnchorEl],
+  );
+
+  const generateSearchUrl = useCallback(() => {
+    const params = new URLSearchParams(searchParams);
+    params.delete("page");
+    params.set("query", searchInput);
+
+    return router.push(`${pathname}?${params.toString()}`);
+  }, [pathname, router, searchInput, searchParams]);
+
+  const handleSearchInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchInput(event.target.value);
+    },
+    [],
+  );
+
+  const handleBlurSearchInput = useCallback(() => {
+    generateSearchUrl();
+  }, [generateSearchUrl]);
+
+  const handleKeyDownSearchInput = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "Enter") {
+        generateSearchUrl();
+      }
+    },
+    [generateSearchUrl],
   );
 
   const handleClickAvatar = useCallback(
@@ -99,6 +133,9 @@ const Header = () => {
         />
       ) : (
         <Input
+          onKeyDown={handleKeyDownSearchInput}
+          onBlur={handleBlurSearchInput}
+          onChange={handleSearchInputChange}
           startIcon={<SearchIcon />}
           data-testid="Header_SearchInput"
           searchWidth="356px"
@@ -138,6 +175,9 @@ const Header = () => {
             >
               <Box sx={{ padding: " 12px 16px" }}>
                 <Input
+                  onKeyDown={handleKeyDownSearchInput}
+                  onBlur={handleBlurSearchInput}
+                  onChange={handleSearchInputChange}
                   startIcon={<SearchIcon />}
                   data-testid="Header_SearchInput_Mobile"
                   placeholder="Search or type a command"
