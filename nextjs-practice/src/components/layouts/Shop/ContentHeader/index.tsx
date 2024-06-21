@@ -19,6 +19,7 @@ import { selectOption } from "@/src/mocks/productFilter";
 import { tabItems } from "@/src/mocks/shopTab";
 import { usePathname } from "next/navigation";
 import { TabsNavigation, TabsValue } from "@/src/types/navigation";
+import { useShopContext } from "@/src/contexts/shopContext/useShopContext";
 
 const filterButtonStyles = (theme: Theme) => ({
   marginLeft: "16px",
@@ -35,6 +36,8 @@ const filterIcon = <FilterAltOutlinedIcon />;
 
 const ContentHeader = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const { totalProducts, showingProducts } = useShopContext();
 
   const pathname = usePathname();
 
@@ -83,6 +86,10 @@ const ContentHeader = () => {
     setAnchorEl(null);
   }, []);
 
+  const handleSubmitFilterModal = useCallback(() => {}, []);
+
+  const handleResetFilterModal = useCallback(() => {}, []);
+
   const isProductsTabs = tabSelected === TabsValue.PRODUCTS;
 
   return (
@@ -128,10 +135,10 @@ const ContentHeader = () => {
             />
             <ProductFilter
               anchorEl={anchorEl}
-              // totalProducts={totalProducts}
-              // showingProducts={showingProducts}
-              // onReset={handleResetFilterModal}
-              // onSubmit={handleSubmitFilterModal}
+              totalProducts={totalProducts}
+              showingProducts={showingProducts}
+              onReset={handleResetFilterModal}
+              onSubmit={handleSubmitFilterModal}
               onCloseModal={handleCloseFilterModal}
             />
           </Grid>

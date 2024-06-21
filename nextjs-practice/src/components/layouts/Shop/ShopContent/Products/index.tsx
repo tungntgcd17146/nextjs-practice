@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback, useState, useMemo } from "react";
+import { memo, useCallback, useState, useMemo, useEffect } from "react";
 
 //mui
 import ProductCard from "@/src/components/ui/ProductCard";
@@ -15,17 +15,14 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import { PRODUCTS_PER_PAGE } from "@/src/constants/common";
 import { fetchProducts } from "@/src/services/productsService";
+import { useShopContext } from "@/src/contexts/shopContext/useShopContext";
 
 export interface Props {
   products: Product[];
   totalCount: number;
   initPage: number;
 }
-const Products = ({
-  products,
-  initPage,
-  totalCount: totalProducts,
-}: Props) => {
+const Products = ({ products, initPage, totalCount: totalProducts }: Props) => {
   const [items, setItems] = useState(products);
   const [page, setPage] = useState(initPage);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +34,13 @@ const Products = ({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { setShowingProducts, setTotalProducts } = useShopContext();
+
+  useEffect(() => {
+    setTotalProducts(totalProducts);
+    setShowingProducts(products.length);
+
+  }, [products.length, setShowingProducts, setTotalProducts, totalProducts]);
 
   //total pages
   const totalPages = useMemo(
@@ -88,6 +92,7 @@ const Products = ({
       });
 
       setItems((prevItems) => [...prevItems, ...newItems]);
+      setShowingProducts((prevShowing) => prevShowing + newItems.length);
       setPage(nextPage);
 
       updateUrl(nextPage);
@@ -100,10 +105,11 @@ const Products = ({
     } finally {
       setIsLoading(false);
     }
-  }, [page, totalPages, updateUrl]);
+  }, [page, setShowingProducts, totalPages, updateUrl]);
 
   const handleClickShowLess = () => {
     setItems(products);
+    setShowingProducts(products.length);
     setPage(1);
     setHasMore(true);
     router.push(generatePageURL(1));
