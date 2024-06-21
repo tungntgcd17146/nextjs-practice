@@ -26,14 +26,8 @@ import {
   sortBySelect,
 } from "@/src/mocks/productFilter";
 
-export interface FilterValue {
-  searchInput: string;
-  sortBy: string;
-  categories: string[];
-  minPriceRange: number;
-  maxPriceRange: number;
-  rating: string;
-}
+import { FilterValue } from "@/src/types/product";
+
 export interface Props {
   onSubmit?: (filterValue: FilterValue) => void;
   onReset?: () => void;
@@ -115,7 +109,7 @@ const ProductFilter = ({
 
   const handleApply = useCallback(() => {
     const filterApplyValue = {
-      searchInput: searchInput,
+      query: searchInput,
       categories: categoryValue,
       sortBy: selectedSortByValue,
       minPriceRange: rangeSlideMinValue,

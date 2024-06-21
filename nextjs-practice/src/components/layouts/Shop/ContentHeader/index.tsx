@@ -4,7 +4,7 @@ import { memo, useCallback, useState } from "react";
 import { Theme } from "@mui/material";
 
 //MUI
-//import { SelectChangeEvent } from '@mui/material/Select'
+import { SelectChangeEvent } from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 
@@ -15,11 +15,14 @@ import IconButton from "@/src/components/ui/IconButton";
 import ProductFilter from "@/src/components/forms/ProductFilter";
 
 //utils
-import { selectOption } from "@/src/mocks/productFilter";
+import { selectOption, sortBySelect } from "@/src/mocks/productFilter";
 import { tabItems } from "@/src/mocks/shopTab";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { TabsNavigation, TabsValue } from "@/src/types/navigation";
 import { useShopContext } from "@/src/contexts/shopContext/useShopContext";
+
+import { FilterValue } from "@/src/types/product";
+import { ShopSelect } from "@/src/types/shopFilter";
 
 const filterButtonStyles = (theme: Theme) => ({
   marginLeft: "16px",
@@ -39,6 +42,8 @@ const ContentHeader = () => {
 
   const { totalProducts, showingProducts } = useShopContext();
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const pathname = usePathname();
 
   //Tab state for init selected from route
@@ -49,28 +54,64 @@ const ContentHeader = () => {
         ? TabsValue.FOLLOWERS
         : TabsValue.FOLLOWING;
 
+  const generateProductsFilterURL = useCallback(
+    (formData: FilterValue) => {
+      const {
+        query,
+        sortBy,
+        categories,
+        minPriceRange,
+        maxPriceRange,
+        rating,
+      } = formData;
+
+      const params = new URLSearchParams(searchParams);
+      params.delete("page");
+      query ? params.set("query", query) : params.delete("query");
+      sortBy !== sortBySelect[0].name
+        ? params.set("sortBy", sortBy)
+        : params.delete("sortBy");
+
+      // Join categories array into a comma-separated string
+      if (categories.length > 0) {
+        params.set("categories", categories.join(","));
+      } else {
+        params.delete("categories");
+      }
+
+      minPriceRange === 0 && maxPriceRange === minPriceRange
+        ? params.delete("minPriceRange")
+        : params.set("minPriceRange", minPriceRange.toString());
+
+      maxPriceRange > 0 && minPriceRange !== maxPriceRange
+        ? params.set("maxPriceRange", maxPriceRange.toString())
+        : params.delete("maxPriceRange");
+
+      Number(rating) > 1
+        ? params.set("rating", rating)
+        : params.delete("rating");
+
+      return router.push(`${pathname}?${params.toString()}`);
+    },
+    [pathname, router, searchParams],
+  );
+
   const handleSelectFilterByPopularity = useCallback(
-    () =>
-      //event: SelectChangeEvent
-      {
-        // const selectValue = event.target.value
-        // setPopularitySelect(selectValue)
-        // setPage(1)
-        // //not set popularity query param when select all option
-        // if (selectValue === ShopSelect.ALL) {
-        //   setProductsQueryParam({ ...productsQueryParam, popularity: undefined, _page: 1, _limit: 6 })
-        // } else {
-        //   setProductsQueryParam({
-        //     ...productsQueryParam,
-        //     popularity: selectValue,
-        //     _page: 1,
-        //     _limit: 6
-        //   })
-        // }
-      },
-    [
-      //productsQueryParam
-    ],
+    (event: SelectChangeEvent) => {
+      const params = new URLSearchParams(searchParams);
+      const selectValue = event.target.value;
+
+      //reset page query param
+      params.delete("page");
+
+      //not set popularity query param when select all option
+      selectValue !== ShopSelect.ALL
+        ? params.set("popularity", selectValue)
+        : params.delete("popularity");
+
+      router.push(`${pathname}?${params.toString()}`);
+    },
+    [pathname, router, searchParams],
   );
 
   const handleClickFilterButton = useCallback(
@@ -86,9 +127,25 @@ const ContentHeader = () => {
     setAnchorEl(null);
   }, []);
 
-  const handleSubmitFilterModal = useCallback(() => {}, []);
+  const handleSubmitFilterModal = useCallback(
+    (formData: FilterValue) => {
+      generateProductsFilterURL(formData);
+    },
+    [generateProductsFilterURL],
+  );
 
-  const handleResetFilterModal = useCallback(() => {}, []);
+  const handleResetFilterModal = useCallback(() => {
+    const params = new URLSearchParams(searchParams);
+    params.delete("page");
+    params.delete("query");
+    params.delete("sortBy");
+    params.delete("categories");
+    params.delete("minPriceRange");
+    params.delete("maxPriceRange");
+    params.delete("rating");
+
+    router.push(`${pathname}?${params.toString()}`);
+  }, [pathname, router, searchParams]);
 
   const isProductsTabs = tabSelected === TabsValue.PRODUCTS;
 
