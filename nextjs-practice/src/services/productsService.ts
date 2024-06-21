@@ -6,6 +6,6 @@ export const fetchProducts = async (queryParams?: ProductQueryParams) => {
   return await get<Product[]>(PRODUCT_URL, queryParams);
 };
 
-export const fetchProductById = async (id: number) => {
+export const fetchProductById = async (id: string) => {
   return await get<Product>(`${PRODUCT_URL}/${id}`);
 };

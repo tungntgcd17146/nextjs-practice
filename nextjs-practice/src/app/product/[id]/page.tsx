@@ -9,7 +9,7 @@ import { fetchProductById } from "@/src/services/productsService";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  const product = await fetchProductById(id);
+  const { data: product } = await fetchProductById(id);
 
   return (
     <Suspense fallback={<LoadingProgress />}>
