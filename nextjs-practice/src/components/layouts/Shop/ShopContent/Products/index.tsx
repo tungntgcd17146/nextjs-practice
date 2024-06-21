@@ -64,7 +64,7 @@ const Products = ({
       const newUrl = new URLSearchParams(searchParams.toString());
       newUrl.set("page", page.toString());
 
-      //shallow
+      //shallow routing for update url and not reload page
       window.history.pushState(null, "", `?${newUrl.toString()}`);
     },
     [searchParams],
