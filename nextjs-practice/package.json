@@ -1,0 +1,61 @@
+{
+  "name": "nextjs-practice",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "prepare": "cd .. && husky install nextjs-practice/.husky"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.19",
+    "@mui/material-nextjs": "^5.15.11",
+    "@storybook/addon-themes": "^8.1.6",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.5.0",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@storybook/addon-essentials": "^8.1.6",
+    "@storybook/addon-interactions": "^8.1.6",
+    "@storybook/addon-links": "^8.1.6",
+    "@storybook/addon-onboarding": "^8.1.6",
+    "@storybook/blocks": "^8.1.6",
+    "@storybook/nextjs": "^8.1.6",
+    "@storybook/react": "^8.1.6",
+    "@storybook/test": "^8.1.6",
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^16.0.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/ui": "^1.6.0",
+    "eslint": "^8",
+    "eslint-config-next": "^14.2.3",
+    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-storybook": "^0.8.0",
+    "husky": "^9.0.11",
+    "jsdom": "^24.1.0",
+    "storybook": "^8.1.6",
+    "typescript": "^5",
+    "vitest": "^1.6.0"
+  },
+  "resolutions": {
+    "@storybook/react-docgen-typescript-plugin": "1.0.6--canary.9.cd77847.0"
+  }
+}
