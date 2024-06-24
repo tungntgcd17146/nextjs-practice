@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback, useState, useMemo } from "react";
+import { memo, useCallback, useState, useMemo, useEffect } from "react";
 
 //mui
 import ProductCard from "@/src/components/ui/ProductCard";
@@ -8,35 +8,43 @@ import Grid from "@mui/material/Grid";
 
 //helper
 import useScreenWidth from "@/src/hooks/useScreenWidth";
-import { Product } from "@/src/types/product";
+import { Product, ProductQueryParams } from "@/src/types/product";
 import InfiniteScroll from "@/src/components/ui/InfiniteScroll";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import { PRODUCTS_PER_PAGE } from "@/src/constants/common";
 import { fetchProducts } from "@/src/services/productsService";
+import { useShopContext } from "@/src/contexts/shopContext/useShopContext";
 
 export interface Props {
   products: Product[];
   totalCount: number;
-  initPage: number;
+  queryParams: ProductQueryParams;
 }
+
 const Products = ({
   products,
-  initPage,
+  queryParams,
   totalCount: totalProducts,
 }: Props) => {
   const [items, setItems] = useState(products);
-  const [page, setPage] = useState(initPage);
+  const [page, setPage] = useState(queryParams._page);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(
-    !(Math.ceil(totalProducts / PRODUCTS_PER_PAGE) === initPage),
+    !(Math.ceil(totalProducts / PRODUCTS_PER_PAGE) === queryParams._page),
   );
 
   const { matchedBreakpoint } = useScreenWidth({ down: "sm" });
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { setShowingProducts, setTotalProducts } = useShopContext();
+
+  useEffect(() => {
+    setTotalProducts(totalProducts);
+    setShowingProducts(products.length);
+  }, [products.length, setShowingProducts, setTotalProducts, totalProducts]);
 
   //total pages
   const totalPages = useMemo(
@@ -45,8 +53,8 @@ const Products = ({
   );
 
   const isNotFoundPage = useMemo(
-    () => totalPages < initPage,
-    [initPage, totalPages],
+    () => totalPages < queryParams._page,
+    [queryParams._page, totalPages],
   );
 
   const generatePageURL = useCallback(
@@ -83,11 +91,12 @@ const Products = ({
 
     try {
       const { data: newItems } = await fetchProducts({
+        ...queryParams,
         _page: nextPage,
-        _limit: PRODUCTS_PER_PAGE,
       });
 
       setItems((prevItems) => [...prevItems, ...newItems]);
+      setShowingProducts((prevShowing) => prevShowing + newItems.length);
       setPage(nextPage);
 
       updateUrl(nextPage);
@@ -100,10 +109,11 @@ const Products = ({
     } finally {
       setIsLoading(false);
     }
-  }, [page, totalPages, updateUrl]);
+  }, [page, queryParams, setShowingProducts, totalPages, updateUrl]);
 
   const handleClickShowLess = () => {
     setItems(products);
+    setShowingProducts(products.length);
     setPage(1);
     setHasMore(true);
     router.push(generatePageURL(1));
@@ -117,6 +127,7 @@ const Products = ({
       isError={isNotFoundPage}
       isLoadingSkeleton={isLoading}
       isHiddenLoadMore={!hasMore}
+      isHiddenActionButton={totalPages === 1}
       onClickShowLess={handleClickShowLess}
       onClickLoadMore={handleClickLoadMore}
     >
