@@ -123,9 +123,13 @@ const ContentHeader = () => {
     [],
   );
 
-  const handleCloseFilterModal = useCallback(() => {
-    setAnchorEl(null);
-  }, []);
+  const handleCloseFilterModal = useCallback(
+    (formData: FilterValue) => {
+      generateProductsFilterURL(formData);
+      setAnchorEl(null);
+    },
+    [generateProductsFilterURL],
+  );
 
   const handleSubmitFilterModal = useCallback(
     (formData: FilterValue) => {

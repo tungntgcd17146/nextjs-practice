@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect,useMemo } from "react";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 
 //mui
@@ -53,6 +53,14 @@ const Header = () => {
     matchedBreakpoint: isDownLg,
   } = useScreenWidth({ down: "lg" });
   const theme = useTheme();
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    const query = params.get("query");
+    if (!query) {
+      setSearchInput("");
+    }
+  }, [searchParams]);
 
   const handleClickMobileSearchIcon = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
@@ -110,6 +118,8 @@ const Header = () => {
     setIsOpenDrawer(true);
   }, [setIsOpenDrawer]);
 
+  const isShopProductsPage = useMemo(() => pathname === "/shop", [pathname]);
+
   return (
     <Box
       data-testid="Header"
@@ -133,6 +143,8 @@ const Header = () => {
         />
       ) : (
         <Input
+          disabled={isShopProductsPage}
+          value={searchInput}
           onKeyDown={handleKeyDownSearchInput}
           onBlur={handleBlurSearchInput}
           onChange={handleSearchInputChange}
@@ -175,6 +187,8 @@ const Header = () => {
             >
               <Box sx={{ padding: " 12px 16px" }}>
                 <Input
+                  disabled={isShopProductsPage}
+                  value={searchInput}
                   onKeyDown={handleKeyDownSearchInput}
                   onBlur={handleBlurSearchInput}
                   onChange={handleSearchInputChange}

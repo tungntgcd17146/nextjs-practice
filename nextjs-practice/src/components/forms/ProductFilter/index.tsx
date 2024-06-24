@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState, useMemo } from "react";
 
 //mui
 import Popover from "@mui/material/Popover";
@@ -33,7 +33,7 @@ export interface Props {
   onReset?: () => void;
   totalProducts?: number;
   showingProducts?: number;
-  onCloseModal?: () => void;
+  onCloseModal?: (filterValue: FilterValue) => void;
   anchorEl: HTMLElement | null;
 }
 
@@ -107,28 +107,33 @@ const ProductFilter = ({
     onReset?.();
   }, [onReset]);
 
-  const handleApply = useCallback(() => {
-    const filterApplyValue = {
+  const filterApplyValue = useMemo(
+    () => ({
       query: searchInput,
       categories: categoryValue,
       sortBy: selectedSortByValue,
       minPriceRange: rangeSlideMinValue,
       maxPriceRange: rangeSlideMaxValue,
       rating: selectedRatingValue,
-    };
+    }),
+    [
+      categoryValue,
+      rangeSlideMaxValue,
+      rangeSlideMinValue,
+      searchInput,
+      selectedRatingValue,
+      selectedSortByValue,
+    ],
+  );
 
+  const handleApply = useCallback(() => {
     onSubmit?.(filterApplyValue);
-    onCloseModal?.();
-  }, [
-    categoryValue,
-    onCloseModal,
-    onSubmit,
-    rangeSlideMaxValue,
-    rangeSlideMinValue,
-    searchInput,
-    selectedRatingValue,
-    selectedSortByValue,
-  ]);
+    onCloseModal?.(filterApplyValue);
+  }, [filterApplyValue, onCloseModal, onSubmit]);
+
+  const handleCloseModal = useCallback(() => {
+    onCloseModal?.(filterApplyValue);
+  }, [filterApplyValue, onCloseModal]);
 
   const handleSelectRatingChange = useCallback((value: SelectChangeEvent) => {
     setSelectedRatingValue(value.target.value);
@@ -181,7 +186,7 @@ const ProductFilter = ({
           zIndex: theme.zIndex.drawer + 1,
         }}
         open={open}
-        onClick={onCloseModal}
+        onClick={handleCloseModal}
       />
       <Popover
         data-testid="ProductFilter_Popover"
@@ -200,7 +205,7 @@ const ProductFilter = ({
         id={id}
         open={open}
         anchorEl={isMobile ? null : anchorEl}
-        onClose={onCloseModal}
+        onClose={handleCloseModal}
         anchorOrigin={{
           vertical: "top",
           horizontal: "left",
@@ -220,7 +225,7 @@ const ProductFilter = ({
           <FilterModalHeader
             totalProduct={totalProducts}
             showingProduct={showingProducts}
-            onClickHeaderButton={onCloseModal}
+            onClickHeaderButton={handleCloseModal}
           />
 
           <Input
@@ -275,7 +280,7 @@ const ProductFilter = ({
               aria-label="close-reset"
               children={isDisableActionButton ? "Close" : "Reset"}
               color="inherit"
-              onClick={isDisableActionButton ? onCloseModal : handleReset}
+              onClick={isDisableActionButton ? handleCloseModal : handleReset}
             />
             <Button
               aria-label="apply-button"
