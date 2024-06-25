@@ -53,7 +53,8 @@ const Products = ({
   );
 
   const isNotFoundPage = useMemo(
-    () => totalPages < queryParams._page,
+    // not found page when _page in url is not equal to 1 and lager than total pages
+    () => totalPages < queryParams._page && queryParams._page !== 1,
     [queryParams._page, totalPages],
   );
 
