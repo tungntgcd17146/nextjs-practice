@@ -15,14 +15,24 @@
   },
   "overrides": [
     {
-      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"]
+      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+      "rules": {
+        // You can add specific rules for storybook files here if needed
+      }
     }
   ],
   "rules": {
     "react/no-children-prop": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "prettier/prettier": ["error", { "singleQuote": false }],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "lf",
+        "singleQuote": false, // Ensure double quotes are enforced
+        "trailingComma": "all"
+      }
+    ],
     "quotes": ["error", "double"]
   }
 }
