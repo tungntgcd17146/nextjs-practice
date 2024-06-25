@@ -21,14 +21,14 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const TabsBase: Story = {
   args: {
-    tabSelected:0,
+    tabSelected: 0,
     tabItems: tabItems,
   },
 };
 
 export const TabsDisableItem: Story = {
   args: {
-    tabSelected:0,
+    tabSelected: 0,
     tabItems: [
       ...tabItems,
       { ...tabItems[2], text: "Disable", isDisabled: true },
@@ -38,7 +38,7 @@ export const TabsDisableItem: Story = {
 
 export const TabsSelectedDefault: Story = {
   args: {
-    tabSelected:0,
+    tabSelected: 0,
     tabItems: [
       ...tabItems,
       { ...tabItems[2], text: "Selected", isSelected: true },

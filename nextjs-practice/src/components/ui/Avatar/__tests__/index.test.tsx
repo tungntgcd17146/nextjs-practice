@@ -1,4 +1,12 @@
-import { fireEvent, render, screen, describe, expect, it, vi } from "@/src/utils/testUtils";
+import {
+  fireEvent,
+  render,
+  screen,
+  describe,
+  expect,
+  it,
+  vi,
+} from "@/src/utils/testUtils";
 import Avatar, { Props } from "..";
 
 import Customer1 from "/assets/customer1.webp";

@@ -16,7 +16,6 @@
 //   tabSelectedText: 'Following'
 // }
 
-
 // const setup = (overrideProps = {}) => {
 //   const props = {
 //     ...defaultProp,

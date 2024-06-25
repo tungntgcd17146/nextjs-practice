@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { fireEvent, render, screen, describe, expect, it, vi } from "@/src/utils/testUtils";
+import {
+  fireEvent,
+  render,
+  screen,
+  describe,
+  expect,
+  it,
+  vi,
+} from "@/src/utils/testUtils";
 import NavItem, { Props } from "..";
 
 import * as useScreenWidth from "@/src/hooks/useScreenWidth";
@@ -19,9 +27,7 @@ const setup = (overrideProps = {}) => {
     ...overrideProps,
   };
 
-  return render(
-      <NavItem {...props} />
-  );
+  return render(<NavItem {...props} />);
 };
 
 describe("NavItem Test", () => {

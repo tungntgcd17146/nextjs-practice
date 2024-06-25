@@ -4,9 +4,9 @@ import { themes } from "@/src/themes";
 
 import { Theme } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 
 import { useRouter } from "next/navigation";
 
@@ -20,7 +20,7 @@ export interface Props {
   isShowText?: boolean;
 }
 
-const listItemButtonStyles = (theme: Theme) => ({
+export const listItemButtonStyles = (theme: Theme) => ({
   fontSize: "15px",
   borderRadius: "12px",
   height: "48px",

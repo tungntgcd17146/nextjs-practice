@@ -36,7 +36,7 @@ const ProductDetail = ({ product }: Props) => {
   const { isMobile } = useScreenWidth();
 
   const handleClose = () => {
-    router.push(`/shop`);
+    router.push("/shop");
   };
 
   const {

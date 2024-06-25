@@ -12,7 +12,7 @@ import PageNotFound from "@/src/components/ui/PageNotFound";
 
 //helper
 import useScreenWidth from "@/src/hooks/useScreenWidth";
-import { UserContact } from '@/src/types/contact';
+import { UserContact } from "@/src/types/contact";
 
 interface Props {
   contacts: UserContact[];
@@ -27,10 +27,7 @@ const Contacts = ({ contacts }: Props) => {
     );
 
   return (
-    <InfiniteScroll
-      isEmptyItem={contacts.length === 0}
-      isHiddenActionButton
-    >
+    <InfiniteScroll isEmptyItem={contacts.length === 0} isHiddenActionButton>
       <Grid container={!matchedBreakpoint}>
         {contacts.map((contactItem) => {
           return (

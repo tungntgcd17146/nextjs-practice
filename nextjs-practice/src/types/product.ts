@@ -1,4 +1,4 @@
-import { CommonQueryParams } from '@/src/types/common';
+import { CommonQueryParams } from "@/src/types/common";
 
 export interface Product {
   id: number;

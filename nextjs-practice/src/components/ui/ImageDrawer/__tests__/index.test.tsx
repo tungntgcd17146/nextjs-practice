@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { fireEvent, render, screen, describe, expect, it, vi } from "@/src/utils/testUtils";
+import {
+  fireEvent,
+  render,
+  screen,
+  describe,
+  expect,
+  it,
+  vi,
+} from "@/src/utils/testUtils";
 import ImageDrawer, { Props } from "..";
 
 import * as useScreenWidth from "@/src/hooks/useScreenWidth";

@@ -1,4 +1,12 @@
-import { fireEvent, render, screen, describe, expect, it, vi } from "@/src/utils/testUtils";
+import {
+  fireEvent,
+  render,
+  screen,
+  describe,
+  expect,
+  it,
+  vi,
+} from "@/src/utils/testUtils";
 import Input, { Props } from "..";
 
 const defaultProp = {

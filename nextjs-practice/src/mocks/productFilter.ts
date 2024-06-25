@@ -1,5 +1,5 @@
-import {ShopSelect } from "@/src/types/shopFilter";
-import { Checkbox as CheckboxType} from "@/src/types/checkbox";
+import { ShopSelect } from "@/src/types/shopFilter";
+import { Checkbox as CheckboxType } from "@/src/types/checkbox";
 
 const checkboxOptions: CheckboxType[] = [
   {

@@ -1,48 +1,54 @@
-import { memo, useMemo } from 'react'
+import { memo, useMemo } from "react";
 
-import { themes } from '@/src/themes'
+import { themes } from "@/src/themes";
 
 //mui
-import { ChipProps, Chip as MuiChip, useTheme } from '@mui/material'
+import { ChipProps, Chip as MuiChip, useTheme } from "@mui/material";
 
 export interface Props extends ChipProps {
-  price?: number
-  sx?: React.CSSProperties
+  price?: number;
+  sx?: React.CSSProperties;
 }
 
 const Chip = ({ price, sx, ...rest }: Props) => {
-  const theme = useTheme()
+  const theme = useTheme();
 
   const generateLabel = useMemo(() => {
     if (price === 0) {
-      return '$0'
+      return "$0";
     } else if (price! > 0) {
-      return `${price}$`
+      return `${price}$`;
     } else {
-      return ''
+      return "";
     }
-  }, [price])
+  }, [price]);
 
   return (
     <MuiChip
-      data-testid='Chip'
+      data-testid="Chip"
       label={generateLabel}
-      variant='filled'
+      variant="filled"
       sx={
         price != undefined
           ? {
-              backgroundColor: price === 0 ? theme.palette.grey[100] : themes.colors.green[500],
-              color: price === 0 ? theme.palette.text.secondary : themes.colors.black[700],
-              borderRadius: '6px',
-              fontWeight: '700',
-              lineHeight: '32px',
-              fontSize: '15px'
+              backgroundColor:
+                price === 0
+                  ? theme.palette.grey[100]
+                  : themes.colors.green[500],
+              color:
+                price === 0
+                  ? theme.palette.text.secondary
+                  : themes.colors.black[700],
+              borderRadius: "6px",
+              fontWeight: "700",
+              lineHeight: "32px",
+              fontSize: "15px",
             }
           : sx
       }
       {...rest}
     />
-  )
-}
+  );
+};
 
-export default memo(Chip)
+export default memo(Chip);

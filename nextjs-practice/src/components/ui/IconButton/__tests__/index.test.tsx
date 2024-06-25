@@ -1,4 +1,11 @@
-import { render, screen, describe, expect, it, vi } from "@/src/utils/testUtils";
+import {
+  render,
+  screen,
+  describe,
+  expect,
+  it,
+  vi,
+} from "@/src/utils/testUtils";
 import IconButton, { Props } from "..";
 
 import DragHandleIcon from "@mui/icons-material/DragHandle";

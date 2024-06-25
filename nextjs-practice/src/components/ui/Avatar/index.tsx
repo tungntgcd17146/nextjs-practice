@@ -92,12 +92,7 @@ const Avatar = ({
             src={imgNextSrc}
           />
         ) : (
-          <Image
-            alt={alt}
-            src={imgNextSrc}
-            fill
-            sizes="100%"
-          />
+          <Image alt={alt} src={imgNextSrc} fill sizes="100%" />
         )}
       </MuiAvatar>
     );
@@ -121,12 +116,7 @@ const Avatar = ({
             src={imgNextSrc}
           />
         ) : (
-          <Image
-            alt={alt}
-            src={imgNextSrc}
-            fill
-            sizes="100%"
-          />
+          <Image alt={alt} src={imgNextSrc} fill sizes="100%" />
         )}
       </MuiAvatar>
     </StyledBadge>

@@ -8,7 +8,7 @@ import LoadingProgress from "@/src/components/ui/LoadingProgress";
 import { fetchProducts } from "@/src/services/productsService";
 import { PRODUCTS_PER_PAGE } from "@/src/constants/common";
 import { ProductQueryParams } from "@/src/types/product";
-import { convertArrayToQueryObject } from '@/src/utils/convert/convertArrayToQueryObject';
+import { convertArrayToQueryObject } from "@/src/utils/convert/convertArrayToQueryObject";
 
 export default async function Page({
   searchParams,
@@ -51,7 +51,7 @@ export default async function Page({
     ...(rating && { productRating_gte: rating }),
     ...(popularity && { popularity }),
 
-     // Convert categories array to query object format
+    // Convert categories array to query object format
     ...convertArrayToQueryObject(categories),
   };
 
