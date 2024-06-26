@@ -1,8 +1,4 @@
-import {
-  BASE_REDIRECT_URL,
-  BASE_LOGIN_URL,
-  BASE_SIGNUP_URL,
-} from "@/src/constants/common";
+import { BASE_REDIRECT_URL, BASE_LOGIN_URL } from "@/src/constants/common";
 import type { NextAuthConfig } from "next-auth";
 
 export const authConfig = {
@@ -13,12 +9,9 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnLoginPage = nextUrl.pathname === BASE_LOGIN_URL;
-      const isOnSignupPage = nextUrl.pathname === BASE_SIGNUP_URL;
 
       if (!isOnLoginPage) {
         if (isLoggedIn) return true;
-
-        if (isOnSignupPage) return true;
 
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
