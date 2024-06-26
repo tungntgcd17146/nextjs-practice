@@ -1,5 +1,3 @@
-import { BASE_REDIRECT_URL } from "@/src/constants/common";
-
 export interface NavigateItem {
   text?: string;
   go?: string;
@@ -16,9 +14,9 @@ export enum ShopTabs {
 }
 
 export enum TabsNavigation {
-  PRODUCTS = BASE_REDIRECT_URL,
-  FOLLOWERS = `${BASE_REDIRECT_URL}/followers`,
-  FOLLOWING = `${BASE_REDIRECT_URL}/following`,
+  PRODUCTS = "/shop",
+  FOLLOWERS = "/shop/followers",
+  FOLLOWING = "/shop/following",
 }
 
 export enum TabsValue {
