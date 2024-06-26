@@ -28,7 +28,7 @@
     "prettier/prettier": [
       "error",
       {
-        "endOfLine": "lf",
+        "endOfLine": "auto",
         "singleQuote": false, // Ensure double quotes are enforced
         "trailingComma": "all"
       }

@@ -21,6 +21,7 @@ import AuthEmail from "./AuthEmail";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 import Logo from "@/src/components/ui/Logo";
 import { useMode } from "@/src/contexts/modeContext/useModeContext";
+import { BASE_LOGIN_URL } from "@/src/constants/common";
 
 export interface Props {}
 
@@ -62,7 +63,7 @@ const Signup = () => {
               textDecoration: "none",
               fontWeight: 700,
             }}
-            href={"/"}
+            href={BASE_LOGIN_URL}
           >
             Sign in
           </Link>
