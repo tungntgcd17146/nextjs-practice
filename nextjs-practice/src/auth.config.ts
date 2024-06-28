@@ -27,5 +27,6 @@ export const authConfig = {
       return false;
     },
   },
+  trustHost: true,
   providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig;
