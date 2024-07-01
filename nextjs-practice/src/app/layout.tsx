@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className} suppressHydrationWarning={true}>
+      <body className={inter.className}>
         <StyledEngineProvider injectFirst>
           <ModeContextProvider>
             <CssBaseline />
