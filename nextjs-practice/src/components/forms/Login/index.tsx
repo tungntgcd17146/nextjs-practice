@@ -31,7 +31,7 @@ import { useMode } from "@/src/contexts/modeContext/useModeContext";
 //next js
 import Link from "next/link";
 
-import { authenticate } from "@/src/lib/actions";
+import { authenticate, googleSignin } from "@/src/lib/actions";
 import { BASE_SIGNUP_URL } from "@/src/constants/common";
 
 export interface Props {}
@@ -81,7 +81,6 @@ const Login = () => {
         >
           Sign up with Open account
         </Typography>
-
         <Grid
           item
           sx={{ marginBottom: "24px" }}
@@ -89,6 +88,7 @@ const Login = () => {
           display="flex"
         >
           <Button
+            onClick={() => googleSignin()}
             aria-label="close-reset"
             children="Google"
             color="inherit"
@@ -99,6 +99,7 @@ const Login = () => {
             aria-label="apply-button"
             children="Apple ID"
             color="inherit"
+            disabled
             startIcon={<AppleIcon />}
             sx={{ width: "100%", margin: "0px 4px" }}
           />

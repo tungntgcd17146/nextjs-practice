@@ -6,7 +6,7 @@ export const LoginButton = () => {
 
   return (
     <Button
-      sx={{ marginBottom: "32px" }}
+      sx={{ marginBottom: "32px", width: "100%" }}
       aria-label="signin-button"
       children={pending ? "Loading..." : "Sign in"}
       color="primary"
