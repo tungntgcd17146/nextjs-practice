@@ -1,38 +1,3 @@
 {
-  "extends": [
-    "plugin:storybook/recommended",
-    "next",
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react-hooks/recommended",
-    "prettier",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": ["prettier"],
-  "globals": {
-    "React": "readonly"
-  },
-  "overrides": [
-    {
-      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
-      "rules": {
-        // You can add specific rules for storybook files here if needed
-      }
-    }
-  ],
-  "rules": {
-    "react/no-children-prop": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto",
-        "singleQuote": false, // Ensure double quotes are enforced
-        "trailingComma": "all"
-      }
-    ],
-    "quotes": ["error", "double"]
-  }
+  "extends": "next/core-web-vitals"
 }
