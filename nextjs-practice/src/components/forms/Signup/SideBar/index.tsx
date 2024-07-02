@@ -47,37 +47,25 @@ const SideBar = () => {
       <Box display="flex" flexDirection="column" justifyContent="start">
         <Box display="flex" sx={{ marginBottom: "20px" }}>
           <CheckCircleOutlineIcon sx={{ color: themes.colors.green[600] }} />
-          <Typography
-            sx={optionMessageStyles}
-            variant="body1"
-          >
+          <Typography sx={optionMessageStyles} variant="body1">
             Unlimited product updates
           </Typography>
         </Box>
         <Box display="flex" sx={{ marginBottom: "20px" }}>
           <CheckCircleOutlineIcon sx={{ color: themes.colors.green[600] }} />
-          <Typography
-            sx={optionMessageStyles}
-            variant="body1"
-          >
+          <Typography sx={optionMessageStyles} variant="body1">
             Pro tips
           </Typography>
         </Box>
         <Box display="flex" sx={{ marginBottom: "20px" }}>
           <CheckCircleOutlineIcon sx={{ color: themes.colors.green[600] }} />
-          <Typography
-            sx={optionMessageStyles}
-            variant="body1"
-          >
+          <Typography sx={optionMessageStyles} variant="body1">
             Free forever
           </Typography>
         </Box>
         <Box display="flex" sx={{ marginBottom: "20px" }}>
           <CheckCircleOutlineIcon sx={{ color: themes.colors.green[600] }} />
-          <Typography
-            sx={optionMessageStyles}
-            variant="body1"
-          >
+          <Typography sx={optionMessageStyles} variant="body1">
             Full author options
           </Typography>
         </Box>

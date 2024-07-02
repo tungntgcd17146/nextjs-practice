@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useContext } from 'react'
-import { ShopContext } from './ShopContext'
+import { useContext } from "react";
+import { ShopContext } from "./ShopContext";
 
 export const useShopContext = () => {
   const context = useContext(ShopContext);

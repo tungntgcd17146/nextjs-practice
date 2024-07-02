@@ -6,6 +6,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
+import { BASE_REDIRECT_URL } from "@/src/constants/common";
 
 export const navigationItems: NavigateItem[] = [
   {
@@ -26,7 +27,7 @@ export const navigationItems: NavigateItem[] = [
   {
     text: "Shop",
     icon: <StorefrontOutlinedIcon />,
-    go: "/shop",
+    go: BASE_REDIRECT_URL,
   },
   {
     text: "Income",

@@ -51,6 +51,7 @@ const Input = ({
     >
       {startIcon && (
         <IconButton
+          disabled
           aria-label="search"
           data-testid="SearchInput_SearchIcon"
           children={startIcon}

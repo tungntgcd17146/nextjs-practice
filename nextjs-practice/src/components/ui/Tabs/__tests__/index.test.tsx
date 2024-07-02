@@ -17,7 +17,7 @@ const defaultProp = {
   onTabClick: vi.fn(),
   onTabsChange: vi.fn(),
   tabItems: tabItems,
-  tabSelected:0,
+  tabSelected: 0,
 } as Props;
 
 const setup = (overrideProps = {}) => {

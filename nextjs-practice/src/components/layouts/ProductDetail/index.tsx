@@ -18,6 +18,7 @@ import Figma from "@/public/assets/figma.webp";
 
 //constants
 import DetailContent from "./DetailContent";
+import { BASE_REDIRECT_URL } from "@/src/constants/common";
 
 //types
 import { Product } from "@/src/types/product";
@@ -36,7 +37,7 @@ const ProductDetail = ({ product }: Props) => {
   const { isMobile } = useScreenWidth();
 
   const handleClose = () => {
-    router.push(`/shop`);
+    router.push(BASE_REDIRECT_URL);
   };
 
   const {

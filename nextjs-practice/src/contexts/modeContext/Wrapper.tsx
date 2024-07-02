@@ -11,7 +11,7 @@ export default function ComponentWrapper({
   children: React.ReactNode;
 }) {
   const { isDarkMode } = useMode();
-  
+
   return (
     <ThemeProvider theme={defaultTheme(isDarkMode)}>{children}</ThemeProvider>
   );

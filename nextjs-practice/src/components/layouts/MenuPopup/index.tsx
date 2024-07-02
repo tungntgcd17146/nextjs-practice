@@ -5,16 +5,19 @@ import Popover from "@mui/material/Popover";
 import { useTheme } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
 import Grid from "@mui/material/Grid";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
 
 //components
 import List from "@mui/material/List";
-import NavItem from "@/src/components/ui/NavItem/";
+import NavItem, { listItemButtonStyles } from "@/src/components/ui/NavItem/";
 import Divider from "@mui/material/Divider";
 
 //utils
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 import { themes } from "@/src/themes";
 import { menuItems } from "@/src/mocks/menuPopup";
+import { logout } from "@/src/lib/actions";
 
 export interface Props {
   onCloseModal: () => void;
@@ -32,6 +35,11 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
   const handleNavItemClick = useCallback(() => {
     onCloseModal();
   }, [onCloseModal]);
+
+  const handleLogout = async () => {
+    // Perform logout logic here
+    await logout();
+  };
 
   return (
     <>
@@ -86,11 +94,21 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
                   icon={icon}
                   text={text}
                   index={index}
-                  // isSelected={pathname.includes(go!)}
                   isShowText={true}
                 />
               );
             })}
+            <ListItemButton
+              data-testid="NavItem_ListItemButton"
+              sx={listItemButtonStyles}
+              onClick={handleLogout}
+            >
+              <ListItemText
+                data-testid="NavItem_ListItemText"
+                sx={{ fontSize: "15px", marginLeft: "12px" }}
+                primary="logout"
+              />
+            </ListItemButton>
           </List>
         </Grid>
       </Popover>
