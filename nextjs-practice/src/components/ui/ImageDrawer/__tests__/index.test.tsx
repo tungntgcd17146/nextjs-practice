@@ -7,11 +7,11 @@ import {
   expect,
   it,
   vi,
-} from "@/src/utils/testUtils";
-import ImageDrawer, { Props } from "..";
+} from '@/src/utils/testUtils';
+import ImageDrawer, { Props } from '..';
 
-import * as useScreenWidth from "@/src/hooks/useScreenWidth";
-import DarkProductDetail from "@/public/assets/ProductDetailImgDark.webp";
+import * as useScreenWidth from '@/src/hooks/useScreenWidth';
+import DarkProductDetail from '@/public/assets/ProductDetailImgDark.webp';
 
 const defaultProp = {
   image: DarkProductDetail,
@@ -26,21 +26,21 @@ const setup = (overrideProps = {}) => {
   return render(<ImageDrawer {...props} />);
 };
 
-describe("ImageDrawer Test", () => {
-  it("render ImageDrawer with icon and text correctly", () => {
+describe('ImageDrawer Test', () => {
+  it('render ImageDrawer with icon and text correctly', () => {
     setup();
 
-    expect(screen.getByTestId("ImageDrawer_Img")).toBeTruthy();
+    expect(screen.getByTestId('ImageDrawer_Img')).toBeTruthy();
   });
 
-  it("render ImageDrawer when click image correctly", () => {
-    vi.spyOn(useScreenWidth, "default").mockReturnValue({
+  it('render ImageDrawer when click image correctly', () => {
+    vi.spyOn(useScreenWidth, 'default').mockReturnValue({
       matchedBreakpoint: true,
     } as any);
     setup();
 
-    fireEvent.click(screen.getByTestId("ImageDrawer_Img"));
+    fireEvent.click(screen.getByTestId('ImageDrawer_Img'));
 
-    expect(screen.getByTestId("ImageDrawer_Img_Modal")).toBeTruthy();
+    expect(screen.getByTestId('ImageDrawer_Img_Modal')).toBeTruthy();
   });
 });

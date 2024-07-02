@@ -1,44 +1,44 @@
-"use client";
+'use client';
 
-import { useState, useCallback, useEffect, useMemo } from "react";
-import useScreenWidth from "@/src/hooks/useScreenWidth";
+import { useState, useCallback, useEffect, useMemo } from 'react';
+import useScreenWidth from '@/src/hooks/useScreenWidth';
 
 //mui
-import Box from "@mui/material/Box";
-import { useTheme, Theme } from "@mui/material";
-import DragHandleIcon from "@mui/icons-material/DragHandle";
-import SearchIcon from "@mui/icons-material/Search";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import AddIcon from "@mui/icons-material/Add";
-import Popper from "@mui/material/Popper";
+import Box from '@mui/material/Box';
+import { useTheme, Theme } from '@mui/material';
+import DragHandleIcon from '@mui/icons-material/DragHandle';
+import SearchIcon from '@mui/icons-material/Search';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import AddIcon from '@mui/icons-material/Add';
+import Popper from '@mui/material/Popper';
 
 //components
-import Drawer from "@/src/components/layouts/Drawer/";
-import IconButton from "@/src/components/ui/IconButton";
-import Avatar from "@/src/components/ui/Avatar";
-import Customer1 from "@/public/assets/customer1.webp";
-import Button from "@/src/components/ui/Button";
-import Input from "@/src/components/ui/Input";
+import Drawer from '@/src/components/layouts/Drawer/';
+import IconButton from '@/src/components/ui/IconButton';
+import Avatar from '@/src/components/ui/Avatar';
+import Customer1 from '@/public/assets/customer1.webp';
+import Button from '@/src/components/ui/Button';
+import Input from '@/src/components/ui/Input';
 
-import { themes } from "@/src/themes";
+import { themes } from '@/src/themes';
 
 //constants
-import { navigationItems } from "@/src/mocks/sideNavigation";
+import { navigationItems } from '@/src/mocks/sideNavigation';
 
 //types
-import MenuPopup from "@/src/components/layouts/MenuPopup";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import MenuPopup from '@/src/components/layouts/MenuPopup';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const iconButtonStyles = (theme: Theme) => ({
-  ":hover": { color: theme.palette.text.secondary },
+  ':hover': { color: theme.palette.text.secondary },
 });
 
 const Header = () => {
   const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);
   const [searchIconAnchorEl, setSearchIconAnchorEl] =
     useState<null | HTMLElement>(null);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
 
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -51,14 +51,14 @@ const Header = () => {
     isTablet,
     isDesktop,
     matchedBreakpoint: isDownLg,
-  } = useScreenWidth({ down: "lg" });
+  } = useScreenWidth({ down: 'lg' });
   const theme = useTheme();
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
-    const query = params.get("query");
+    const query = params.get('query');
     if (!query) {
-      setSearchInput("");
+      setSearchInput('');
     }
   }, [searchParams]);
 
@@ -71,8 +71,8 @@ const Header = () => {
 
   const generateSearchUrl = useCallback(() => {
     const params = new URLSearchParams(searchParams);
-    params.delete("page");
-    params.set("query", searchInput);
+    params.delete('page');
+    params.set('query', searchInput);
 
     return router.push(`${pathname}?${params.toString()}`);
   }, [pathname, router, searchInput, searchParams]);
@@ -90,7 +90,7 @@ const Header = () => {
 
   const handleKeyDownSearchInput = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === "Enter") {
+      if (event.key === 'Enter') {
         generateSearchUrl();
       }
     },
@@ -118,19 +118,19 @@ const Header = () => {
     setIsOpenDrawer(true);
   }, [setIsOpenDrawer]);
 
-  const isShopProductsPage = useMemo(() => pathname === "/shop", [pathname]);
+  const isShopProductsPage = useMemo(() => pathname === '/shop', [pathname]);
 
   return (
     <Box
       data-testid="Header"
       sx={{
-        marginLeft: isTablet ? "80px" : isDesktop ? "330px" : "0px",
-        padding: "24px",
-        height: "96px",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
+        marginLeft: isTablet ? '80px' : isDesktop ? '330px' : '0px',
+        padding: '24px',
+        height: '96px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         backgroundColor: theme.palette.background.paper,
       }}
     >
@@ -165,9 +165,9 @@ const Header = () => {
 
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "24px",
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '24px',
         }}
       >
         {/* search input on mobile */}
@@ -183,9 +183,9 @@ const Header = () => {
             <Popper
               open={openSearchInputPopup}
               anchorEl={searchIconAnchorEl}
-              sx={{ backgroundColor: theme.palette.grey[200], width: "100%" }}
+              sx={{ backgroundColor: theme.palette.grey[200], width: '100%' }}
             >
-              <Box sx={{ padding: " 12px 16px" }}>
+              <Box sx={{ padding: ' 12px 16px' }}>
                 <Input
                   disabled={isShopProductsPage}
                   value={searchInput}
@@ -204,7 +204,7 @@ const Header = () => {
         {!isDownLg && (
           <Button
             aria-label="create"
-            sx={{ width: "120px" }}
+            sx={{ width: '120px' }}
             startIcon={<AddIcon />}
             children="Create"
             color="primary"

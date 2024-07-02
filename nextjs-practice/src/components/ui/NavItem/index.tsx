@@ -1,14 +1,14 @@
-import { memo } from "react";
+import { memo } from 'react';
 
-import { themes } from "@/src/themes";
+import { themes } from '@/src/themes';
 
-import { Theme } from "@mui/material";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItem from "@mui/material/ListItem";
+import { Theme } from '@mui/material';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItem from '@mui/material/ListItem';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 export interface Props {
   icon?: React.ReactNode;
@@ -21,17 +21,17 @@ export interface Props {
 }
 
 export const listItemButtonStyles = (theme: Theme) => ({
-  fontSize: "15px",
-  borderRadius: "12px",
-  height: "48px",
-  padding: "0 12px",
-  marginBottom: "8px",
-  "&.Mui-selected": {
+  fontSize: '15px',
+  borderRadius: '12px',
+  height: '48px',
+  padding: '0 12px',
+  marginBottom: '8px',
+  '&.Mui-selected': {
     boxShadow: `inset 0px -2px 1px ${themes.colors.black[400]}, inset 0px 1px 1px r ${themes.colors.white[500]}`,
     backgroundColor: theme.palette.grey[100],
     color: theme.palette.text.secondary,
   },
-  "&.Mui-selected:hover": {
+  '&.Mui-selected:hover': {
     backgroundColor: theme.palette.grey[100],
   },
 });
@@ -51,7 +51,7 @@ const NavItem = ({
     e.stopPropagation();
 
     onNavItemClick?.(e);
-    router.push(go || "");
+    router.push(go || '');
   };
 
   return (
@@ -65,7 +65,7 @@ const NavItem = ({
         {icon && (
           <ListItemIcon
             data-testid="NavItem_ListItemIcon"
-            sx={{ width: "24px", height: "24px" }}
+            sx={{ width: '24px', height: '24px' }}
           >
             {icon}
           </ListItemIcon>
@@ -73,7 +73,7 @@ const NavItem = ({
         {isShowText && (
           <ListItemText
             data-testid="NavItem_ListItemText"
-            sx={{ fontSize: "15px", marginLeft: "12px" }}
+            sx={{ fontSize: '15px', marginLeft: '12px' }}
             primary={text}
           />
         )}

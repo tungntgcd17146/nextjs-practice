@@ -1,5 +1,5 @@
-import Contacts from "@/src/components/layouts/Shop/ShopContent/Contacts";
-import { fetchContacts } from "@/src/services/contactsService";
+import Contacts from '@/src/components/layouts/Shop/ShopContent/Contacts';
+import { fetchContacts } from '@/src/services/contactsService';
 
 export default async function Page({
   searchParams,
@@ -13,7 +13,7 @@ export default async function Page({
 
   const { data: contacts } = await fetchContacts({
     _page: 1,
-    contactStatus: "followers",
+    contactStatus: 'followers',
     ...(query && { q: query }),
   });
 

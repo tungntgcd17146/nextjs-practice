@@ -1,4 +1,4 @@
-import { NavigateItem, ShopTabs, TabsNavigation } from "@/src/types/navigation";
+import { NavigateItem, ShopTabs, TabsNavigation } from '@/src/types/navigation';
 
 export const tabItems: NavigateItem[] = [
   {

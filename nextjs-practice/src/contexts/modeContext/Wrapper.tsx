@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { ThemeProvider } from "@mui/material";
-import React from "react";
-import { useMode } from "@/src/contexts/modeContext/useModeContext";
-import { defaultTheme } from "@/src/materialTheme";
+import { ThemeProvider } from '@mui/material';
+import React from 'react';
+import { useMode } from '@/src/contexts/modeContext/useModeContext';
+import { defaultTheme } from '@/src/materialTheme';
 
 export default function ComponentWrapper({
   children,

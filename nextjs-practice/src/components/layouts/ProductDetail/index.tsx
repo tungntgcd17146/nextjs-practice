@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import { themes } from "@/src/themes";
+import { themes } from '@/src/themes';
 
 //mui
-import Grid from "@mui/material/Grid";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import { useTheme } from "@mui/material";
-import Box from "@mui/material/Box";
+import Grid from '@mui/material/Grid';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import { useTheme } from '@mui/material';
+import Box from '@mui/material/Box';
 
 //components
-import IconButton from "@/src/components/ui/IconButton";
-import Button from "@/src/components/ui/Button";
-import Avatar from "@/src/components/ui/Avatar";
-import User1 from "@/public/assets/User1.webp";
-import Figma from "@/public/assets/figma.webp";
+import IconButton from '@/src/components/ui/IconButton';
+import Button from '@/src/components/ui/Button';
+import Avatar from '@/src/components/ui/Avatar';
+import User1 from '@/public/assets/User1.webp';
+import Figma from '@/public/assets/figma.webp';
 
 //constants
-import DetailContent from "./DetailContent";
-import { BASE_REDIRECT_URL } from "@/src/constants/common";
+import DetailContent from './DetailContent';
+import { BASE_REDIRECT_URL } from '@/src/constants/common';
 
 //types
-import { Product } from "@/src/types/product";
+import { Product } from '@/src/types/product';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
-import useScreenWidth from "@/src/hooks/useScreenWidth";
+import useScreenWidth from '@/src/hooks/useScreenWidth';
 
 interface Props {
   product: Product;
@@ -53,7 +53,7 @@ const ProductDetail = ({ product }: Props) => {
       {/* Header */}
       <Grid
         item
-        sx={{ margin: "24px 42px" }}
+        sx={{ margin: '24px 42px' }}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
@@ -71,7 +71,7 @@ const ProductDetail = ({ product }: Props) => {
           onClick={handleClose}
           data-testid="ProductDetail_CloseIconButton"
           sx={{
-            borderRadius: "50%",
+            borderRadius: '50%',
             backgroundColor: theme.palette.grey[100],
           }}
         />
@@ -79,7 +79,7 @@ const ProductDetail = ({ product }: Props) => {
       <Grid
         container
         sx={{
-          padding: "24px",
+          padding: '24px',
         }}
         display="flex"
         flexDirection="row"
@@ -98,39 +98,39 @@ const ProductDetail = ({ product }: Props) => {
 
         {!isMobile && (
           <Grid
-            sx={{ marginLeft: "24px" }}
+            sx={{ marginLeft: '24px' }}
             display="flex"
             flexDirection="column"
             item
           >
             <Avatar
-              sx={{ marginBottom: "24px" }}
+              sx={{ marginBottom: '24px' }}
               avtBackground={themes.colors.yellow[500]}
               imgNextSrc={User1}
-              alt={"User1"}
+              alt={'User1'}
               size="medium"
             />
             <Avatar
               sx={{
-                marginBottom: "24px",
+                marginBottom: '24px',
                 backgroundColor: theme.palette.grey[300],
-                "& .MuiAvatar-img": {
-                  width: "20px",
-                  height: "32px",
+                '& .MuiAvatar-img': {
+                  width: '20px',
+                  height: '32px',
                 },
               }}
               badgeSx={
                 {
-                  "& .MuiBadge-badge": {
+                  '& .MuiBadge-badge': {
                     backgroundColor: theme.palette.text.secondary,
                     color: theme.palette.background.paper,
-                    border: "unset",
+                    border: 'unset',
                   },
                 } as React.CSSProperties
               }
               imgWidth={20}
               imgHeight={32}
-              badgeAnchorOrigin={{ vertical: "top", horizontal: "left" }}
+              badgeAnchorOrigin={{ vertical: 'top', horizontal: 'left' }}
               BadgeIcon="3"
               avtBackground={theme.palette.grey[200]}
               imgNextSrc={Figma}
@@ -141,12 +141,12 @@ const ProductDetail = ({ product }: Props) => {
               aria-label="like-product"
               sx={{
                 backgroundColor: theme.palette.grey[300],
-                borderRadius: "50%",
-                width: "64px",
-                height: "64px",
-                alignItems: "center",
-                ":hover": {
-                  backgroundColor: "none",
+                borderRadius: '50%',
+                width: '64px',
+                height: '64px',
+                alignItems: 'center',
+                ':hover': {
+                  backgroundColor: 'none',
                 },
               }}
               children={<FavoriteOutlinedIcon />}

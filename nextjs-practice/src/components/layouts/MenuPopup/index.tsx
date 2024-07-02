@@ -1,23 +1,23 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback } from 'react';
 
 //mui
-import Popover from "@mui/material/Popover";
-import { useTheme } from "@mui/material";
-import Backdrop from "@mui/material/Backdrop";
-import Grid from "@mui/material/Grid";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
+import Popover from '@mui/material/Popover';
+import { useTheme } from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
+import Grid from '@mui/material/Grid';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
 
 //components
-import List from "@mui/material/List";
-import NavItem, { listItemButtonStyles } from "@/src/components/ui/NavItem/";
-import Divider from "@mui/material/Divider";
+import List from '@mui/material/List';
+import NavItem, { listItemButtonStyles } from '@/src/components/ui/NavItem/';
+import Divider from '@mui/material/Divider';
 
 //utils
-import useScreenWidth from "@/src/hooks/useScreenWidth";
-import { themes } from "@/src/themes";
-import { menuItems } from "@/src/mocks/menuPopup";
-import { logout } from "@/src/lib/actions";
+import useScreenWidth from '@/src/hooks/useScreenWidth';
+import { themes } from '@/src/themes';
+import { menuItems } from '@/src/mocks/menuPopup';
+import { logout } from '@/src/lib/actions';
 
 export interface Props {
   onCloseModal: () => void;
@@ -30,7 +30,7 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
   const { isMobile } = useScreenWidth();
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
+  const id = open ? 'simple-popper' : undefined;
 
   const handleNavItemClick = useCallback(() => {
     onCloseModal();
@@ -57,10 +57,10 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
           paper: {
             sx: isMobile
               ? {
-                  width: "80%",
-                  borderRadius: "12px",
+                  width: '80%',
+                  borderRadius: '12px',
                 }
-              : { borderRadius: "16px", width: "280px", padding: "16px" },
+              : { borderRadius: '16px', width: '280px', padding: '16px' },
           },
         }}
         id={id}
@@ -68,12 +68,12 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
         anchorEl={anchorEl}
         onClose={onCloseModal}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: isMobile ? "center" : "right",
+          vertical: 'top',
+          horizontal: isMobile ? 'center' : 'right',
         }}
       >
         <Grid container display="flex" flexDirection="column">
@@ -84,7 +84,7 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
               return isDivider ? (
                 <Divider
                   key={index}
-                  sx={{ color: theme.palette.grey[100], marginBottom: "12px" }}
+                  sx={{ color: theme.palette.grey[100], marginBottom: '12px' }}
                 />
               ) : (
                 <NavItem
@@ -105,7 +105,7 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
             >
               <ListItemText
                 data-testid="NavItem_ListItemText"
-                sx={{ fontSize: "15px", marginLeft: "12px" }}
+                sx={{ fontSize: '15px', marginLeft: '12px' }}
                 primary="logout"
               />
             </ListItemButton>

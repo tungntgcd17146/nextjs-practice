@@ -1,34 +1,34 @@
-"use client";
+'use client';
 
-import { memo, useCallback, useState, useMemo } from "react";
-import { Theme } from "@mui/material";
+import { memo, useCallback, useState, useMemo } from 'react';
+import { Theme } from '@mui/material';
 
 //MUI
-import { SelectChangeEvent } from "@mui/material/Select";
-import Grid from "@mui/material/Grid";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+import { SelectChangeEvent } from '@mui/material/Select';
+import Grid from '@mui/material/Grid';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 
 //components
-import Tabs from "@/src/components/ui/Tabs";
-import Select from "@/src/components/ui/Select";
-import IconButton from "@/src/components/ui/IconButton";
-import ProductFilter from "@/src/components/forms/ProductFilter";
+import Tabs from '@/src/components/ui/Tabs';
+import Select from '@/src/components/ui/Select';
+import IconButton from '@/src/components/ui/IconButton';
+import ProductFilter from '@/src/components/forms/ProductFilter';
 
 //utils
-import { selectOption, sortBySelect } from "@/src/mocks/productFilter";
-import { tabItems } from "@/src/mocks/shopTab";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { TabsNavigation, TabsValue } from "@/src/types/navigation";
-import { useShopContext } from "@/src/contexts/shopContext/useShopContext";
+import { selectOption, sortBySelect } from '@/src/mocks/productFilter';
+import { tabItems } from '@/src/mocks/shopTab';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { TabsNavigation, TabsValue } from '@/src/types/navigation';
+import { useShopContext } from '@/src/contexts/shopContext/useShopContext';
 
-import { FilterValue } from "@/src/types/product";
-import { ShopSelect } from "@/src/types/shopFilter";
+import { FilterValue } from '@/src/types/product';
+import { ShopSelect } from '@/src/types/shopFilter';
 
 const filterButtonStyles = (theme: Theme) => ({
-  marginLeft: "16px",
+  marginLeft: '16px',
   boxShadow: `0 0 0 2px ${theme.palette.text.primary} inset`,
-  borderRadius: "8px",
-  ":hover": {
+  borderRadius: '8px',
+  ':hover': {
     backgroundColor: theme.palette.info.main,
     color: theme.palette.primary.main,
     borderColor: theme.palette.text.primary,
@@ -71,30 +71,30 @@ const ContentHeader = () => {
       } = formData;
 
       const params = new URLSearchParams(searchParams);
-      params.delete("page");
-      query ? params.set("query", query) : params.delete("query");
+      params.delete('page');
+      query ? params.set('query', query) : params.delete('query');
       sortBy !== sortBySelect[0].name
-        ? params.set("sortBy", sortBy)
-        : params.delete("sortBy");
+        ? params.set('sortBy', sortBy)
+        : params.delete('sortBy');
 
       // Join categories array into a comma-separated string
       if (categories.length > 0) {
-        params.set("categories", categories.join(","));
+        params.set('categories', categories.join(','));
       } else {
-        params.delete("categories");
+        params.delete('categories');
       }
 
       minPriceRange === 0 && maxPriceRange === minPriceRange
-        ? params.delete("minPriceRange")
-        : params.set("minPriceRange", minPriceRange.toString());
+        ? params.delete('minPriceRange')
+        : params.set('minPriceRange', minPriceRange.toString());
 
       maxPriceRange > 0 && minPriceRange !== maxPriceRange
-        ? params.set("maxPriceRange", maxPriceRange.toString())
-        : params.delete("maxPriceRange");
+        ? params.set('maxPriceRange', maxPriceRange.toString())
+        : params.delete('maxPriceRange');
 
       Number(rating) > 1
-        ? params.set("rating", rating)
-        : params.delete("rating");
+        ? params.set('rating', rating)
+        : params.delete('rating');
 
       return router.push(`${pathname}?${params.toString()}`);
     },
@@ -107,12 +107,12 @@ const ContentHeader = () => {
       const selectValue = event.target.value;
 
       //reset page query param
-      params.delete("page");
+      params.delete('page');
 
       //not set popularity query param when select all option
       selectValue !== ShopSelect.ALL
-        ? params.set("popularity", selectValue)
-        : params.delete("popularity");
+        ? params.set('popularity', selectValue)
+        : params.delete('popularity');
 
       router.push(`${pathname}?${params.toString()}`);
     },
@@ -145,13 +145,13 @@ const ContentHeader = () => {
 
   const handleResetFilterModal = useCallback(() => {
     const params = new URLSearchParams(searchParams);
-    params.delete("page");
-    params.delete("query");
-    params.delete("sortBy");
-    params.delete("categories");
-    params.delete("minPriceRange");
-    params.delete("maxPriceRange");
-    params.delete("rating");
+    params.delete('page');
+    params.delete('query');
+    params.delete('sortBy');
+    params.delete('categories');
+    params.delete('minPriceRange');
+    params.delete('maxPriceRange');
+    params.delete('rating');
 
     router.push(`${pathname}?${params.toString()}`);
   }, [pathname, router, searchParams]);
@@ -162,10 +162,10 @@ const ContentHeader = () => {
     <Grid
       container
       display="flex"
-      sx={{ marginBottom: "32px" }}
+      sx={{ marginBottom: '32px' }}
       justifyContent="space-between"
     >
-      <Grid sx={{ marginBottom: "16px" }} item xs={12} md={8}>
+      <Grid sx={{ marginBottom: '16px' }} item xs={12} md={8}>
         <Tabs tabSelected={tabSelected} tabItems={tabItems} />
       </Grid>
 

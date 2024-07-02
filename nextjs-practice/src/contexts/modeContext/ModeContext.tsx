@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { createContext, useState } from "react";
-import { useMediaQuery } from "@mui/material";
+import React, { createContext, useState } from 'react';
+import { useMediaQuery } from '@mui/material';
 
 interface ModeContextProps {
   isDarkMode: boolean;
@@ -12,7 +12,7 @@ const ModeContext = createContext<ModeContextProps | undefined>(undefined);
 
 const ModeProvider = ({ children }: { children: React.ReactNode }) => {
   // Get the user's preferred color scheme
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   // State to manage the current mode
   const [isDarkMode, setIsDarkMode] = useState(prefersDarkMode);

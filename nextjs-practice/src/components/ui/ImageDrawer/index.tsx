@@ -1,23 +1,23 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState } from 'react';
 
 //mui
-import { Modal, Fade } from "@mui/material";
-import Box from "@mui/material/Box";
+import { Modal, Fade } from '@mui/material';
+import Box from '@mui/material/Box';
 
-import useScreenWidth from "@/src/hooks/useScreenWidth";
+import useScreenWidth from '@/src/hooks/useScreenWidth';
 
-import Image from "next/image";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Image from 'next/image';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 export interface Props {
   image: string | StaticImport;
   alt: string;
 }
 
-const ImageDrawer = ({ image, alt = "Product Detail" }: Props) => {
+const ImageDrawer = ({ image, alt = 'Product Detail' }: Props) => {
   const [open, setOpen] = useState(false);
 
-  const { matchedBreakpoint } = useScreenWidth({ down: "lg" });
+  const { matchedBreakpoint } = useScreenWidth({ down: 'lg' });
 
   const handleClose = () => {
     setOpen(false);
@@ -31,9 +31,9 @@ const ImageDrawer = ({ image, alt = "Product Detail" }: Props) => {
     <>
       <Box
         sx={{
-          width: "100%",
-          height: "650px",
-          position: "relative",
+          width: '100%',
+          height: '650px',
+          position: 'relative',
         }}
       >
         <Image
@@ -45,8 +45,8 @@ const ImageDrawer = ({ image, alt = "Product Detail" }: Props) => {
             handleImage();
           }}
           style={{
-            cursor: "pointer",
-            borderRadius: "12px",
+            cursor: 'pointer',
+            borderRadius: '12px',
           }}
           fill
           sizes="100%"
@@ -57,17 +57,17 @@ const ImageDrawer = ({ image, alt = "Product Detail" }: Props) => {
         onClose={handleClose}
         closeAfterTransition
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <Fade in={open} timeout={500}>
           <Box
             sx={{
-              height: "1000px",
-              width: matchedBreakpoint ? "100%" : "70%",
-              position: "relative",
+              height: '1000px',
+              width: matchedBreakpoint ? '100%' : '70%',
+              position: 'relative',
             }}
           >
             <Image
@@ -75,7 +75,7 @@ const ImageDrawer = ({ image, alt = "Product Detail" }: Props) => {
               src={image}
               alt={alt}
               style={{
-                borderRadius: "16px",
+                borderRadius: '16px',
               }}
               fill
               sizes="100%"

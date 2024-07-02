@@ -1,5 +1,5 @@
-import { themes } from "@/src/themes";
-import createTheme from "@mui/material/styles/createTheme";
+import { themes } from '@/src/themes';
+import createTheme from '@mui/material/styles/createTheme';
 
 export const defaultTheme = (isDarkMode: boolean) =>
   createTheme({
@@ -19,42 +19,42 @@ export const defaultTheme = (isDarkMode: boolean) =>
     },
 
     palette: {
-      mode: isDarkMode ? "dark" : "light",
+      mode: isDarkMode ? 'dark' : 'light',
       ...(isDarkMode
         ? {
             // palette values for dark Mode
             action: {},
-            divider: "#1A1D1F",
+            divider: '#1A1D1F',
             background: {
-              default: "#111315",
-              paper: "#1A1D1F",
+              default: '#111315',
+              paper: '#1A1D1F',
             },
             text: {
-              primary: "#ABABB5", //'#6F767E' by design
-              secondary: "#FCFCFC",
+              primary: '#ABABB5', //'#6F767E' by design
+              secondary: '#FCFCFC',
             },
             grey: {
-              100: "#272B30",
-              200: "#111315",
-              300: "#272B30",
+              100: '#272B30',
+              200: '#111315',
+              300: '#272B30',
             },
           }
         : {
             // palette values for light Mode
             action: {},
-            divider: "#FCFCFC",
+            divider: '#FCFCFC',
             background: {
-              default: "#F4F4F4",
-              paper: "#FCFCFC",
+              default: '#F4F4F4',
+              paper: '#FCFCFC',
             },
             text: {
-              primary: "#6F767E",
-              secondary: "#1A1D1F",
+              primary: '#6F767E',
+              secondary: '#1A1D1F',
             },
             grey: {
-              100: "#EFEFEF",
-              200: "#FFFFFF",
-              300: "#FCFCFC",
+              100: '#EFEFEF',
+              200: '#FFFFFF',
+              300: '#FCFCFC',
             },
           }),
 
@@ -89,97 +89,97 @@ export const defaultTheme = (isDarkMode: boolean) =>
       },
     },
     typography: {
-      fontFamily: ["Inter", "sans-serif"].join(","),
+      fontFamily: ['Inter', 'sans-serif'].join(','),
       h1: {
-        fontSize: "64px",
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: "64px" /* 100% */,
-        letterSpacing: "-1.92px",
+        fontSize: '64px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '64px' /* 100% */,
+        letterSpacing: '-1.92px',
       },
       h2: {
-        fontSize: "48px",
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: "48px" /* 100% */,
-        letterSpacing: "1.44px",
+        fontSize: '48px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '48px' /* 100% */,
+        letterSpacing: '1.44px',
       },
       h3: {
-        fontSize: "40px",
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: "48px" /* 100% */,
-        letterSpacing: "-0.8px",
+        fontSize: '40px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '48px' /* 100% */,
+        letterSpacing: '-0.8px',
       },
       h4: {
-        fontSize: "32px",
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: "40px" /* 100% */,
-        letterSpacing: "-0.92px",
+        fontSize: '32px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '40px' /* 100% */,
+        letterSpacing: '-0.92px',
       },
       h5: {
-        fontSize: "24px",
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: "32px" /* 100% */,
-        letterSpacing: "-0.4px",
+        fontSize: '24px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '32px' /* 100% */,
+        letterSpacing: '-0.4px',
       },
       h6: {
-        fontSize: "20px",
-        fontStyle: "normal",
-        fontWeight: "500",
-        lineHeight: "32px" /* 100% */,
-        letterSpacing: "-0.4px",
+        fontSize: '20px',
+        fontStyle: 'normal',
+        fontWeight: '500',
+        lineHeight: '32px' /* 100% */,
+        letterSpacing: '-0.4px',
       },
       subtitle1: {
-        fontSize: "15px",
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: "24px" /* 160% */,
-        letterSpacing: "-0.15px",
+        fontSize: '15px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '24px' /* 160% */,
+        letterSpacing: '-0.15px',
       },
       subtitle2: {
-        fontSize: "15px",
-        fontStyle: "normal",
-        fontWeight: "700",
-        lineHeight: "24px" /* 143% */,
-        letterSpacing: "-0.15px",
+        fontSize: '15px',
+        fontStyle: 'normal',
+        fontWeight: '700',
+        lineHeight: '24px' /* 143% */,
+        letterSpacing: '-0.15px',
       },
       body1: {
-        fontSize: "14px",
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: "24px" /* 150% */,
-        letterSpacing: "-0.14px",
+        fontSize: '14px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '24px' /* 150% */,
+        letterSpacing: '-0.14px',
       },
       body2: {
-        fontSize: "15px",
-        fontStyle: "normal",
-        fontWeight: "500",
-        lineHeight: "24px" /* 143% */,
-        letterSpacing: "-0.225px",
+        fontSize: '15px',
+        fontStyle: 'normal',
+        fontWeight: '500',
+        lineHeight: '24px' /* 143% */,
+        letterSpacing: '-0.225px',
       },
       button: {
-        fontSize: "15px",
-        fontStyle: "normal",
-        fontWeight: "700",
-        lineHeight: "24px" /* 143% */,
-        letterSpacing: "-0.15px",
+        fontSize: '15px',
+        fontStyle: 'normal',
+        fontWeight: '700',
+        lineHeight: '24px' /* 143% */,
+        letterSpacing: '-0.15px',
       },
       caption: {
-        fontSize: "13px",
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: "16px" /* 143% */,
-        letterSpacing: "-0.13px",
+        fontSize: '13px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '16px' /* 143% */,
+        letterSpacing: '-0.13px',
       },
       overline: {
-        fontSize: "18px",
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: "32px" /* 143% */,
-        letterSpacing: "-0.36px",
+        fontSize: '18px',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        lineHeight: '32px' /* 143% */,
+        letterSpacing: '-0.36px',
       },
     },
     spacing: 8,
@@ -187,19 +187,19 @@ export const defaultTheme = (isDarkMode: boolean) =>
       MuiListItemIcon: {
         styleOverrides: {
           root: {
-            minWidth: "unset",
-            color: "unset",
+            minWidth: 'unset',
+            color: 'unset',
           },
         },
       },
       MuiButtonBase: {
         styleOverrides: {
           root: {
-            "MuiButton-root:hover": {
-              backgroundColor: "unset",
+            'MuiButton-root:hover': {
+              backgroundColor: 'unset',
             },
-            ":hover": {
-              borderColor: "unset",
+            ':hover': {
+              borderColor: 'unset',
             },
           },
         },
@@ -207,20 +207,20 @@ export const defaultTheme = (isDarkMode: boolean) =>
       MuiButton: {
         styleOverrides: {
           root: {
-            textTransform: "none",
-            ":hover": {
-              borderColor: "unset",
+            textTransform: 'none',
+            ':hover': {
+              borderColor: 'unset',
             },
 
-            ".startIcon": {},
+            '.startIcon': {},
           },
         },
       },
       MuiListItemButton: {
         styleOverrides: {
           root: {
-            ".MuiButtonBase-root-MuiListItemButton-root.Mui-selected": {
-              backgroundColor: "black",
+            '.MuiButtonBase-root-MuiListItemButton-root.Mui-selected': {
+              backgroundColor: 'black',
             },
           },
         },
@@ -228,8 +228,8 @@ export const defaultTheme = (isDarkMode: boolean) =>
       MuiSwitch: {
         styleOverrides: {
           root: {
-            ".MuiSwitch-input": {
-              width: "200px",
+            '.MuiSwitch-input': {
+              width: '200px',
             },
           },
         },
@@ -237,76 +237,76 @@ export const defaultTheme = (isDarkMode: boolean) =>
       MuiDivider: {
         styleOverrides: {
           root: {
-            borderColor: "unset",
+            borderColor: 'unset',
           },
         },
       },
       MuiIconButton: {
         styleOverrides: {
           root: {
-            color: "unset",
-            ":hover": {
-              backgroundColor: "unset",
-              borderColor: "unset",
+            color: 'unset',
+            ':hover': {
+              backgroundColor: 'unset',
+              borderColor: 'unset',
             },
-            alignItems: "unset",
+            alignItems: 'unset',
           },
         },
       },
       MuiToggleButton: {
         styleOverrides: {
           root: {
-            textTransform: "unset",
-            color: "unset",
+            textTransform: 'unset',
+            color: 'unset',
           },
         },
       },
       MuiGrid: {
         styleOverrides: {
           root: {
-            justifyContent: "none",
+            justifyContent: 'none',
           },
         },
       },
       MuiTab: {
         styleOverrides: {
           root: {
-            textTransform: "none",
+            textTransform: 'none',
           },
         },
       },
       MuiFormControl: {
         styleOverrides: {
           root: {
-            margin: "0px",
+            margin: '0px',
           },
         },
       },
       MuiInputBase: {
         styleOverrides: {
           root: {
-            borderRadius: "unset",
-            "&.MuiSelect": {
-              borderRadius: "unset",
+            borderRadius: 'unset',
+            '&.MuiSelect': {
+              borderRadius: 'unset',
             },
-            minHeight: "40px",
-            color: "currentColor",
+            minHeight: '40px',
+            color: 'currentColor',
           },
         },
       },
       MuiTypography: {
         styleOverrides: {
           root: {
-            textTransform: "unset",
+            textTransform: 'unset',
           },
         },
       },
       MuiPopover: {
         styleOverrides: {
           paper: {
-            maxHeight: "unset",
-            maxWidth: "unset",
-            backgroundImage: "unset",
+            maxHeight: 'unset',
+            maxWidth: 'unset',
+            backgroundImage: 'unset',
           },
         },
       },

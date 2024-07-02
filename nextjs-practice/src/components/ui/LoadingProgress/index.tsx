@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { memo } from "react";
+import { memo } from 'react';
 
 //mui
-import Box from "@mui/material/Box";
+import Box from '@mui/material/Box';
 import CircularProgress, {
   CircularProgressProps,
-} from "@mui/material/CircularProgress/CircularProgress";
-import Typography from "@mui/material/Typography/Typography";
-import { useTheme } from "@mui/material";
+} from '@mui/material/CircularProgress/CircularProgress';
+import Typography from '@mui/material/Typography/Typography';
+import { useTheme } from '@mui/material';
 
 export interface Props extends CircularProgressProps {
   helperText?: string;
@@ -17,7 +17,7 @@ export interface Props extends CircularProgressProps {
 }
 
 const LoadingProgress = ({
-  helperText = "Loading...",
+  helperText = 'Loading...',
   dataTestId,
   wrapperStyle,
   sx,
@@ -28,12 +28,12 @@ const LoadingProgress = ({
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "50vh",
-        width: "100%",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '50vh',
+        width: '100%',
         ...wrapperStyle,
       }}
     >
@@ -43,7 +43,7 @@ const LoadingProgress = ({
         {...rest}
       />
       {helperText && (
-        <Typography variant="body1" sx={{ marginTop: "16px" }}>
+        <Typography variant="body1" sx={{ marginTop: '16px' }}>
           {helperText}
         </Typography>
       )}

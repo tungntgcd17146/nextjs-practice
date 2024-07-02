@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { render, vi, expect, it } from "@/src/utils/testUtils";
+import { render, vi, expect, it } from '@/src/utils/testUtils';
 
-import useScreenWidth, { Options } from "@/src/hooks/useScreenWidth";
-import { ThemeProvider } from "@mui/material/styles";
-import { defaultTheme } from "@/src/materialTheme";
-import * as useTheme from "@mui/material/styles/useTheme";
+import useScreenWidth, { Options } from '@/src/hooks/useScreenWidth';
+import { ThemeProvider } from '@mui/material/styles';
+import { defaultTheme } from '@/src/materialTheme';
+import * as useTheme from '@mui/material/styles/useTheme';
 
 const defaultProp = {};
 // TestComponent.jsx
@@ -32,11 +32,11 @@ const setup = (overrideProps = {}) => {
   );
 };
 
-it("useScreenWidth returns correct values", async () => {
+it('useScreenWidth returns correct values', async () => {
   // Wrap the component tree with ThemeProvider
   const { unmount } = setup();
   const result = vi
-    .spyOn(useTheme, "default")
+    .spyOn(useTheme, 'default')
     .mockReturnValue(defaultTheme(true));
 
   expect(result).toBeTruthy();

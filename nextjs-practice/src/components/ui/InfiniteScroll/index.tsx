@@ -1,11 +1,11 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback } from 'react';
 
-import Button from "@/src/components/ui/Button";
-import PageNotFound from "@/src/components/ui/PageNotFound";
+import Button from '@/src/components/ui/Button';
+import PageNotFound from '@/src/components/ui/PageNotFound';
 
 //mui
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 export interface Props {
   maxHeight?: string;
@@ -20,7 +20,7 @@ export interface Props {
 }
 
 const InfiniteScroll = ({
-  maxHeight = "auto",
+  maxHeight = 'auto',
   children,
   isLoadingSkeleton,
   isError,
@@ -58,35 +58,35 @@ const InfiniteScroll = ({
   return (
     <Box
       sx={{
-        overflowY: "auto",
+        overflowY: 'auto',
         maxHeight: maxHeight,
-        width: "100%",
-        scrollbarColor: "dark",
-        scrollbarWidth: "thin",
+        width: '100%',
+        scrollbarColor: 'dark',
+        scrollbarWidth: 'thin',
       }}
     >
       <Box sx={{ opacity: isLoadingSkeleton ? 0.3 : 1 }}>{children}</Box>
 
       {!isHiddenActionButton &&
         (!isHiddenLoadMore ? (
-          <Grid xs={12} sx={{ textAlign: "center", marginTop: "24px" }} item>
+          <Grid xs={12} sx={{ textAlign: 'center', marginTop: '24px' }} item>
             <Button
               disabled={isLoadingSkeleton}
               aria-label="load-more"
               data-testid="InfiniteScroll_LoadMoreButton"
-              children={isLoadingSkeleton ? "Loading..." : "Load more"}
+              children={isLoadingSkeleton ? 'Loading...' : 'Load more'}
               color="inherit"
               size="small"
               onClick={handleClickLoadMore}
             />
           </Grid>
         ) : (
-          <Grid xs={12} sx={{ textAlign: "center", marginTop: "24px" }} item>
+          <Grid xs={12} sx={{ textAlign: 'center', marginTop: '24px' }} item>
             <Button
               disabled={isLoadingSkeleton}
               aria-label="load-more"
               data-testid="InfiniteScroll_LoadMoreButton"
-              children={isLoadingSkeleton ? "Loading..." : "Show less"}
+              children={isLoadingSkeleton ? 'Loading...' : 'Show less'}
               color="inherit"
               size="small"
               onClick={onClickShowLess}

@@ -1,13 +1,13 @@
 //mui
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material";
-import AppleIcon from "@mui/icons-material/Apple";
-import GoogleIcon from "@mui/icons-material/Google";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
+import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material';
+import AppleIcon from '@mui/icons-material/Apple';
+import GoogleIcon from '@mui/icons-material/Google';
+import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
 
 //components
-import Button from "@/src/components/ui/Button";
+import Button from '@/src/components/ui/Button';
 
 const HeaderContent = () => {
   const theme = useTheme();
@@ -16,7 +16,7 @@ const HeaderContent = () => {
     <>
       <Typography
         sx={{
-          marginBottom: "20px",
+          marginBottom: '20px',
           color: theme.palette.text.secondary,
         }}
         variant="body1"
@@ -26,7 +26,7 @@ const HeaderContent = () => {
 
       <Grid
         item
-        sx={{ marginBottom: "24px" }}
+        sx={{ marginBottom: '24px' }}
         justifyContent="space-between"
         display="flex"
       >
@@ -35,7 +35,7 @@ const HeaderContent = () => {
           children="Google"
           color="inherit"
           startIcon={<GoogleIcon />}
-          sx={{ width: "100%", margin: "0px 4px" }}
+          sx={{ width: '100%', margin: '0px 4px' }}
           disabled
         />
         <Button
@@ -43,16 +43,16 @@ const HeaderContent = () => {
           children="Apple ID"
           color="inherit"
           startIcon={<AppleIcon />}
-          sx={{ width: "100%", margin: "0px 4px" }}
+          sx={{ width: '100%', margin: '0px 4px' }}
           disabled
         />
       </Grid>
 
-      <Divider sx={{ color: theme.palette.grey[100], marginBottom: "12px" }} />
+      <Divider sx={{ color: theme.palette.grey[100], marginBottom: '12px' }} />
 
       <Typography
         sx={{
-          marginBottom: "20px",
+          marginBottom: '20px',
           color: theme.palette.text.secondary,
         }}
         variant="body1"

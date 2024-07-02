@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import Chip from ".";
-import { themes } from "@/src/themes";
+import Chip from '.';
+import { themes } from '@/src/themes';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Example/Chip",
+  title: 'Example/Chip',
   component: Chip,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: "centered",
+    layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof Chip>;
 
 export default meta;
@@ -22,25 +22,25 @@ type Story = StoryObj<typeof meta>;
 export const ChipCustom: Story = {
   args: {
     sx: {
-      borderRadius: "6px",
+      borderRadius: '6px',
       backgroundColor: themes.colors.red[500],
-      height: "32px",
-      width: "16px",
+      height: '32px',
+      width: '16px',
     },
-    variant: "filled",
+    variant: 'filled',
   },
 };
 
 export const ChipPriceBase: Story = {
   args: {
     price: 100,
-    variant: "filled",
+    variant: 'filled',
   },
 };
 
 export const ChipPriceIs0: Story = {
   args: {
     price: 0,
-    variant: "filled",
+    variant: 'filled',
   },
 };

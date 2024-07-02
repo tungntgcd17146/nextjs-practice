@@ -7,11 +7,11 @@ import {
   expect,
   it,
   vi,
-} from "@/src/utils/testUtils";
-import Tabs, { Props } from "..";
-import * as useScreenWidth from "@/src/hooks/useScreenWidth";
+} from '@/src/utils/testUtils';
+import Tabs, { Props } from '..';
+import * as useScreenWidth from '@/src/hooks/useScreenWidth';
 
-import { tabItems } from "@/src/mocks/shopTab";
+import { tabItems } from '@/src/mocks/shopTab';
 
 const defaultProp = {
   onTabClick: vi.fn(),
@@ -29,33 +29,33 @@ const setup = (overrideProps = {}) => {
   return render(<Tabs {...props} />);
 };
 
-describe("Tabs Test", () => {
-  it("render Tab number correctly", () => {
+describe('Tabs Test', () => {
+  it('render Tab number correctly', () => {
     setup();
 
-    expect(screen.queryAllByTestId("Tabs_StyledTab").length).toEqual(
+    expect(screen.queryAllByTestId('Tabs_StyledTab').length).toEqual(
       defaultProp.tabItems.length,
     );
   });
 
-  it("render Tab with item is disabled correctly", () => {
+  it('render Tab with item is disabled correctly', () => {
     setup({
       tabItems: [
         ...tabItems,
-        { ...tabItems[2], text: "Disable", isDisabled: true },
+        { ...tabItems[2], text: 'Disable', isDisabled: true },
       ],
     });
 
-    expect(screen.getByText("Disable").getAttribute("disabled")).toBeDefined();
+    expect(screen.getByText('Disable').getAttribute('disabled')).toBeDefined();
   });
 
-  it("Call onTabChange and onTabClick when click Tab", () => {
-    vi.spyOn(useScreenWidth, "default").mockReturnValue({
+  it('Call onTabChange and onTabClick when click Tab', () => {
+    vi.spyOn(useScreenWidth, 'default').mockReturnValue({
       isMobile: true,
     } as any);
     setup();
 
-    const tabClicking = screen.queryAllByTestId("Tabs_StyledTab")[1];
+    const tabClicking = screen.queryAllByTestId('Tabs_StyledTab')[1];
     fireEvent.click(tabClicking);
 
     expect(defaultProp.onTabClick).toBeCalled();

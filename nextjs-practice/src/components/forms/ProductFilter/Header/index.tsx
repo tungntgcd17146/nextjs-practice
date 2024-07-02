@@ -1,16 +1,16 @@
-import { memo } from "react";
+import { memo } from 'react';
 
-import Chip from "@/src/components/ui/Chip";
-import IconButton from "@/src/components/ui/IconButton";
+import Chip from '@/src/components/ui/Chip';
+import IconButton from '@/src/components/ui/IconButton';
 
-import useScreenWidth from "@/src/hooks/useScreenWidth";
-import { themes } from "@/src/themes";
+import useScreenWidth from '@/src/hooks/useScreenWidth';
+import { themes } from '@/src/themes';
 
 //mui
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import { useTheme, Theme } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import { useTheme, Theme } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 interface Props {
   onClickHeaderButton?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -19,15 +19,15 @@ interface Props {
 }
 
 const closeIconButtonStyles = (theme: Theme) => ({
-  borderRadius: "50%",
+  borderRadius: '50%',
   backgroundColor: theme.palette.grey[100],
 });
 
 const chipStyle = {
-  borderRadius: "4px",
+  borderRadius: '4px',
   backgroundColor: themes.colors.red[500],
-  height: "32px",
-  width: "14px",
+  height: '32px',
+  width: '14px',
 };
 
 const FilterModalHeader = ({
@@ -41,7 +41,7 @@ const FilterModalHeader = ({
   return (
     <Grid
       item
-      sx={{ marginBottom: "24px" }}
+      sx={{ marginBottom: '24px' }}
       display="flex"
       alignItems="center"
       justifyContent="space-between"
@@ -51,8 +51,8 @@ const FilterModalHeader = ({
         <Typography
           variant="h4"
           sx={{
-            marginLeft: "16px",
-            fontSize: "18px",
+            marginLeft: '16px',
+            fontSize: '18px',
             color: theme.palette.text.secondary,
           }}
         >

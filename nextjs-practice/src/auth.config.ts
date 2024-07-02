@@ -1,10 +1,10 @@
-import type { NextAuthConfig } from "next-auth";
+import type { NextAuthConfig } from 'next-auth';
 import {
   BASE_REDIRECT_URL,
   BASE_LOGIN_URL,
   BASE_SIGNUP_URL,
-} from "@/src/constants/common";
-import { NextResponse } from "next/server";
+} from '@/src/constants/common';
+import { NextResponse } from 'next/server';
 
 export const authConfig = {
   pages: {

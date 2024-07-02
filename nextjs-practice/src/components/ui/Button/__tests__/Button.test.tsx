@@ -6,13 +6,13 @@ import {
   expect,
   it,
   vi,
-} from "@/src/utils/testUtils";
-import Button, { Props } from "..";
+} from '@/src/utils/testUtils';
+import Button, { Props } from '..';
 
 const defaultProp = {
-  size: "medium",
-  color: "inherit",
-  children: "Button",
+  size: 'medium',
+  color: 'inherit',
+  children: 'Button',
   onClick: vi.fn(),
 } as Props;
 
@@ -25,33 +25,33 @@ const setup = (overrideProps = {}) => {
   return render(<Button {...props} />);
 };
 
-describe("Button Test", () => {
-  it("render Button correctly", () => {
+describe('Button Test', () => {
+  it('render Button correctly', () => {
     setup();
 
-    expect(screen.getByTestId("Button")).toBeTruthy();
+    expect(screen.getByTestId('Button')).toBeTruthy();
   });
 
-  it("Disable Button correctly", () => {
+  it('Disable Button correctly', () => {
     setup({
-      size: "small",
-      color: "primary",
+      size: 'small',
+      color: 'primary',
       disabled: true,
     });
 
-    expect(screen.getByTestId("Button").getAttribute("disabled")).toBeDefined();
+    expect(screen.getByTestId('Button').getAttribute('disabled')).toBeDefined();
   });
 
-  it("click Button call onClick correctly", () => {
+  it('click Button call onClick correctly', () => {
     setup({
-      size: "small",
-      color: "success",
+      size: 'small',
+      color: 'success',
     });
 
-    const button = screen.getByTestId("Button");
+    const button = screen.getByTestId('Button');
 
     fireEvent.click(button);
 
-    expect(button.getAttribute("disabled")).toBeDefined();
+    expect(button.getAttribute('disabled')).toBeDefined();
   });
 });

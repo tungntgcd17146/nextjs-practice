@@ -1,12 +1,12 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 //img
-import CoverPhoto from "@/public/assets/CoverPhoto.webp";
-import CoverPhotoMobile from "@/public/assets/CoverPhotoMobile.webp";
+import CoverPhoto from '@/public/assets/CoverPhoto.webp';
+import CoverPhotoMobile from '@/public/assets/CoverPhotoMobile.webp';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-import useScreenWidth from "@/src/hooks/useScreenWidth";
+import useScreenWidth from '@/src/hooks/useScreenWidth';
 
 const BackgroundImage = () => {
   const { isMobile } = useScreenWidth();
@@ -15,9 +15,9 @@ const BackgroundImage = () => {
     return (
       <div
         style={{
-          width: "100%",
-          height: "252px",
-          position: "relative",
+          width: '100%',
+          height: '252px',
+          position: 'relative',
         }}
       >
         <Image
@@ -34,9 +34,9 @@ const BackgroundImage = () => {
   return (
     <div
       style={{
-        width: "100%",
-        height: "400px",
-        position: "relative",
+        width: '100%',
+        height: '400px',
+        position: 'relative',
       }}
     >
       <Image

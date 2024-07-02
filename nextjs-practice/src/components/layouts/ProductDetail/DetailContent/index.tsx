@@ -1,34 +1,34 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 //component
-import Button from "@/src/components/ui/Button";
-import Tabs from "@/src/components/ui/Tabs";
-import Rating from "@/src/components/ui/Rating";
-import ImageDrawer from "@/src/components/ui/ImageDrawer";
-import Chip from "@/src/components/ui/Chip";
-import Avatar from "@/src/components/ui/Avatar";
-import Customer1 from "@/public/assets/customer1.webp";
-import ProductDetailDark from "@/public/assets/ProductDetailImgDark.webp";
-import ProductDetailLight from "@/public/assets/ProductDetailImgLight.webp";
+import Button from '@/src/components/ui/Button';
+import Tabs from '@/src/components/ui/Tabs';
+import Rating from '@/src/components/ui/Rating';
+import ImageDrawer from '@/src/components/ui/ImageDrawer';
+import Chip from '@/src/components/ui/Chip';
+import Avatar from '@/src/components/ui/Avatar';
+import Customer1 from '@/public/assets/customer1.webp';
+import ProductDetailDark from '@/public/assets/ProductDetailImgDark.webp';
+import ProductDetailLight from '@/public/assets/ProductDetailImgLight.webp';
 
 //utils
-import useScreenWidth from "@/src/hooks/useScreenWidth";
-import { themes } from "@/src/themes";
-import { FeatureProduct } from "@/src/types/product";
-import { useMode } from "@/src/contexts/modeContext/useModeContext";
+import useScreenWidth from '@/src/hooks/useScreenWidth';
+import { themes } from '@/src/themes';
+import { FeatureProduct } from '@/src/types/product';
+import { useMode } from '@/src/contexts/modeContext/useModeContext';
 
 //mui
-import { useTheme } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import CheckIcon from "@mui/icons-material/Check";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
+import { useTheme } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import CheckIcon from '@mui/icons-material/Check';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 import {
   fakeFeatureForProductData,
   fakeProductOverview,
-} from "@/src/mocks/commonData";
+} from '@/src/mocks/commonData';
 
 export interface Props {
   productName: string;
@@ -57,8 +57,8 @@ const DetailContent = ({
     <Grid
       sx={{
         backgroundColor: theme.palette.background.paper,
-        borderRadius: "8px",
-        maxWidth: "1000px",
+        borderRadius: '8px',
+        maxWidth: '1000px',
       }}
       display="flex"
       flexDirection="column"
@@ -68,23 +68,23 @@ const DetailContent = ({
       <Grid
         item
         sx={{
-          padding: "16px",
+          padding: '16px',
         }}
         display="flex"
         flexDirection="column"
       >
         <Grid
           container
-          sx={{ marginBottom: "32px" }}
+          sx={{ marginBottom: '32px' }}
           display="flex"
           justifyContent="space-between"
         >
           <Grid item xs={12} md={6}>
             <Tabs
-              sx={{ marginBottom: "16px" }}
+              sx={{ marginBottom: '16px' }}
               tabItems={[
-                { text: "Product", isSelected: true },
-                { text: "Comments", isDisabled: true },
+                { text: 'Product', isSelected: true },
+                { text: 'Comments', isDisabled: true },
               ]}
               tabSelected={0}
             />
@@ -96,13 +96,13 @@ const DetailContent = ({
             md={6}
             display="flex"
             flexDirection="row"
-            justifyContent={!isMobile ? "flex-end" : "flex-start"}
+            justifyContent={!isMobile ? 'flex-end' : 'flex-start'}
           >
             <Button
               aria-label="favorite"
               children="32"
               color="inherit"
-              sx={{ marginRight: "16px" }}
+              sx={{ marginRight: '16px' }}
               startIcon={
                 <FavoriteOutlinedIcon sx={{ color: themes.colors.red[500] }} />
               }
@@ -113,8 +113,8 @@ const DetailContent = ({
               children={`$${productPrice}`}
               color="primary"
               sx={{
-                borderTopRightRadius: "0px",
-                borderBottomRightRadius: "0px",
+                borderTopRightRadius: '0px',
+                borderBottomRightRadius: '0px',
               }}
               endIcon={<Divider orientation="vertical" />}
             />
@@ -122,7 +122,7 @@ const DetailContent = ({
               aria-label="download"
               children="Download"
               color="primary"
-              sx={{ borderTopLeftRadius: "0px", borderBottomLeftRadius: "0px" }}
+              sx={{ borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px' }}
               endIcon={<FileDownloadIcon />}
             />
           </Grid>
@@ -133,13 +133,13 @@ const DetailContent = ({
           {/* Header */}
           <Typography
             variant="h5"
-            sx={{ marginBottom: "12px", color: theme.palette.text.secondary }}
+            sx={{ marginBottom: '12px', color: theme.palette.text.secondary }}
           >
             {`Fleet - ${productName} ${productCategory}`}
           </Typography>
           <Typography
             variant="body1"
-            sx={{ marginBottom: "12px", color: theme.palette.text.primary }}
+            sx={{ marginBottom: '12px', color: theme.palette.text.primary }}
           >
             Elegant product mockup for your next project
           </Typography>
@@ -148,23 +148,23 @@ const DetailContent = ({
             display="flex"
             flexDirection="row"
             alignItems="center"
-            sx={{ marginBottom: "32px" }}
+            sx={{ marginBottom: '32px' }}
           >
             <Avatar
               imgNextSrc={Customer1}
-              sx={{ marginRight: "12px", marginLeft: "12px" }}
+              sx={{ marginRight: '12px', marginLeft: '12px' }}
               size="small"
-              alt={"Customer1"}
+              alt={'Customer1'}
               avtBackground={themes.colors.yellow[600]}
             />
             <Typography
               variant="body1"
-              sx={{ color: theme.palette.text.primary, marginLeft: "12px" }}
+              sx={{ color: theme.palette.text.primary, marginLeft: '12px' }}
             >
               by Chelsie Haley
             </Typography>
             <Rating
-              sx={{ marginLeft: "12px" }}
+              sx={{ marginLeft: '12px' }}
               ratingPoint={productRating}
               counter={productRatingCount}
             />
@@ -185,14 +185,14 @@ const DetailContent = ({
               <Grid
                 display="flex"
                 flexDirection="row"
-                sx={{ marginTop: "32px", marginBottom: "12px" }}
+                sx={{ marginTop: '32px', marginBottom: '12px' }}
               >
                 <Chip
                   sx={{
-                    borderRadius: "6px",
+                    borderRadius: '6px',
                     backgroundColor: themes.colors.yellow[600],
-                    height: "32px",
-                    width: "16px",
+                    height: '32px',
+                    width: '16px',
                   }}
                   variant="filled"
                 />
@@ -200,7 +200,7 @@ const DetailContent = ({
                   variant="h6"
                   sx={{
                     color: theme.palette.text.secondary,
-                    marginLeft: "12px",
+                    marginLeft: '12px',
                   }}
                 >
                   Overview
@@ -219,14 +219,14 @@ const DetailContent = ({
               <Grid
                 display="flex"
                 flexDirection="row"
-                sx={{ marginTop: "32px", marginBottom: "12px" }}
+                sx={{ marginTop: '32px', marginBottom: '12px' }}
               >
                 <Chip
                   sx={{
-                    borderRadius: "6px",
+                    borderRadius: '6px',
                     backgroundColor: themes.colors.violet[500],
-                    height: "32px",
-                    width: "16px",
+                    height: '32px',
+                    width: '16px',
                   }}
                   variant="filled"
                 />
@@ -234,7 +234,7 @@ const DetailContent = ({
                   variant="h6"
                   sx={{
                     color: theme.palette.text.secondary,
-                    marginLeft: "12px",
+                    marginLeft: '12px',
                   }}
                 >
                   Features
@@ -247,7 +247,7 @@ const DetailContent = ({
                     <CheckIcon
                       sx={{
                         color: themes.colors.green[500],
-                        marginRight: "12px",
+                        marginRight: '12px',
                       }}
                     />
                     <Typography
@@ -259,8 +259,8 @@ const DetailContent = ({
                   </Grid>
                   <Divider
                     sx={{
-                      marginTop: "12px",
-                      marginBottom: "12px",
+                      marginTop: '12px',
+                      marginBottom: '12px',
                       color: theme.palette.grey[100],
                     }}
                   />
@@ -270,8 +270,8 @@ const DetailContent = ({
           </Grid>
           <Divider
             sx={{
-              marginTop: "64px",
-              marginBottom: "64px",
+              marginTop: '64px',
+              marginBottom: '64px',
               color: theme.palette.grey[100],
             }}
           />

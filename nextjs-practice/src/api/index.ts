@@ -18,7 +18,7 @@ export const get = async <T>(
 
   const data = await response.json();
 
-  const countItems = Number(response.headers.get("x-total-count"));
+  const countItems = Number(response.headers.get('x-total-count'));
 
   return { data: data as T, countItems };
 };

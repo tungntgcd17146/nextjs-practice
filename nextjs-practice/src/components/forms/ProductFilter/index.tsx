@@ -1,32 +1,32 @@
-import { memo, useCallback, useEffect, useState, useMemo } from "react";
+import { memo, useCallback, useEffect, useState, useMemo } from 'react';
 
 //mui
-import Popover from "@mui/material/Popover";
-import { SelectChangeEvent, useTheme } from "@mui/material";
-import Backdrop from "@mui/material/Backdrop";
-import Grid from "@mui/material/Grid";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import Checkboxes from "@/src/components/ui/Checkboxes";
+import Popover from '@mui/material/Popover';
+import { SelectChangeEvent, useTheme } from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
+import Grid from '@mui/material/Grid';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import Checkboxes from '@/src/components/ui/Checkboxes';
 
 //components
-import Input from "@/src/components/ui/Input";
-import FilterModalHeader from "./Header";
-import Select from "@/src/components/ui/Select";
-import RangeSlider from "@/src/components/ui/RangeSlider";
-import Button from "@/src/components/ui/Button";
-import SearchIcon from "@mui/icons-material/Search";
+import Input from '@/src/components/ui/Input';
+import FilterModalHeader from './Header';
+import Select from '@/src/components/ui/Select';
+import RangeSlider from '@/src/components/ui/RangeSlider';
+import Button from '@/src/components/ui/Button';
+import SearchIcon from '@mui/icons-material/Search';
 
 //utils
-import useScreenWidth from "@/src/hooks/useScreenWidth";
-import { themes } from "@/src/themes";
-import { Checkbox as CheckboxType } from "@/src/types/checkbox";
+import useScreenWidth from '@/src/hooks/useScreenWidth';
+import { themes } from '@/src/themes';
+import { Checkbox as CheckboxType } from '@/src/types/checkbox';
 import {
   checkboxOptions,
   ratingSelect,
   sortBySelect,
-} from "@/src/mocks/productFilter";
+} from '@/src/mocks/productFilter';
 
-import { FilterValue } from "@/src/types/product";
+import { FilterValue } from '@/src/types/product';
 
 export interface Props {
   onSubmit?: (filterValue: FilterValue) => void;
@@ -37,10 +37,10 @@ export interface Props {
   anchorEl: HTMLElement | null;
 }
 
-const applyButtonStyles = { marginLeft: "16px" };
-const selectStyles = { height: "100%" };
+const applyButtonStyles = { marginLeft: '16px' };
+const selectStyles = { height: '100%' };
 const iconHelperSelectStyles = { color: themes.colors.red[500] };
-const commonMarginBottom = { marginBottom: "24px" };
+const commonMarginBottom = { marginBottom: '24px' };
 
 const startIcon = <FavoriteOutlinedIcon sx={iconHelperSelectStyles} />;
 
@@ -55,7 +55,7 @@ const ProductFilter = ({
   const [categoryChecked, setCategoryChecked] =
     useState<CheckboxType[]>(checkboxOptions);
 
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const [categoryValue, setCategoryValue] = useState<string[]>([]);
   const [selectedSortByValue, setSelectedSortByValue] = useState(
     sortBySelect[0].value,
@@ -75,7 +75,7 @@ const ProductFilter = ({
   useEffect(() => {
     //when all value is default disable apply button
     setIsDisableActionButton(
-      searchInput === "" &&
+      searchInput === '' &&
         categoryValue.length === 0 &&
         selectedSortByValue === sortBySelect[0].value &&
         selectedRatingValue === ratingSelect[0].value &&
@@ -92,10 +92,10 @@ const ProductFilter = ({
   ]);
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
+  const id = open ? 'simple-popper' : undefined;
 
   const handleReset = useCallback(() => {
-    setSearchInput("");
+    setSearchInput('');
     setSelectedSortByValue(sortBySelect[0].value);
     setSelectedRatingValue(ratingSelect[0].value);
     setRangeSlideMinValue(0);
@@ -194,12 +194,12 @@ const ProductFilter = ({
           paper: {
             sx: isMobile
               ? {
-                  width: "100%",
-                  height: "100%",
-                  top: "0px !important",
-                  left: "0px !important",
+                  width: '100%',
+                  height: '100%',
+                  top: '0px !important',
+                  left: '0px !important',
                 }
-              : { borderRadius: "16px" },
+              : { borderRadius: '16px' },
           },
         }}
         id={id}
@@ -207,17 +207,17 @@ const ProductFilter = ({
         anchorEl={isMobile ? null : anchorEl}
         onClose={handleCloseModal}
         anchorOrigin={{
-          vertical: "top",
-          horizontal: "left",
+          vertical: 'top',
+          horizontal: 'left',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'center',
         }}
       >
         <Grid
           container
-          sx={{ padding: "24px" }}
+          sx={{ padding: '24px' }}
           display="flex"
           flexDirection="column"
         >
@@ -272,13 +272,13 @@ const ProductFilter = ({
 
           <Grid
             item
-            sx={{ marginBottom: "24px" }}
+            sx={{ marginBottom: '24px' }}
             justifyContent="flex-end"
             display="flex"
           >
             <Button
               aria-label="close-reset"
-              children={isDisableActionButton ? "Close" : "Reset"}
+              children={isDisableActionButton ? 'Close' : 'Reset'}
               color="inherit"
               onClick={isDisableActionButton ? handleCloseModal : handleReset}
             />

@@ -8,15 +8,15 @@ export interface NavigateItem {
 }
 
 export enum ShopTabs {
-  PRODUCTS = "Products",
-  FOLLOWERS = "Followers",
-  FOLLOWING = "Following",
+  PRODUCTS = 'Products',
+  FOLLOWERS = 'Followers',
+  FOLLOWING = 'Following',
 }
 
 export enum TabsNavigation {
-  PRODUCTS = "/shop",
-  FOLLOWERS = "/shop/followers",
-  FOLLOWING = "/shop/following",
+  PRODUCTS = '/shop',
+  FOLLOWERS = '/shop/followers',
+  FOLLOWING = '/shop/following',
 }
 
 export enum TabsValue {

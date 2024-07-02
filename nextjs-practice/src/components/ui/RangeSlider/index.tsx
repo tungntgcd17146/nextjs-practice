@@ -1,12 +1,12 @@
-import * as React from "react";
-import { memo } from "react";
-import { Theme } from "@mui/material";
-import { themes } from "@/src/themes";
+import * as React from 'react';
+import { memo } from 'react';
+import { Theme } from '@mui/material';
+import { themes } from '@/src/themes';
 
 //mui
-import Typography from "@mui/material/Typography";
-import Slider, { SliderProps } from "@mui/material/Slider";
-import Box from "@mui/material/Box";
+import Typography from '@mui/material/Typography';
+import Slider, { SliderProps } from '@mui/material/Slider';
+import Box from '@mui/material/Box';
 
 export interface Props extends SliderProps {
   valueLabelFormat?: (value: number) => string;
@@ -23,11 +23,11 @@ export const valuetext = (value: number) => {
 };
 
 const sliderStyles = (theme: Theme) => ({
-  "& .MuiSlider-thumb": {
+  '& .MuiSlider-thumb': {
     border: `2px solid ${themes.colors.blue[600]}`,
     color: themes.colors.white[600],
   },
-  "& .MuiSlider-track": {
+  '& .MuiSlider-track': {
     color: themes.colors.blue[600],
   },
   color: theme.palette.grey[100],
@@ -57,7 +57,7 @@ const RangeSlider = ({
   return (
     <Box sx={wrapperStyles}>
       {label && (
-        <Typography variant="body1" sx={{ marginBottom: "8px" }}>
+        <Typography variant="body1" sx={{ marginBottom: '8px' }}>
           {label}
         </Typography>
       )}
