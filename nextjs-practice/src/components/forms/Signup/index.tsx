@@ -232,7 +232,7 @@ const Signup = () => {
               children={submitLoading ? "Loading..." : "Continue"}
               color="primary"
               type="submit"
-              disabled={submitLoading}
+              disabled={submitLoading || !isMatchedConfirmPassword}
             />
 
             <Typography sx={{ marginBottom: "32px" }} variant="body1">
