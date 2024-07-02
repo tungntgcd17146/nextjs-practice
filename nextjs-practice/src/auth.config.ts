@@ -4,6 +4,7 @@ import {
   BASE_LOGIN_URL,
   BASE_SIGNUP_URL,
 } from "@/src/constants/common";
+import { NextResponse } from "next/server";
 
 export const authConfig = {
   pages: {
@@ -16,12 +17,12 @@ export const authConfig = {
       const isOnSignupPage = nextUrl.pathname === BASE_SIGNUP_URL;
 
       if (!isOnLoginPage) {
-        if (isLoggedIn) return true;
-        if (isOnSignupPage) return true;
+        if ((isLoggedIn && !isOnSignupPage) || (!isLoggedIn && isOnSignupPage))
+          return true;
 
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return Response.redirect(new URL(BASE_REDIRECT_URL, nextUrl));
+        return NextResponse.redirect(new URL(BASE_REDIRECT_URL, nextUrl));
       }
 
       return false;
