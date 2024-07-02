@@ -40,8 +40,4 @@ export const menuItems: NavigateItem[] = [
   {
     text: "Account Settings",
   },
-  {
-    text: "Log out",
-    go: "/",
-  },
 ];

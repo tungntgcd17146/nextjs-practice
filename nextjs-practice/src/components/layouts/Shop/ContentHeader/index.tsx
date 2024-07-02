@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useState, useMemo } from "react";
 import { Theme } from "@mui/material";
 
 //MUI
@@ -47,12 +47,17 @@ const ContentHeader = () => {
   const pathname = usePathname();
 
   //Tab state for init selected from route
-  const tabSelected =
-    pathname === TabsNavigation.PRODUCTS
-      ? TabsValue.PRODUCTS
-      : pathname === TabsNavigation.FOLLOWERS
-        ? TabsValue.FOLLOWERS
-        : TabsValue.FOLLOWING;
+  const tabSelected = useMemo(
+    () =>
+      pathname === TabsNavigation.PRODUCTS
+        ? TabsValue.PRODUCTS
+        : pathname === TabsNavigation.FOLLOWERS
+          ? TabsValue.FOLLOWERS
+          : pathname === TabsNavigation.FOLLOWING
+            ? TabsValue.FOLLOWING
+            : TabsValue.PRODUCTS,
+    [pathname],
+  );
 
   const generateProductsFilterURL = useCallback(
     (formData: FilterValue) => {

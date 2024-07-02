@@ -13,6 +13,7 @@ import { themes } from "@/src/themes";
 import useScreenWidth from "@/src/hooks/useScreenWidth";
 
 import { useRouter } from "next/navigation";
+import { BASE_REDIRECT_URL } from "@/src/constants/common";
 
 export interface Props {
   headerContent?: string;
@@ -42,7 +43,7 @@ const NotFoundPage = ({
       if (onClick) {
         onClick?.(e);
       }
-      router.push("/shop");
+      router.push(BASE_REDIRECT_URL);
     },
 
     [onClick, router],

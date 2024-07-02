@@ -1,5 +1,3 @@
-import { BASE_URL } from "@/src/constants/environment";
-
 export const get = async <T>(
   path: string,
   queyParams?: object,
@@ -7,10 +5,15 @@ export const get = async <T>(
 ): Promise<{ data: T; countItems: number }> => {
   const params = new URLSearchParams({ ...queyParams });
 
-  const response = await fetch(`${BASE_URL}${path}?${params}`, configOptions);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}${path}?${params}`,
+    configOptions,
+  );
 
   if (!response.ok) {
-    throw new Error(`Error fetching data from ${BASE_URL}${path}`);
+    throw new Error(
+      `Error fetching data from ${process.env.NEXT_PUBLIC_API_URL}${path}`,
+    );
   }
 
   const data = await response.json();

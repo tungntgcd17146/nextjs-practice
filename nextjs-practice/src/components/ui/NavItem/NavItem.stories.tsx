@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 
 import NavItem from ".";
+import { BASE_LOGIN_URL } from "@/src/constants/common";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -25,7 +26,7 @@ export const NavItemBase: Story = {
     text: "Nav Item",
     index: 1,
     isSelected: false,
-    go: "/",
+    go: BASE_LOGIN_URL,
     isShowText: true,
   },
 };
@@ -36,7 +37,7 @@ export const NavItemHiddenText: Story = {
     text: "Nav Item",
     index: 1,
     isSelected: false,
-    go: "/",
+    go: BASE_LOGIN_URL,
     isShowText: false,
   },
 };
@@ -47,7 +48,7 @@ export const NavItemSelected: Story = {
     text: "Nav Item",
     index: 1,
     isSelected: true,
-    go: "/",
+    go: BASE_LOGIN_URL,
     isShowText: true,
   },
 };
