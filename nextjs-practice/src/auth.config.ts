@@ -22,7 +22,17 @@ export const authConfig = {
 
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return NextResponse.redirect(new URL(BASE_REDIRECT_URL, nextUrl));
+        // Parse the search parameters
+        const searchParams = new URLSearchParams(nextUrl.search);
+        const callbackUrl = searchParams.get('callbackUrl');
+
+        if (callbackUrl) {
+          const decodedCallbackUrl = decodeURIComponent(callbackUrl);
+          
+          return NextResponse.redirect(decodedCallbackUrl);
+        } else {
+          return NextResponse.redirect(new URL(BASE_REDIRECT_URL, nextUrl));
+        }
       }
 
       return false;
