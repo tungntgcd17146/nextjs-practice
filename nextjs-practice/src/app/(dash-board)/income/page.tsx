@@ -6,6 +6,7 @@ export default function Page() {
       headerContent="Oops"
       body="This page does not exist."
       footer="This feature will be implemented in the future."
+      isBrowserError
     />
   );
 }

@@ -65,7 +65,7 @@ const InfiniteScroll = ({
         scrollbarWidth: 'thin',
       }}
     >
-      <Box sx={{ opacity: isLoadingSkeleton ? 0.3 : 1 }}>{children}</Box>
+      {children}
 
       {!isHiddenActionButton &&
         (!isHiddenLoadMore ? (

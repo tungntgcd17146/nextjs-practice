@@ -17,6 +17,7 @@ import Divider from '@mui/material/Divider';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { themes } from '@/src/themes';
 import { menuItems } from '@/src/mocks/menuPopup';
+import Chip from '@/src/components/ui/Chip';
 
 export interface Props {
   onCloseModal: () => void;
@@ -95,6 +96,16 @@ const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
                   text={text}
                   index={index}
                   isShowText={true}
+                  endHelper={
+                    <Chip
+                      text="Teaser"
+                      sx={{
+                        borderRadius: '6px',
+                        color: theme.palette.text.secondary,
+                        height: '32px',
+                      }}
+                    />
+                  }
                 />
               );
             })}

@@ -18,6 +18,7 @@ import AddIcon from '@mui/icons-material/Add';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 
 import { themes } from '@/src/themes';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
@@ -38,9 +39,11 @@ const OwnerInfo = ({
   onClickFollow,
 }: Props) => {
   const theme = useTheme();
-  const { isMobile } = useScreenWidth();
+  const { isMobile, matchedBreakpoint } = useScreenWidth({
+    down: 'lg',
+  });
 
-  const commonSocialIconStyles = { marginRight: '24px' };
+  const BadgeAddIcon = useMemo(() => <AddIcon />, []);
 
   return (
     <>
@@ -49,7 +52,7 @@ const OwnerInfo = ({
         item
         xs={12}
         sm={12}
-        lg={8}
+        lg={6}
         display="flex"
         flexDirection="row"
         sx={{ marginBottom: '12px' }}
@@ -59,12 +62,7 @@ const OwnerInfo = ({
           size="large"
           imgNextSrc={avatar}
           alt="Customer1"
-          BadgeIcon={useMemo(
-            () => (
-              <AddIcon />
-            ),
-            [],
-          )}
+          BadgeIcon={BadgeAddIcon}
           badgeSx={{ marginRight: '16px' }}
         />
         <Grid item display="flex" flexDirection="column">
@@ -94,28 +92,40 @@ const OwnerInfo = ({
         item
         xs={12}
         sm={12}
-        lg={4}
+        lg={6}
         display="flex"
         flexDirection="row"
-        justifyContent="space-between"
+        justifyContent={matchedBreakpoint ? 'space-between' : 'flex-end'}
       >
-        <Grid display="flex" flexDirection="row" alignItems="flex-start">
+        <Box>
           <IconButton
             aria-label="personal-twitter"
-            sx={commonSocialIconStyles}
+            sx={
+              matchedBreakpoint
+                ? { marginRight: '32px' }
+                : { marginLeft: '32px' }
+            }
             children={<TwitterIcon />}
           />
           <IconButton
             aria-label="personal-facebook"
-            sx={commonSocialIconStyles}
+            sx={
+              matchedBreakpoint
+                ? { marginRight: '32px' }
+                : { marginLeft: '32px' }
+            }
             children={<FacebookIcon />}
           />
           <IconButton
             aria-label="personal-instagram"
-            sx={commonSocialIconStyles}
+            sx={
+              matchedBreakpoint
+                ? { marginRight: '32px' }
+                : { marginLeft: '32px' }
+            }
             children={<InstagramIcon />}
           />
-        </Grid>
+        </Box>
 
         <Button
           aria-label="follow-button"
@@ -123,7 +133,7 @@ const OwnerInfo = ({
           onClick={onClickFollow}
           children="Follow"
           color="primary"
-          sx={{ width: '120px' }}
+          sx={{ width: '120px', marginLeft: '32px' }}
         />
       </Grid>
 
