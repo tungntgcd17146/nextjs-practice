@@ -1,8 +1,7 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
 //components
 import Products from '@/src/components/layouts/Shop/ShopContent/Products';
-import LoadingProgress from '@/src/components/ui/LoadingProgress';
 
 //services
 import { fetchProducts } from '@/src/services/productsService';
@@ -79,12 +78,10 @@ export default async function Page({
   const { initialItems, totalCount } = await fetchAllProducts(queryParams);
 
   return (
-    <Suspense fallback={<LoadingProgress />}>
-      <Products
-        products={initialItems}
-        totalCount={totalCount}
-        queryParams={queryParams}
-      />
-    </Suspense>
+    <Products
+      products={initialItems}
+      totalCount={totalCount}
+      queryParams={queryParams}
+    />
   );
 }

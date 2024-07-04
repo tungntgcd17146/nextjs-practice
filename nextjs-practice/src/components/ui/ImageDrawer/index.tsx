@@ -12,9 +12,14 @@ import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 export interface Props {
   image: string | StaticImport;
   alt: string;
+  overrideContainerStyles?: React.CSSProperties;
 }
 
-const ImageDrawer = ({ image, alt = 'Product Detail' }: Props) => {
+const ImageDrawer = ({
+  image,
+  alt = 'Product Detail',
+  overrideContainerStyles,
+}: Props) => {
   const [open, setOpen] = useState(false);
 
   const { matchedBreakpoint } = useScreenWidth({ down: 'lg' });
@@ -34,6 +39,7 @@ const ImageDrawer = ({ image, alt = 'Product Detail' }: Props) => {
           width: '100%',
           height: '650px',
           position: 'relative',
+          ...overrideContainerStyles,
         }}
       >
         <Image

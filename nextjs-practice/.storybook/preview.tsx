@@ -32,6 +32,10 @@ export const decorators = [
 
 const preview: Preview = {
   parameters: {
+    layout: 'fullscreen',
+    nextjs: {
+      appDirectory: true,
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

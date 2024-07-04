@@ -4,7 +4,7 @@ import RangeSlider from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Example/RangeSlider',
+  title: 'Ui components/RangeSlider',
   component: RangeSlider,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -19,5 +19,12 @@ type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const RangeSliderBase: Story = {
-  args: {},
+  args: {
+    min: 0,
+    max: 100,
+    startValue: 0,
+    endValue: 0,
+    label: 'Price',
+    onChangeValue: () => {},
+  },
 };

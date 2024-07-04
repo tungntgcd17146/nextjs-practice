@@ -17,14 +17,14 @@ import Divider from '@mui/material/Divider';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { themes } from '@/src/themes';
 import { menuItems } from '@/src/mocks/menuPopup';
-import { logout } from '@/src/lib/actions';
 
 export interface Props {
   onCloseModal: () => void;
   anchorEl: HTMLElement | null;
+  logout: () => Promise<void>;
 }
 
-const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
+const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
   //disable apply and reset button when all value is default
   const theme = useTheme();
   const { isMobile } = useScreenWidth();

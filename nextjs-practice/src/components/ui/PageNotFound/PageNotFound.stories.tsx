@@ -4,7 +4,7 @@ import NotFoundPage from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Example/NotFoundPage',
+  title: 'Ui components/NotFoundPage',
   component: NotFoundPage,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -23,10 +23,11 @@ export const NotFoundPageCustom: Story = {
     headerContent: 'Oops',
     body: 'This page does not exist.',
     footer: 'This feature will be implemented in the future.',
+    isBrowserError: true,
   },
 };
 
-export const NotFoundPagePriceBase: Story = {
+export const NotFoundPageBase: Story = {
   args: {
     isBrowserError: true,
   },
