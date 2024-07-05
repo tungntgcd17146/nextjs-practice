@@ -5,6 +5,7 @@ const CardSkeleton = () => {
 
   return (
     <Card
+      data-testid="CardSkeleton"
       sx={{
         maxWidth: 560,
         maxHeight: 276,

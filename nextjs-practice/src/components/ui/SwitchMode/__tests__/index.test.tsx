@@ -24,7 +24,6 @@ const setup = (overrideProps = {}) => {
   );
 };
 
-//TODO: add more test case for testing action click button and call toggleMode fn of useMode hook
 describe('SwitchMode Test', () => {
   it('component mounting: selected light mode button correctly', () => {
     setup();

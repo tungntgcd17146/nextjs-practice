@@ -62,8 +62,8 @@ const NotFoundPage = ({
           !isBrowserError && isTablet
             ? '80px'
             : !isBrowserError && isDesktop
-              ? '330px'
-              : '0px',
+            ? '330px'
+            : '0px',
         ...sx,
       }}
     >

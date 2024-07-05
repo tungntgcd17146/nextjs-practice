@@ -43,7 +43,7 @@ describe('ProductCard Test', () => {
   it('hover ProductCard will show Icon Button', async () => {
     setup();
 
-    const cardItem = screen.getByTestId('ProductCard_CardActionArea');
+    const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 
@@ -57,7 +57,7 @@ describe('ProductCard Test', () => {
   it('call onEditCard when click icon edit button', () => {
     setup();
 
-    const cardItem = screen.getByTestId('ProductCard_CardActionArea');
+    const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 
@@ -69,7 +69,7 @@ describe('ProductCard Test', () => {
   it('call onEditCard when click icon delete button', () => {
     setup();
 
-    const cardItem = screen.getByTestId('ProductCard_CardActionArea');
+    const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 
@@ -81,7 +81,7 @@ describe('ProductCard Test', () => {
   it('call onEditCard when click icon view button', () => {
     setup();
 
-    const cardItem = screen.getByTestId('ProductCard_CardActionArea');
+    const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 

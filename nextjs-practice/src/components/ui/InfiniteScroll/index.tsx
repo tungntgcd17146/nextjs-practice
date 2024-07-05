@@ -84,8 +84,8 @@ const InfiniteScroll = ({
           <Grid xs={12} sx={{ textAlign: 'center', marginTop: '24px' }} item>
             <Button
               disabled={isLoadingSkeleton}
-              aria-label="load-more"
-              data-testid="InfiniteScroll_LoadMoreButton"
+              aria-label="show-less"
+              data-testid="InfiniteScroll_ShowLessButton"
               children={isLoadingSkeleton ? 'Loading...' : 'Show less'}
               color="inherit"
               size="small"
