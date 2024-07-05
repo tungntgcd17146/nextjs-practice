@@ -7,7 +7,7 @@ import LoadingProgress from '@/src/components/ui/LoadingProgress';
 //services
 import { PRODUCTS_PER_PAGE } from '@/src/constants/common';
 import { ProductQueryParams } from '@/src/types/product';
-import { convertArrayToQueryObject } from '@/src/utils/convert/convertArrayToQueryObject';
+import { convertArrayToQueryObject } from '@/src/utils/convert';
 
 export default async function Page({
   searchParams,
