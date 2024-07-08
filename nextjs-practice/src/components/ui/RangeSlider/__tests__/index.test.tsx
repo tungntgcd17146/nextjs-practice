@@ -6,8 +6,8 @@ import {
   expect,
   it,
   vi,
-} from "@/src/utils/testUtils";
-import RangeSlider, { Props, valuetext } from "..";
+} from '@/src/utils/testUtils';
+import RangeSlider, { Props, valuetext } from '..';
 
 const defaultProp = {
   valueLabelFormat: valuetext,
@@ -26,18 +26,18 @@ const setup = (overrideProps = {}) => {
   return render(<RangeSlider {...props} />);
 };
 
-describe("RangeSlider Test", () => {
-  it("render RangeSlider  correctly", () => {
+describe('RangeSlider Test', () => {
+  it('render RangeSlider  correctly', () => {
     setup();
 
-    expect(screen.getByTestId("RangeSlider")).toBeTruthy();
+    expect(screen.getByTestId('RangeSlider')).toBeTruthy();
   });
 
-  it("onChangeValue  correctly", () => {
+  it('onChangeValue  correctly', () => {
     setup();
 
-    const slider = screen.getAllByRole("slider")[1];
-    fireEvent.change(slider, { target: { value: "50" } });
+    const slider = screen.getAllByRole('slider')[1];
+    fireEvent.change(slider, { target: { value: '50' } });
 
     expect(defaultProp.onChangeValue).toBeCalled();
   });

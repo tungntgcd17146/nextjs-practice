@@ -1,160 +1,104 @@
-"use client";
+'use client';
 
-import { themes } from "@/src/themes";
+import { Suspense, memo } from 'react';
 
 //mui
-import Grid from "@mui/material/Grid";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import { useTheme } from "@mui/material";
-import Box from "@mui/material/Box";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material';
+import Divider from '@mui/material/Divider';
 
 //components
-import IconButton from "@/src/components/ui/IconButton";
-import Button from "@/src/components/ui/Button";
-import Avatar from "@/src/components/ui/Avatar";
-import User1 from "@/public/assets/User1.webp";
-import Figma from "@/public/assets/figma.webp";
+import Header from '@/src/components/layouts/ProductDetail/Header';
+import SocialInfo from '@/src/components/layouts/ProductDetail/SocialInfo';
+import ProductDetailDark from '@/public/assets/ProductDetailImgDark.webp';
+import ProductDetailLight from '@/public/assets/ProductDetailImgLight.webp';
+import ImageDrawer from '@/src/components/ui/ImageDrawer';
+import DetailContentSkeleton from '@/src/components/layouts/ProductDetail/DetailContent/DetailContentSkeleton';
+import DetailContentWrapper from '@/src/components/layouts/ProductDetail/DetailContent/DetailContentWrapper';
+import DetailOverviewWrapper from '@/src/components/layouts/ProductDetail/DetailOverview/DetailOverviewWrapper';
+import DetailOverviewSkeleton from '@/src/components/layouts/ProductDetail/DetailOverview/DetailOverviewSkeleton';
+import DetailFeatureSkeleton from '@/src/components/layouts/ProductDetail/DetailFeature/DetailFeatureSkeleton';
+import DetailFeatureWrapper from '@/src/components/layouts/ProductDetail/DetailFeature/DetailFeatureWrapper';
 
 //constants
-import DetailContent from "./DetailContent";
 
-//types
-import { Product } from "@/src/types/product";
+//hooks
+import useScreenWidth from '@/src/hooks/useScreenWidth';
 
-import { useRouter } from "next/navigation";
-
-import useScreenWidth from "@/src/hooks/useScreenWidth";
+//contexts
+import { useMode } from '@/src/contexts/modeContext/useModeContext';
 
 interface Props {
-  product: Product;
+  productId: string;
 }
 
-const ProductDetail = ({ product }: Props) => {
-  const router = useRouter();
+const ProductDetail = ({ productId }: Props) => {
+  const { isMobile, isDesktop } = useScreenWidth();
   const theme = useTheme();
-  const { isMobile } = useScreenWidth();
-
-  const handleClose = () => {
-    router.push(`/shop`);
-  };
-
-  const {
-    productName,
-    productCategory,
-    productPrice,
-    productRating,
-    productRatingCount,
-  } = product;
+  const { isDarkMode } = useMode();
 
   return (
     <Box>
       {/* Header */}
-      <Grid
-        item
-        sx={{ margin: "24px 42px" }}
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Button
-          aria-label="edit-product"
-          data-testid="ProductDetail_EditButton"
-          children="Edit product"
-          color="inherit"
-        />
-
-        <IconButton
-          aria-label="detail-product-close"
-          children={<CloseOutlinedIcon />}
-          onClick={handleClose}
-          data-testid="ProductDetail_CloseIconButton"
-          sx={{
-            borderRadius: "50%",
-            backgroundColor: theme.palette.grey[100],
-          }}
-        />
-      </Grid>
+      <Header />
       <Grid
         container
         sx={{
-          padding: "24px",
+          padding: '24px',
         }}
         display="flex"
         flexDirection="row"
         justifyContent="center"
         alignItems="flex-start"
       >
-        <DetailContent
-          {...{
-            productName,
-            productCategory,
-            productPrice,
-            productRating,
-            productRatingCount,
+        <Grid
+          sx={{
+            backgroundColor: theme.palette.background.paper,
+            borderRadius: '8px',
+            width: '1000px',
+            padding: '16px',
           }}
-        />
-
-        {!isMobile && (
+          display="flex"
+          flexDirection="column"
+          md={isDesktop ? undefined : 10}
+          item
+        >
+          <Suspense fallback={<DetailContentSkeleton />}>
+            <DetailContentWrapper productId={productId} />
+          </Suspense>
+          <ImageDrawer
+            image={isDarkMode ? ProductDetailDark : ProductDetailLight}
+            alt="product detail"
+          />
           <Grid
-            sx={{ marginLeft: "24px" }}
+            container
             display="flex"
-            flexDirection="column"
-            item
+            flexDirection="row"
+            justifyContent="space-between"
           >
-            <Avatar
-              sx={{ marginBottom: "24px" }}
-              avtBackground={themes.colors.yellow[500]}
-              imgNextSrc={User1}
-              alt={"User1"}
-              size="medium"
-            />
-            <Avatar
-              sx={{
-                marginBottom: "24px",
-                backgroundColor: theme.palette.grey[300],
-                "& .MuiAvatar-img": {
-                  width: "20px",
-                  height: "32px",
-                },
-              }}
-              badgeSx={
-                {
-                  "& .MuiBadge-badge": {
-                    backgroundColor: theme.palette.text.secondary,
-                    color: theme.palette.background.paper,
-                    border: "unset",
-                  },
-                } as React.CSSProperties
-              }
-              imgWidth={20}
-              imgHeight={32}
-              badgeAnchorOrigin={{ vertical: "top", horizontal: "left" }}
-              BadgeIcon="3"
-              avtBackground={theme.palette.grey[200]}
-              imgNextSrc={Figma}
-              alt="Figma"
-              size="medium"
-            />
-            <IconButton
-              aria-label="like-product"
-              sx={{
-                backgroundColor: theme.palette.grey[300],
-                borderRadius: "50%",
-                width: "64px",
-                height: "64px",
-                alignItems: "center",
-                ":hover": {
-                  backgroundColor: "none",
-                },
-              }}
-              children={<FavoriteOutlinedIcon />}
-            />
+            <Suspense fallback={<DetailOverviewSkeleton />}>
+              <DetailOverviewWrapper />
+            </Suspense>
+
+            <Suspense fallback={<DetailFeatureSkeleton />}>
+              <DetailFeatureWrapper />
+            </Suspense>
           </Grid>
-        )}
+          {/* Divider */}
+          <Divider
+            sx={{
+              marginTop: '64px',
+              marginBottom: '64px',
+              color: theme.palette.grey[100],
+            }}
+          />
+        </Grid>
+
+        {!isMobile && <SocialInfo />}
       </Grid>
     </Box>
   );
 };
 
-export default ProductDetail;
+export default memo(ProductDetail);

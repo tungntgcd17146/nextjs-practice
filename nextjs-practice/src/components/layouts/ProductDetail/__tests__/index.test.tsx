@@ -1,87 +1,128 @@
-//TODO: Update test later
-// /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { fireEvent, render, screen, waitFor } from '@/src/utils/testUtils'
-// import { describe, expect, it, vi } from 'vitest'
-// import ProductDetail from '../'
-// import * as useScreenWidth from '@/src/hooks/useScreenWidth'
-// import { fakeFeatureForProductData, fakeProductOverview } from '@/src/mocks/data'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import ProductDetail from '@/src/components/layouts/ProductDetail';
+import useScreenWidth from '@/src/hooks/useScreenWidth';
+import { useMode } from '@/src/contexts/modeContext/useModeContext';
 
-// const mockProduct = {
-//   id: '1',
-//   productName: 'Product 1',
-//   productCategory: 'Category 1',
-//   productPrice: 100,
-//   productRating: 4.5,
-//   productRatingCount: 100,
-//   productOverview: fakeProductOverview,
-//   productFeature: fakeFeatureForProductData
-//   // ... other properties
-// }
+// Mock the dependencies
+vi.mock('@/src/components/layouts/ProductDetail/Header', () => ({
+  __esModule: true,
+  default: () => <div>Header</div>,
+}));
 
-// const defaultProp = {
-//   product: mockProduct
-// }
+vi.mock('@/src/components/layouts/ProductDetail/SocialInfo', () => ({
+  __esModule: true,
+  default: () => <div>SocialInfo</div>,
+}));
 
-// const setup = (overrideProps = {}) => {
-//   const props = {
-//     ...defaultProp,
-//     ...overrideProps
-//   }
+vi.mock('@/src/components/ui/ImageDrawer', () => ({
+  __esModule: true,
+  default: () => <div>ImageDrawer</div>,
+}));
 
-//   return render(
-//       <ProductDetail {...props} />
-//   )
-// }
+vi.mock(
+  '@/src/components/layouts/ProductDetail/DetailContent/DetailContentWrapper',
+  () => ({
+    __esModule: true,
+    default: () => <div>DetailContentWrapper</div>,
+  }),
+);
 
-// describe('ProductDetail Test', () => {
-//   afterEach(() => {
-//     vi.clearAllMocks()
-//   })
-//   it('render loading correctly when fetching product data', () => {
-//     vi.spyOn(useScreenWidth, 'default').mockReturnValue({ isMobile: true, isTablet: false, isDesktop: false } as any)
+vi.mock(
+  '@/src/components/layouts/ProductDetail/DetailOverview/DetailOverviewWrapper',
+  () => ({
+    __esModule: true,
+    default: () => <div>DetailOverviewWrapper</div>,
+  }),
+);
 
-//     // Mock the API function
-//     ;(useProductQuery as any).mockReturnValue({
-//       data: mockProduct,
-//       isLoading: true,
-//       isError: false
-//     })
-//     setup()
+vi.mock(
+  '@/src/components/layouts/ProductDetail/DetailFeature/DetailFeatureWrapper',
+  () => ({
+    __esModule: true,
+    default: () => <div>DetailFeatureWrapper</div>,
+  }),
+);
 
-//     expect(screen.getByTestId('ProductDetail_Loading')).toBeTruthy()
-//   })
+vi.mock(
+  '@/src/components/layouts/ProductDetail/DetailContent/DetailContentSkeleton',
+  () => ({
+    __esModule: true,
+    default: () => <div>DetailContentSkeleton</div>,
+  }),
+);
 
-//   it('render product detail correctly and go back shop page when click close', async () => {
-//     vi.spyOn(useScreenWidth, 'default').mockReturnValue({ isMobile: false, isTablet: false, isDesktop: true } as any)
+vi.mock(
+  '@/src/components/layouts/ProductDetail/DetailOverview/DetailOverviewSkeleton',
+  () => ({
+    __esModule: true,
+    default: () => <div>DetailOverviewSkeleton</div>,
+  }),
+);
 
-//     // Mock the API function
-//     ;(useProductQuery as any).mockReturnValue({
-//       data: mockProduct,
-//       isLoading: false,
-//       isError: false
-//     })
-//     setup()
+vi.mock(
+  '@/src/components/layouts/ProductDetail/DetailFeature/DetailFeatureSkeleton',
+  () => ({
+    __esModule: true,
+    default: () => <div>DetailFeatureSkeleton</div>,
+  }),
+);
 
-//     await waitFor(() => {
-//       expect(screen.getByTestId('ProductDetail_CloseIconButton')).toBeTruthy()
+vi.mock('@/src/hooks/useScreenWidth', () => ({
+  __esModule: true,
+  default: () => ({ isMobile: false, isDesktop: true, isTablet: false }),
+}));
 
-//       fireEvent.click(screen.getByTestId('ProductDetail_CloseIconButton'))
-//     })
-//   })
+vi.mock('@/src/contexts/modeContext/useModeContext', () => ({
+  useMode: () => ({ isDarkMode: false }),
+}));
 
-//   it('show Error page when fetch product data error', async () => {
-//     vi.spyOn(useScreenWidth, 'default').mockReturnValue({ isMobile: false, isTablet: false, isDesktop: true } as any)
+vi.mock('next/navigation', () => ({
+  usePathname: () => '',
+}));
 
-//     // Mock the API function
-//     ;(useProductQuery as any).mockReturnValue({
-//       data: mockProduct,
-//       isLoading: false,
-//       isError: true
-//     })
-//     setup()
+vi.mock('@/src/hooks/useScreenWidth', () => ({
+  default: vi.fn(),
+}));
 
-//     await waitFor(() => {
-//       expect(screen.getByText('Error page')).toBeTruthy()
-//     })
-//   })
-// })
+vi.mock('@/src/contexts/modeContext/useModeContext', () => ({
+  useMode: vi.fn(),
+}));
+
+const setup = () => {
+  render(<ProductDetail productId="123" />);
+};
+
+describe('ProductDetail Component', () => {
+  beforeEach(() => {
+    (useScreenWidth as any).mockReturnValue({ isMobile: false });
+    (useMode as any).mockReturnValue({ isDarkMode: false });
+    vi.clearAllMocks();
+  });
+
+  it('renders correctly on dark mode', () => {
+    (useMode as any).mockReturnValue({ isDarkMode: true });
+    setup();
+
+    expect(screen.getByText('Header')).toBeInTheDocument();
+    expect(screen.getByText('SocialInfo')).toBeInTheDocument();
+    expect(screen.getByText('ImageDrawer')).toBeInTheDocument();
+    expect(screen.getByText('DetailContentWrapper')).toBeInTheDocument();
+    expect(screen.getByText('DetailOverviewWrapper')).toBeInTheDocument();
+    expect(screen.getByText('DetailFeatureWrapper')).toBeInTheDocument();
+  });
+
+  it('renders correctly on desktop', () => {
+    (useMode as any).mockReturnValue({ isDarkMode: false });
+    (useScreenWidth as any).mockReturnValue({ isDesktop: true });
+    setup();
+
+    expect(screen.getByText('Header')).toBeInTheDocument();
+    expect(screen.getByText('SocialInfo')).toBeInTheDocument();
+    expect(screen.getByText('ImageDrawer')).toBeInTheDocument();
+    expect(screen.getByText('DetailContentWrapper')).toBeInTheDocument();
+    expect(screen.getByText('DetailOverviewWrapper')).toBeInTheDocument();
+    expect(screen.getByText('DetailFeatureWrapper')).toBeInTheDocument();
+  });
+});

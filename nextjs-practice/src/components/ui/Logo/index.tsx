@@ -1,16 +1,17 @@
-import { memo } from "react";
+import { memo } from 'react';
 
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import Image from "next/image";
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import Image from 'next/image';
 
-interface Props {
+export interface Props {
   logoImage: string | StaticImport;
-  alt: string
+  alt: string;
 }
 
 const Logo = ({ logoImage, alt }: Props) => {
   return (
     <Image
+      data-testid="Logo"
       width={48}
       height={48}
       src={logoImage}

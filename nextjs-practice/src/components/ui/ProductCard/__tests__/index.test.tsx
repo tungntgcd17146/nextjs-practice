@@ -6,17 +6,17 @@ import {
   it,
   vi,
   fireEvent,
-} from "@/src/utils/testUtils";
-import ProductCard, { Props } from "..";
+} from '@/src/utils/testUtils';
+import ProductCard, { Props } from '..';
 
 const defaultProp = {
   id: 1,
-  productName: "Product",
-  productCategory: "Category",
+  productName: 'Product',
+  productCategory: 'Category',
   productPrice: 100,
   productRating: 4.5,
   productRatingCount: 100,
-  popularity: "Most popular",
+  popularity: 'Most popular',
   onEditCard: vi.fn(),
   onDeleteCard: vi.fn(),
   onViewCard: vi.fn(),
@@ -31,61 +31,61 @@ const setup = (overrideProps = {}) => {
   return render(<ProductCard {...props} />);
 };
 
-describe("ProductCard Test", () => {
-  it("render ProductCard correctly", () => {
+describe('ProductCard Test', () => {
+  it('render ProductCard correctly', () => {
     setup();
 
-    expect(screen.getByText("Product (Category)")).toBeTruthy();
-    expect(screen.getByText("4.5")).toBeTruthy();
-    expect(screen.getByText("(100)")).toBeTruthy();
+    expect(screen.getByText('Product (Category)')).toBeTruthy();
+    expect(screen.getByText('4.5')).toBeTruthy();
+    expect(screen.getByText('(100)')).toBeTruthy();
   });
 
-  it("hover ProductCard will show Icon Button", async () => {
+  it('hover ProductCard will show Icon Button', async () => {
     setup();
 
-    const cardItem = screen.getByTestId("ProductCard_CardActionArea");
+    const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 
-    expect(screen.getByTestId("ProductCard_IconButton_edit")).toBeTruthy();
-    expect(screen.getByTestId("ProductCard_IconButton_delete")).toBeTruthy();
-    expect(screen.getByTestId("ProductCard_IconButton_view")).toBeTruthy();
+    expect(screen.getByTestId('ProductCard_IconButton_edit')).toBeTruthy();
+    expect(screen.getByTestId('ProductCard_IconButton_delete')).toBeTruthy();
+    expect(screen.getByTestId('ProductCard_IconButton_view')).toBeTruthy();
 
     fireEvent.mouseLeave(cardItem);
   });
 
-  it("call onEditCard when click icon edit button", () => {
+  it('call onEditCard when click icon edit button', () => {
     setup();
 
-    const cardItem = screen.getByTestId("ProductCard_CardActionArea");
+    const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 
-    fireEvent.click(screen.getByTestId("ProductCard_IconButton_edit"));
+    fireEvent.click(screen.getByTestId('ProductCard_IconButton_edit'));
 
     expect(defaultProp.onEditCard).toBeCalled();
   });
 
-  it("call onEditCard when click icon delete button", () => {
+  it('call onEditCard when click icon delete button', () => {
     setup();
 
-    const cardItem = screen.getByTestId("ProductCard_CardActionArea");
+    const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 
-    fireEvent.click(screen.getByTestId("ProductCard_IconButton_delete"));
+    fireEvent.click(screen.getByTestId('ProductCard_IconButton_delete'));
 
     expect(defaultProp.onDeleteCard).toBeCalled();
   });
 
-  it("call onEditCard when click icon view button", () => {
+  it('call onEditCard when click icon view button', () => {
     setup();
 
-    const cardItem = screen.getByTestId("ProductCard_CardActionArea");
+    const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 
-    fireEvent.click(screen.getByTestId("ProductCard_IconButton_view"));
+    fireEvent.click(screen.getByTestId('ProductCard_IconButton_view'));
 
     expect(defaultProp.onViewCard).toBeCalled();
   });

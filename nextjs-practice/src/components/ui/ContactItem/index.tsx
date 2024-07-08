@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { memo, useCallback, useEffect, useState } from "react";
-import { themes } from "@/src/themes";
+import { memo, useCallback, useEffect, useState } from 'react';
+import { themes } from '@/src/themes';
 
 //mui
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import Box from "@mui/material/Box";
+import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import Box from '@mui/material/Box';
 
 //components
-import User1 from "@/public/assets/User1.webp";
-import Avatar from "@/src/components/ui/Avatar";
-import Button from "@/src/components/ui/Button";
+import User1 from '@/public/assets/User1.webp';
+import Avatar from '@/src/components/ui/Avatar';
+import Button from '@/src/components/ui/Button';
 
 //utils
-import { userImageData } from "@/src/mocks/commonData";
-import useScreenWidth from "@/src/hooks/useScreenWidth";
+import { userImageData } from '@/src/mocks/commonData';
+import useScreenWidth from '@/src/hooks/useScreenWidth';
 
 //types
-import { UserContact } from "@/src/types/contact";
-import Image from "next/image";
+import { UserContact } from '@/src/types/contact';
+import Image from 'next/image';
 
 export interface Props {
   user: UserContact;
@@ -36,25 +36,25 @@ const ContactItem = ({
   onChangeFollowButtonStatus,
   onClickMessageButton,
 }: Props) => {
-  const [followButtonStatus, setFollowButtonStatus] = useState<string>("");
+  const [followButtonStatus, setFollowButtonStatus] = useState<string>('');
   const theme = useTheme();
 
   useEffect(() => {
-    if (user.contactStatus === "following") {
-      setFollowButtonStatus("Unfollow");
+    if (user.contactStatus === 'following') {
+      setFollowButtonStatus('Unfollow');
     } else {
-      setFollowButtonStatus("Follow");
+      setFollowButtonStatus('Follow');
     }
   }, [user.contactStatus]);
 
   const { isMobile, matchedBreakpoint: isHideImageList } = useScreenWidth({
-    down: "lg",
+    down: 'lg',
   });
 
   const handleClickFollow = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       setFollowButtonStatus((prev) =>
-        prev === "Follow" ? "Following" : prev === "Unfollow" ? "Follow" : prev,
+        prev === 'Follow' ? 'Following' : prev === 'Unfollow' ? 'Follow' : prev,
       );
       onChangeFollowButtonStatus?.(e);
     },
@@ -84,12 +84,12 @@ const ContactItem = ({
           <Avatar
             avtBackground={themes.colors.yellow[500]}
             imgNextSrc={User1}
-            alt={"User1"}
+            alt={'User1'}
             size="medium"
           />
 
           <Grid
-            sx={{ marginLeft: "16px" }}
+            sx={{ marginLeft: '16px' }}
             display="flex"
             flexDirection="column"
           >
@@ -97,7 +97,7 @@ const ContactItem = ({
               variant="overline"
               sx={{
                 color: theme.palette.text.secondary,
-                fontSize: isMobile ? "18px" : "20px",
+                fontSize: isMobile ? '18px' : '20px',
               }}
             >
               {userName}
@@ -106,7 +106,7 @@ const ContactItem = ({
               {/* info following */}
               <Typography
                 variant="body1"
-                sx={{ color: theme.palette.text.primary, marginRight: "5px" }}
+                sx={{ color: theme.palette.text.primary, marginRight: '5px' }}
               >
                 {productNumber}
               </Typography>
@@ -121,17 +121,17 @@ const ContactItem = ({
                 orientation="vertical"
                 sx={{
                   color: theme.palette.text.primary,
-                  marginLeft: "16px",
-                  marginRight: "16px",
-                  height: "12px",
-                  textAlign: "center",
+                  marginLeft: '16px',
+                  marginRight: '16px',
+                  height: '12px',
+                  textAlign: 'center',
                 }}
               />
 
               {/* info follower */}
               <Typography
                 variant="body1"
-                sx={{ color: theme.palette.text.primary, marginRight: "5px" }}
+                sx={{ color: theme.palette.text.primary, marginRight: '5px' }}
               >
                 {followerNumber}
               </Typography>
@@ -144,15 +144,15 @@ const ContactItem = ({
             </Grid>
 
             {/* action button */}
-            <Grid sx={{ marginTop: "16px" }}>
+            <Grid sx={{ marginTop: '16px' }}>
               <Button
                 aria-label="follow-user"
                 data-testid="ContactItem_FollowButton"
-                sx={{ marginRight: "8px" }}
+                sx={{ marginRight: '8px' }}
                 children={followButtonStatus}
                 size="small"
                 color={
-                  followButtonStatus === "Following" ? "success" : "inherit"
+                  followButtonStatus === 'Following' ? 'success' : 'inherit'
                 }
                 onClick={handleClickFollow}
               />
@@ -173,8 +173,8 @@ const ContactItem = ({
           {!isHideImageList && (
             <ImageList
               sx={{
-                width: "480px",
-                height: "128px",
+                width: '480px',
+                height: '128px',
               }}
               cols={3}
             >
@@ -182,16 +182,16 @@ const ContactItem = ({
                 <ImageListItem key={index}>
                   <Box
                     style={{
-                      width: "100%",
-                      height: "125px",
-                      position: "relative",
+                      width: '100%',
+                      height: '125px',
+                      position: 'relative',
                     }}
                   >
                     <Image
                       fill
                       src={item.img}
                       alt={item.imgTitle}
-                      style={{ borderRadius: "12px" }}
+                      style={{ borderRadius: '12px' }}
                       loading="lazy"
                       sizes="100%"
                     />
@@ -203,7 +203,7 @@ const ContactItem = ({
         </Grid>
       </Grid>
 
-      <Divider sx={{ margin: "24px 0", color: theme.palette.grey[100] }} />
+      <Divider sx={{ margin: '24px 0', color: theme.palette.grey[100] }} />
     </Grid>
   );
 };

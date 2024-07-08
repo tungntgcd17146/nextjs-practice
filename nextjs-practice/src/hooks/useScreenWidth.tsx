@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 /* eslint-disable react-hooks/rules-of-hooks */
-import * as React from "react";
+import * as React from 'react';
 
-import { useTheme, Theme } from "@mui/material/styles";
-import { useMediaQuery, Breakpoint } from "@mui/material";
+import { useTheme, Theme } from '@mui/material/styles';
+import { useMediaQuery, Breakpoint } from '@mui/material';
 
 /**
  * useScreenWidth use case:
@@ -52,9 +52,9 @@ export type Options =
 const useScreenWidth = ({ only, up, down }: Options = {}): UseScreenWidth => {
   const theme = useTheme<Theme>();
 
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("md", "xl"));
-  const isDesktop = useMediaQuery(theme.breakpoints.up("xl"));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('md', 'xl'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
 
   // Set matching breakpoints from hook's arguments
   const [matchedBreakpoint, setMatchedBreakpoint] =

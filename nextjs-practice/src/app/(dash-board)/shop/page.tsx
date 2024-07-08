@@ -1,14 +1,14 @@
-import React, { Suspense } from "react";
+import React from 'react';
 
 //components
-import Products from "@/src/components/layouts/Shop/ShopContent/Products";
-import LoadingProgress from "@/src/components/ui/LoadingProgress";
+import Products from '@/src/components/layouts/Shop/ShopContent/Products';
 
 //services
-import { fetchProducts } from "@/src/services/productsService";
-import { PRODUCTS_PER_PAGE } from "@/src/constants/common";
-import { ProductQueryParams } from "@/src/types/product";
-import { convertArrayToQueryObject } from '@/src/utils/convert/convertArrayToQueryObject';
+import { PRODUCTS_PER_PAGE } from '@/src/constants/common';
+import { fetchProducts } from '@/src/services/productsService';
+
+import { ProductQueryParams } from '@/src/types/product';
+import { convertArrayToQueryObject } from '@/src/utils/convert';
 
 export default async function Page({
   searchParams,
@@ -32,8 +32,8 @@ export default async function Page({
   const categoriesString = searchParams?.categories;
   const decodedCategories = categoriesString
     ? decodeURIComponent(categoriesString)
-    : "";
-  const categories = decodedCategories ? decodedCategories.split(",") : [];
+    : '';
+  const categories = decodedCategories ? decodedCategories.split(',') : [];
 
   const minPriceRange = searchParams?.minPriceRange;
   const maxPriceRange = searchParams?.maxPriceRange;
@@ -44,14 +44,14 @@ export default async function Page({
     _page: currentPage,
     _limit: PRODUCTS_PER_PAGE,
     ...(query && { q: query }),
-    _order: sortBy === "New" ? "desc" : "asc",
-    _sort: "createdAt", // Sorting by createdAt property from API
+    _order: sortBy === 'New' ? 'desc' : 'asc',
+    _sort: 'createdAt', // Sorting by createdAt property from API
     ...(maxPriceRange && { productPrice_lte: maxPriceRange }),
     ...(minPriceRange && { productPrice_gte: minPriceRange }),
     ...(rating && { productRating_gte: rating }),
     ...(popularity && { popularity }),
 
-     // Convert categories array to query object format
+    // Convert categories array to query object format
     ...convertArrayToQueryObject(categories),
   };
 
@@ -79,12 +79,10 @@ export default async function Page({
   const { initialItems, totalCount } = await fetchAllProducts(queryParams);
 
   return (
-    <Suspense fallback={<LoadingProgress />}>
-      <Products
-        products={initialItems}
-        totalCount={totalCount}
-        queryParams={queryParams}
-      />
-    </Suspense>
+    <Products
+      products={initialItems}
+      totalCount={totalCount}
+      queryParams={queryParams}
+    />
   );
 }

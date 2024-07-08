@@ -1,41 +1,42 @@
-import { NavigateItem } from "@/src/types/navigation";
+import { NavigateItem } from '@/src/types/navigation';
 
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
-import DonutSmallOutlinedIcon from "@mui/icons-material/DonutSmallOutlined";
-import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import DiamondOutlinedIcon from '@mui/icons-material/DiamondOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
+import DonutSmallOutlinedIcon from '@mui/icons-material/DonutSmallOutlined';
+import RecommendOutlinedIcon from '@mui/icons-material/RecommendOutlined';
+import { BASE_REDIRECT_URL } from '@/src/constants/common';
 
 export const navigationItems: NavigateItem[] = [
   {
-    text: "Home",
+    text: 'Home',
     icon: <HomeOutlinedIcon />,
-    go: "/home",
+    go: '/home',
   },
   {
-    text: "Products",
+    text: 'Products',
     icon: <DiamondOutlinedIcon />,
-    go: "/products",
+    go: '/products',
   },
   {
-    text: "Customers",
+    text: 'Customers',
     icon: <AccountCircleOutlinedIcon />,
-    go: "/customers",
+    go: '/customers',
   },
   {
-    text: "Shop",
+    text: 'Shop',
     icon: <StorefrontOutlinedIcon />,
-    go: "/shop",
+    go: BASE_REDIRECT_URL,
   },
   {
-    text: "Income",
+    text: 'Income',
     icon: <DonutSmallOutlinedIcon />,
-    go: "/income",
+    go: '/income',
   },
   {
-    text: "Promote",
+    text: 'Promote',
     icon: <RecommendOutlinedIcon />,
-    go: "/promote",
+    go: '/promote',
   },
 ];

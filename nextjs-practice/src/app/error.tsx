@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import PageNotFound from "@/src/components/ui/PageNotFound";
+import PageNotFound from '@/src/components/ui/PageNotFound';
 
 export default function Error() {
   return (

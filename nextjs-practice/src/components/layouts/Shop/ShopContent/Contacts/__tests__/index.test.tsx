@@ -1,133 +1,72 @@
-//TODO: update tests later
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import Contacts, {
+  Props,
+} from '@/src/components/layouts/Shop/ShopContent/Contacts';
+import useScreenWidth from '@/src/hooks/useScreenWidth';
 
-// /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { render, screen } from '@/src/utils/testUtils'
-// import { describe, expect, it, vi } from 'vitest'
-// import Contacts from '../'
-// import * as useScreenWidth from '@/src/hooks/useScreenWidth'
+const mockRouter = {
+  push: vi.fn(),
+};
+vi.mock('next/navigation', () => ({
+  useRouter: () => mockRouter,
+}));
 
-// vi.mock('@/hooks/useContactsQuery')
-// vi.mock('react-router-dom', () => ({
-//   useLocation: vi.fn(() => ({ pathname: '/' })),
-//   useNavigate: vi.fn(() => vi.fn())
-// }))
+// Mock useScreenWidth
+vi.mock('@/src/hooks/useScreenWidth', () => ({
+  __esModule: true,
+  default: vi.fn(),
+}));
 
-// const defaultProp = {
-//   tabSelectedText: 'Following'
-// }
+const mockContactItem = [
+  {
+    id: '1',
+    userName: 'John Doe',
+    productNumber: '123',
+    followerNumber: '456',
+    contactStatus: 'following',
+  },
+  {
+    id: '2',
+    userName: 'Jane Smith',
+    productNumber: '789',
+    followerNumber: '123',
+    contactStatus: 'following',
+  },
+];
 
+const defaultProp: Props = {
+  contacts: mockContactItem as any,
+};
+const setup = (overrideProps = {}) => {
+  const props = {
+    ...defaultProp,
+    ...overrideProps,
+  };
+  return render(<Contacts {...props} />);
+};
 
-// const setup = (overrideProps = {}) => {
-//   const props = {
-//     ...defaultProp,
-//     ...overrideProps
-//   }
+describe('Contacts', () => {
+  beforeEach(() => {
+    (useScreenWidth as any).mockReturnValue({ matchedBreakpoint: true });
+  });
 
-//   return render(
-//       <Contacts {...props} />
-//   )
-// }
+  it('renders PageNotFound when no ContactItem are provided', () => {
+    (useScreenWidth as any).mockReturnValue({ matchedBreakpoint: false });
+    setup({
+      contacts: undefined,
+    });
 
-// describe('Contacts Test', () => {
-//   it('render Contacts with loading when fetching correctly', async () => {
-//     // Mock the response you expect from useContactsQuery
-//     const mockResponse = {
-//       data: {
-//         data: []
-//       },
-//       isLoading: true,
-//       isError: false
-//     }
-//     ;(useContactsQuery as any).mockReturnValue(mockResponse)
+    expect(screen.getByText('No item found')).toBeInTheDocument();
+  });
 
-//     setup()
+  it('renders ContactItem components when ContactItem are provided', () => {
+    setup();
 
-//     expect(screen.getByTestId('InfiniteScroll_Loading')).toBeTruthy()
-//   })
-
-//   it('render error tab correctly', async () => {
-//     // Mock the response you expect from useContactsQuery
-//     const mockResponse = {
-//       data: {
-//         data: []
-//       },
-//       isLoading: false,
-//       isError: true
-//     }
-//     ;(useContactsQuery as any).mockReturnValue(mockResponse)
-
-//     setup()
-
-//     expect(screen.getByText('Error page')).toBeTruthy()
-//   })
-
-//   it('render not found item tab correctly', async () => {
-//     // Mock the response you expect from useContactsQuery
-//     const mockResponse = {
-//       data: {
-//         data: undefined
-//       },
-//       isLoading: false,
-//       isError: true
-//     }
-//     ;(useContactsQuery as any).mockReturnValue(mockResponse)
-
-//     setup()
-
-//     expect(screen.getByText('No item found')).toBeTruthy()
-//   })
-
-//   it('render contact item number correctly', async () => {
-//     vi.spyOn(useScreenWidth, 'default').mockReturnValue({ matchedBreakpoint: true } as any)
-//     // Mock the response you expect from useContactsQuery
-//     const mockResponse = {
-//       data: {
-//         data: [
-//           {
-//             id: 8,
-//             userName: 'Rosetta Gottlieb8',
-//             productNumber: 12,
-//             followerNumber: 23,
-//             contactStatus: 'followers'
-//           },
-//           {
-//             id: 9,
-//             userName: 'Rosetta Gottlieb9',
-//             productNumber: 12,
-//             followerNumber: 23,
-//             contactStatus: 'following'
-//           },
-//           {
-//             id: 10,
-//             userName: 'Rosetta Gottlieb10',
-//             productNumber: 12,
-//             followerNumber: 23,
-//             contactStatus: 'followers'
-//           },
-//           {
-//             id: 11,
-//             userName: 'Rosetta Gottlieb11',
-//             productNumber: 12,
-//             followerNumber: 23,
-//             contactStatus: 'following'
-//           },
-//           {
-//             id: 12,
-//             userName: 'Rosetta Gottlieb12',
-//             productNumber: 12,
-//             followerNumber: 23,
-//             contactStatus: 'followers'
-//           }
-//         ],
-//         headers: { 'x-total-count': '10' }
-//       },
-//       isLoading: false,
-//       isError: false
-//     }
-//     ;(useContactsQuery as any).mockReturnValue(mockResponse)
-
-//     setup()
-
-//     expect(screen.getAllByTestId('ContactItem').length).toEqual(mockResponse.data.data.length)
-//   })
-// })
+    expect(screen.getAllByTestId('ContactItem').length).toEqual(
+      mockContactItem.length,
+    );
+  });
+});

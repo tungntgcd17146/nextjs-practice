@@ -1,28 +1,29 @@
-"use client";
+'use client';
 
-import { memo, useMemo } from "react";
+import { memo, useMemo } from 'react';
 
-import Avatar from "@/src/components/ui/Avatar";
-import IconButton from "@/src/components/ui/IconButton";
-import Button from "@/src/components/ui/Button";
+import Avatar from '@/src/components/ui/Avatar';
+import IconButton from '@/src/components/ui/IconButton';
+import Button from '@/src/components/ui/Button';
 
 //img
-import Customer1 from "@/public/assets/customer1.webp";
+import Customer1 from '@/public/assets/customer1.webp';
 
 //mui
-import { useTheme } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import AddIcon from "@mui/icons-material/Add";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import Divider from "@mui/material/Divider";
+import { useTheme } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import AddIcon from '@mui/icons-material/Add';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 
-import { themes } from "@/src/themes";
-import useScreenWidth from "@/src/hooks/useScreenWidth";
+import { themes } from '@/src/themes';
+import useScreenWidth from '@/src/hooks/useScreenWidth';
 
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 export interface Props {
   name?: string;
@@ -38,9 +39,11 @@ const OwnerInfo = ({
   onClickFollow,
 }: Props) => {
   const theme = useTheme();
-  const { isMobile } = useScreenWidth();
+  const { isMobile, matchedBreakpoint } = useScreenWidth({
+    down: 'lg',
+  });
 
-  const commonSocialIconStyles = { marginRight: "24px" };
+  const BadgeAddIcon = useMemo(() => <AddIcon />, []);
 
   return (
     <>
@@ -49,29 +52,24 @@ const OwnerInfo = ({
         item
         xs={12}
         sm={12}
-        lg={8}
+        lg={6}
         display="flex"
         flexDirection="row"
-        sx={{ marginBottom: "12px" }}
+        sx={{ marginBottom: '12px' }}
       >
         <Avatar
           avtBackground={themes.colors.yellow[600]}
           size="large"
           imgNextSrc={avatar}
           alt="Customer1"
-          BadgeIcon={useMemo(
-            () => (
-              <AddIcon />
-            ),
-            [],
-          )}
-          badgeSx={{ marginRight: "16px" }}
+          BadgeIcon={BadgeAddIcon}
+          badgeSx={{ marginRight: '16px' }}
         />
         <Grid item display="flex" flexDirection="column">
           <Typography
             sx={{
               color: theme.palette.text.secondary,
-              fontSize: isMobile ? "20px" : "32px",
+              fontSize: isMobile ? '20px' : '32px',
             }}
             variant="h4"
           >
@@ -80,7 +78,7 @@ const OwnerInfo = ({
           <Typography
             sx={{
               color: theme.palette.text.primary,
-              ...(!isMobile ? { fontSize: "20px", marginTop: "8px" } : {}),
+              ...(!isMobile ? { fontSize: '20px', marginTop: '8px' } : {}),
             }}
             variant="body2"
           >
@@ -94,28 +92,40 @@ const OwnerInfo = ({
         item
         xs={12}
         sm={12}
-        lg={4}
+        lg={6}
         display="flex"
         flexDirection="row"
-        justifyContent="space-between"
+        justifyContent={matchedBreakpoint ? 'space-between' : 'flex-end'}
       >
-        <Grid display="flex" flexDirection="row" alignItems="flex-start">
+        <Box>
           <IconButton
             aria-label="personal-twitter"
-            sx={commonSocialIconStyles}
+            sx={
+              matchedBreakpoint
+                ? { marginRight: '32px' }
+                : { marginLeft: '32px' }
+            }
             children={<TwitterIcon />}
           />
           <IconButton
             aria-label="personal-facebook"
-            sx={commonSocialIconStyles}
+            sx={
+              matchedBreakpoint
+                ? { marginRight: '32px' }
+                : { marginLeft: '32px' }
+            }
             children={<FacebookIcon />}
           />
           <IconButton
             aria-label="personal-instagram"
-            sx={commonSocialIconStyles}
+            sx={
+              matchedBreakpoint
+                ? { marginRight: '32px' }
+                : { marginLeft: '32px' }
+            }
             children={<InstagramIcon />}
           />
-        </Grid>
+        </Box>
 
         <Button
           aria-label="follow-button"
@@ -123,12 +133,12 @@ const OwnerInfo = ({
           onClick={onClickFollow}
           children="Follow"
           color="primary"
-          sx={{ width: "120px" }}
+          sx={{ width: '120px', marginLeft: '32px' }}
         />
       </Grid>
 
       <Grid item xs={12}>
-        <Divider sx={{ margin: "20px 0px", color: theme.palette.grey[100] }} />
+        <Divider sx={{ margin: '20px 0px', color: theme.palette.grey[100] }} />
       </Grid>
     </>
   );

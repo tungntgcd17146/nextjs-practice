@@ -1,17 +1,27 @@
-import { fireEvent, render, screen, describe, expect, it, vi } from "@/src/utils/testUtils";
-import Avatar, { Props } from "..";
+import {
+  fireEvent,
+  render,
+  screen,
+  describe,
+  expect,
+  it,
+  vi,
+} from '@/src/utils/testUtils';
+import Avatar, { Props } from '..';
 
-import Customer1 from "/assets/customer1.webp";
-import { themes } from "@/src/themes";
+import Customer1 from '/assets/customer1.webp';
+import { themes } from '@/src/themes';
 
-import DragHandleIcon from "@mui/icons-material/DragHandle";
+import DragHandleIcon from '@mui/icons-material/DragHandle';
 
 const defaultProp = {
   src: Customer1,
   alt: Customer1,
   avtBackground: themes.colors.yellow[600],
   onClick: vi.fn(),
-  size: "small",
+  size: 'small',
+  imgWidth: 48,
+  imgHeight: 48,
 } as unknown as Props;
 
 const setup = (overrideProps = {}) => {
@@ -23,29 +33,29 @@ const setup = (overrideProps = {}) => {
   return render(<Avatar {...props} />);
 };
 
-describe("Avatar Test", () => {
-  it("render Avatar correctly", () => {
+describe('Avatar Test', () => {
+  it('render Avatar correctly', () => {
     setup();
 
-    expect(screen.getByTestId("Avatar_MuiAvatar")).toBeTruthy();
+    expect(screen.getByTestId('Avatar_MuiAvatar')).toBeTruthy();
   });
 
-  it("render Avatar with badge correctly", () => {
+  it('render Avatar with badge correctly', () => {
     setup({
       BadgeIcon: <DragHandleIcon />,
-      size: "large",
+      size: 'large',
     });
 
-    expect(screen.getByTestId("Avatar_StyledBadge")).toBeTruthy();
+    expect(screen.getByTestId('Avatar_StyledBadge')).toBeTruthy();
   });
 
-  it("call onClick when click Avatar correctly", () => {
+  it('call onClick when click Avatar correctly', () => {
     setup({
       BadgeIcon: <DragHandleIcon />,
-      size: "medium",
+      size: 'medium',
     });
 
-    const avatarWithBadge = screen.getByTestId("Avatar_StyledBadge");
+    const avatarWithBadge = screen.getByTestId('Avatar_StyledBadge');
 
     fireEvent.click(avatarWithBadge);
 

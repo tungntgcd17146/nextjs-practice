@@ -1,11 +1,11 @@
-import React from "react";
-import type { Preview } from "@storybook/react";
+import React from 'react';
+import type { Preview } from '@storybook/react';
 
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { withThemeFromJSXProvider } from "@storybook/addon-themes";
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 
-import { defaultTheme } from "../src/materialTheme";
-import ModeContextProvider from "../src/contexts/modeContext/index";
+import { defaultTheme } from '../src/materialTheme';
+import ModeContextProvider from '../src/contexts/modeContext/index';
 
 /* snipped for brevity */
 
@@ -15,7 +15,7 @@ export const decorators = [
       dark: defaultTheme(true),
       light: defaultTheme(false),
     },
-    defaultTheme: "dark",
+    defaultTheme: 'dark',
     Provider: ThemeProvider,
     GlobalStyles: CssBaseline,
   }),
@@ -32,6 +32,10 @@ export const decorators = [
 
 const preview: Preview = {
   parameters: {
+    layout: 'fullscreen',
+    nextjs: {
+      appDirectory: true,
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -40,7 +44,7 @@ const preview: Preview = {
     },
   },
 
-  tags: ["autodocs"]
+  tags: ['autodocs'],
 };
 
 export default preview;

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState } from 'react';
 
 interface ShopContextType {
   totalProducts: number;
@@ -7,7 +7,9 @@ interface ShopContextType {
   setTotalProducts: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const ShopContext = createContext<ShopContextType | undefined>(undefined);
+export const ShopContext = createContext<ShopContextType | undefined>(
+  undefined,
+);
 
 interface ShopProviderProps {
   children: React.ReactNode;

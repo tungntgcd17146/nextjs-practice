@@ -7,10 +7,10 @@ import {
   expect,
   it,
   vi,
-} from "@/src/utils/testUtils";
-import Tabs, { Props } from "..";
+} from '@/src/utils/testUtils';
+import Tabs, { Props } from '..';
 
-import { selectOption } from "@/src/mocks/productFilter";
+import { selectOption } from '@/src/mocks/productFilter';
 
 const defaultProp = {
   options: selectOption,
@@ -26,19 +26,19 @@ const setup = (overrideProps = {}) => {
   return render(<Tabs {...props} />);
 };
 
-describe("Tabs Test", () => {
-  it("render select item default correctly", () => {
+describe('Tabs Test', () => {
+  it('render select item default correctly', () => {
     setup();
 
-    expect(screen.getByRole("combobox").textContent).toEqual(
+    expect(screen.getByRole('combobox').textContent).toEqual(
       defaultProp.options[0].name,
     );
   });
 
-  it("render select item on dropdown correctly", async () => {
+  it('render select item on dropdown correctly', async () => {
     setup();
 
-    const selectInput = screen.getByRole("combobox");
+    const selectInput = screen.getByRole('combobox');
 
     fireEvent.mouseDown(selectInput);
 
@@ -50,10 +50,10 @@ describe("Tabs Test", () => {
     ).toBeTruthy();
   });
 
-  it("select item on dropdown call onChange correctly", async () => {
+  it('select item on dropdown call onChange correctly', async () => {
     setup();
 
-    const selectInput = screen.getByRole("combobox");
+    const selectInput = screen.getByRole('combobox');
 
     fireEvent.mouseDown(selectInput);
 

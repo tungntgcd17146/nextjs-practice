@@ -1,21 +1,24 @@
-"use client";
+'use client';
 
-import { memo, useCallback, useState, useMemo, useEffect } from "react";
+import { memo, useCallback, useState, useMemo, useEffect } from 'react';
 
 //mui
-import ProductCard from "@/src/components/ui/ProductCard";
-import Grid from "@mui/material/Grid";
+import ProductCard from '@/src/components/ui/ProductCard';
+import Grid from '@mui/material/Grid';
+
+//components
+import CardSkeleton from '@/src/components/ui/CardSkeleton';
 
 //helper
-import useScreenWidth from "@/src/hooks/useScreenWidth";
-import { Product, ProductQueryParams } from "@/src/types/product";
-import InfiniteScroll from "@/src/components/ui/InfiniteScroll";
+import useScreenWidth from '@/src/hooks/useScreenWidth';
+import { Product, ProductQueryParams } from '@/src/types/product';
+import InfiniteScroll from '@/src/components/ui/InfiniteScroll';
 
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
-import { PRODUCTS_PER_PAGE } from "@/src/constants/common";
-import { fetchProducts } from "@/src/services/productsService";
-import { useShopContext } from "@/src/contexts/shopContext/useShopContext";
+import { PRODUCTS_PER_PAGE } from '@/src/constants/common';
+import { fetchProducts } from '@/src/services/productsService';
+import { useShopContext } from '@/src/contexts/shopContext/useShopContext';
 
 export interface Props {
   products: Product[];
@@ -35,7 +38,7 @@ const Products = ({
     !(Math.ceil(totalProducts / PRODUCTS_PER_PAGE) === queryParams._page),
   );
 
-  const { matchedBreakpoint } = useScreenWidth({ down: "sm" });
+  const { matchedBreakpoint } = useScreenWidth({ down: 'sm' });
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -53,14 +56,15 @@ const Products = ({
   );
 
   const isNotFoundPage = useMemo(
-    () => totalPages < queryParams._page,
+    // not found page when _page in url is not equal to 1 and lager than total pages
+    () => totalPages < queryParams._page && queryParams._page !== 1,
     [queryParams._page, totalPages],
   );
 
   const generatePageURL = useCallback(
     (pageNumber: number | string) => {
       const params = new URLSearchParams(searchParams);
-      params.set("page", pageNumber.toString());
+      params.set('page', pageNumber.toString());
 
       return `${pathname}?${params.toString()}`;
     },
@@ -70,10 +74,10 @@ const Products = ({
   const updateUrl = useCallback(
     (page: number | string) => {
       const newUrl = new URLSearchParams(searchParams.toString());
-      newUrl.set("page", page.toString());
+      newUrl.set('page', page.toString());
 
       //shallow routing for update url and not reload page
-      window.history.pushState(null, "", `?${newUrl.toString()}`);
+      window.history.pushState(null, '', `?${newUrl.toString()}`);
     },
     [searchParams],
   );
@@ -105,7 +109,7 @@ const Products = ({
         setHasMore(false);
       }
     } catch (error) {
-      console.error("Error fetching items:", error);
+      console.error('Error fetching items:', error);
     } finally {
       setIsLoading(false);
     }
@@ -145,16 +149,20 @@ const Products = ({
 
           return (
             <Grid key={id} sm={6} lg={4} item>
-              <ProductCard
-                id={id}
-                productName={productName}
-                productCategory={productCategory}
-                productPrice={productPrice}
-                productRating={productRating}
-                productRatingCount={productRatingCount}
-                popularity={popularity}
-                onViewCard={handleClickViewCard}
-              />
+              {isLoading ? (
+                <CardSkeleton />
+              ) : (
+                <ProductCard
+                  id={id}
+                  productName={productName}
+                  productCategory={productCategory}
+                  productPrice={productPrice}
+                  productRating={productRating}
+                  productRatingCount={productRatingCount}
+                  popularity={popularity}
+                  onViewCard={handleClickViewCard}
+                />
+              )}
             </Grid>
           );
         })}

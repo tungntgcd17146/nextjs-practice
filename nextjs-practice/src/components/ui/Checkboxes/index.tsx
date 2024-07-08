@@ -1,14 +1,14 @@
-import * as React from "react";
-import { memo } from "react";
+import * as React from 'react';
+import { memo } from 'react';
 
-import { Checkbox } from "@/src/types/checkbox";
+import { Checkbox } from '@/src/types/checkbox';
 
 //mui
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Typography from "@mui/material/Typography";
-import { Checkbox as MuiCheckbox, Theme } from "@mui/material";
-import Box from "@mui/material/Box";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Typography from '@mui/material/Typography';
+import { Checkbox as MuiCheckbox, Theme } from '@mui/material';
+import Box from '@mui/material/Box';
 
 export interface Props {
   checkboxOptions: Checkbox[];
@@ -18,14 +18,14 @@ export interface Props {
 }
 
 const formControlLabelStyles = (theme: Theme) => ({
-  display: "flex",
-  justifyContent: "space-between",
+  display: 'flex',
+  justifyContent: 'space-between',
   color: theme.palette.text.secondary,
 });
 
 const muiCheckboxStyles = (theme: Theme) => ({
   color: theme.palette.text.primary,
-  "&.Mui-checked": { color: theme.palette.info.main },
+  '&.Mui-checked': { color: theme.palette.info.main },
 });
 
 const Checkboxes = ({
@@ -37,7 +37,7 @@ const Checkboxes = ({
   return (
     <Box sx={wrapperStyles}>
       {label && (
-        <Typography variant="body1" sx={{ marginBottom: "8px" }}>
+        <Typography variant="body1" sx={{ marginBottom: '8px' }}>
           {label}
         </Typography>
       )}

@@ -1,10 +1,10 @@
-import { memo } from "react";
+import { memo } from 'react';
 
-import { InputBaseProps, useTheme } from "@mui/material";
-import InputBase from "@mui/material/InputBase";
-import Box from "@mui/material/Box";
+import { InputBaseProps, useTheme } from '@mui/material';
+import InputBase from '@mui/material/InputBase';
+import Box from '@mui/material/Box';
 
-import IconButton from "@/src/components/ui/IconButton";
+import IconButton from '@/src/components/ui/IconButton';
 
 export interface Props extends InputBaseProps {
   startIcon?: React.ReactNode;
@@ -17,9 +17,9 @@ export interface Props extends InputBaseProps {
 }
 
 const defaultStartIconStyles = {
-  position: "absolute",
-  left: "4px",
-  top: "4px",
+  position: 'absolute',
+  left: '4px',
+  top: '4px',
 };
 
 const Input = ({
@@ -28,7 +28,7 @@ const Input = ({
   endHelper,
   onClickEndHelper,
   onChange,
-  searchWidth = "100%",
+  searchWidth = '100%',
   sx,
   containerStyles,
   ...rest
@@ -40,19 +40,20 @@ const Input = ({
       sx={{
         backgroundColor: theme.palette.grey[100],
         color: theme.palette.text.secondary,
-        borderRadius: "12px",
-        height: "48px",
-        paddingLeft: "42px",
-        paddingRight: "68px",
-        position: "relative",
+        borderRadius: '12px',
+        height: '48px',
+        paddingLeft: '42px',
+        paddingRight: '68px',
+        position: 'relative',
         width: searchWidth,
         ...containerStyles,
       }}
     >
       {startIcon && (
         <IconButton
+          disabled
           aria-label="search"
-          data-testid="SearchInput_SearchIcon"
+          data-testid="Input_Start_Icon"
           children={startIcon}
           sx={{ ...defaultStartIconStyles, ...startIconStyles }}
         />
@@ -60,28 +61,28 @@ const Input = ({
       <InputBase
         required
         onChange={onChange}
-        data-testid="SearchInput_InputBase"
-        sx={{ width: "100%", height: "100%", fontSize: "15px", ...sx }}
+        data-testid="Input_InputBase"
+        sx={{ width: '100%', height: '100%', fontSize: '15px', ...sx }}
         {...rest}
       />
       {endHelper && (
         <div
-          data-testid="SearchInput_EndHelper"
+          data-testid="Input_EndHelper"
           onClick={onClickEndHelper}
           style={{
-            fontSize: "16px",
+            fontSize: '16px',
             backgroundColor: theme.palette.grey[200],
             color: theme.palette.text.secondary,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            cursor: "pointer",
-            position: "absolute",
-            right: "0.5rem",
-            top: "0.5rem",
-            width: "56px",
-            height: "32px",
-            borderRadius: "8px",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            cursor: 'pointer',
+            position: 'absolute',
+            right: '0.5rem',
+            top: '0.5rem',
+            width: '56px',
+            height: '32px',
+            borderRadius: '8px',
           }}
         >
           {endHelper}

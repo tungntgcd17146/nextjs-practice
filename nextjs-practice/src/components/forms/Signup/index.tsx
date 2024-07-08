@@ -1,106 +1,140 @@
-"use client";
+'use client';
 
-import { memo, useState } from "react";
-
+import { memo, useState, useCallback } from 'react';
 //mui
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material";
-import Grid from "@mui/material/Grid";
+import Box from '@mui/material/Box';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 //components
-import DarkLogo from "@/public/assets/DarkLogo.webp";
-import LightLogo from "@/public/assets/LightLogo.webp";
-import SideBar from "@/src/components/forms/Signup/SideBar";
-import Button from "@/src/components/ui/Button";
-import Link from "next/link";
-import AuthCode from "./AuthCode";
-import AuthEmail from "./AuthEmail";
+import SideBar from '@/src/components/forms/Signup/SideBar';
+import SignupFields from './SignupFields';
 
 //utils
-import useScreenWidth from "@/src/hooks/useScreenWidth";
-import Logo from "@/src/components/ui/Logo";
-import { useMode } from "@/src/contexts/modeContext/useModeContext";
+import useScreenWidth from '@/src/hooks/useScreenWidth';
+import { signup } from '@/src/lib/actions';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signInSchema } from '@/src/lib/validation';
+import { fetchUserByEmail } from '@/src/services/userAuthService';
+import { SignupFormInputs } from '@/src/types/forms';
 
 export interface Props {}
 
 const Signup = () => {
-  const theme = useTheme();
-  const { isDarkMode } = useMode();
   const { isMobile } = useScreenWidth();
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [submitLoading, setSubmitLoading] = useState(false);
 
-  const [isAuth, setIsAuth] = useState(false);
+  //snackbar
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
-  const logo = isDarkMode ? LightLogo : DarkLogo;
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm<SignupFormInputs>({
+    resolver: zodResolver(signInSchema),
+  });
+
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+  const snackbarAction = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="primary"
+        onClick={handleClose}
+      >
+        <CloseIcon data-testid="Close_Icon" fontSize="small" />
+      </IconButton>
+    </>
+  );
+
+  const isMatchedConfirmPassword = password === confirmPassword;
+
+  const onSubmit: SubmitHandler<SignupFormInputs> = async (formData) => {
+    const { email, password } = formData;
+    setSubmitLoading(true);
+
+    const { data: users } = await fetchUserByEmail({ email });
+
+    const [user] = users;
+
+    if (user) {
+      setSnackbarMessage('Email already exists');
+      setSubmitLoading(false);
+      setOpenSnackbar(true);
+      return;
+    }
+
+    if (isMatchedConfirmPassword) {
+      try {
+        await signup({ email, password });
+        setSubmitLoading(false);
+        setSnackbarMessage('Register user success');
+        setOpenSnackbar(true);
+        // Clear form fields on successful signup
+        reset();
+      } catch (error) {
+        setSnackbarMessage('Register user failed');
+        setSubmitLoading(false);
+        setOpenSnackbar(true);
+      }
+    }
+  };
+
+  const handleChangePassword = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(event.target.value);
+    },
+    [],
+  );
+
+  const handleChangeConfirmPassword = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setConfirmPassword(event.target.value);
+    },
+    [],
+  );
 
   return (
-    <Box display="flex" flex="row">
+    <Box display="flex" flexDirection="row">
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={snackbarMessage}
+        action={snackbarAction}
+      />
       {/*Sign Up Side bar */}
       {!isMobile && <SideBar />}
 
       {/* Content */}
-      <Box
-        sx={{
-          backgroundColor: theme.palette.background.paper,
-          padding: "24px",
-          width: "100%",
-        }}
-        display="flex"
-        justifyContent="center"
-      >
-        <Box sx={{ position: "absolute", top: "24px", left: "24px" }}>
-          <Logo logoImage={logo} alt="logo" />
-        </Box>
-        <Typography
-          sx={{ position: "absolute", top: "40px", right: "40px" }}
-          variant="caption"
-        >
-          Already a member?{" "}
-          <Link
-            style={{
-              color: theme.palette.text.secondary,
-              textDecoration: "none",
-              fontWeight: 700,
-            }}
-            href={"/"}
-          >
-            Sign in
-          </Link>
-        </Typography>
-        <Grid
-          container
-          sx={{
-            height: "100vh",
-            width: isMobile ? "100%" : "350px",
-            marginTop: "370px",
-          }}
-          display="flex"
-          flexDirection="column"
-        >
-          <Typography
-            sx={{ marginBottom: "32px", color: theme.palette.text.secondary }}
-            variant="h2"
-          >
-            Sign up
-          </Typography>
-
-          {/* Signup with email */}
-          {!isAuth ? <AuthEmail /> : <AuthCode />}
-
-          <Button
-            sx={{ marginBottom: "32px" }}
-            aria-label="apply-button"
-            children="Continue"
-            color="primary"
-            //TODO: will implement authentication code by email in the future
-            onClick={() => setIsAuth(!isAuth)}
-          />
-
-          <Typography sx={{ marginBottom: "32px" }} variant="body1">
-            This site is protected by reCAPTCHA and the Google Privacy Policy.
-          </Typography>
-        </Grid>
-      </Box>
+      <SignupFields
+        onSubmit={onSubmit}
+        handleSubmit={handleSubmit}
+        register={register}
+        errors={errors}
+        submitLoading={submitLoading}
+        isMatchedConfirmPassword={isMatchedConfirmPassword}
+        onChangePassword={handleChangePassword}
+        onChangeConfirmPassword={handleChangeConfirmPassword}
+      />
     </Box>
   );
 };

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
-import ComponentWrapper from "./Wrapper";
-import { ModeProvider } from "./ModeContext";
+import React from 'react';
+import ComponentWrapper from './Wrapper';
+import { ModeProvider } from './ModeContext';
 
 export default function ModeContextProvider({
   children,

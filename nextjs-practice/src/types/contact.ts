@@ -1,6 +1,6 @@
-import { CommonQueryParams } from "@/src/types/common";
+import { CommonQueryParams } from '@/src/types/common';
 
-export type ContactStatus = "following" | "followers";
+export type ContactStatus = 'following' | 'followers';
 
 export interface UserContact {
   id: number;

@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from 'react';
 
 //mui
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import { useTheme, Theme } from "@mui/material";
-import Box from "@mui/material/Box";
-import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import Typography from "@mui/material/Typography";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { useTheme, Theme } from '@mui/material';
+import Box from '@mui/material/Box';
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import Typography from '@mui/material/Typography';
 
 //components
-import Rating from "@/src/components/ui/Rating";
-import Branch1 from "@/public/assets/Brand1.webp";
-import IconButton from "@/src/components/ui/IconButton";
-import Chip from "@/src/components/ui/Chip";
+import Rating from '@/src/components/ui/Rating';
+import Branch1 from '@/public/assets/Brand1.webp';
+import IconButton from '@/src/components/ui/IconButton';
+import Chip from '@/src/components/ui/Chip';
 
-import Image from "next/image";
+import Image from 'next/image';
 
 export interface Props {
   onEditCard?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -36,8 +36,8 @@ export interface Props {
 
 const imgIconCommonStyle = (theme: Theme) => ({
   backgroundColor: theme.palette.primary.main,
-  marginRight: "16px",
-  ":hover": {
+  marginRight: '16px',
+  ':hover': {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.info.main,
   },
@@ -89,6 +89,10 @@ const ProductCard = ({
     [id, onViewCard],
   );
 
+  const EditIcon = useMemo(() => <EditOutlinedIcon />, []);
+  const ViewIcon = useMemo(() => <ArrowForwardOutlinedIcon />, []);
+  const DeleteIcon = useMemo(() => <DeleteOutlineOutlinedIcon />, []);
+
   return (
     <Card
       data-testid="ProductCard"
@@ -96,77 +100,62 @@ const ProductCard = ({
         maxWidth: 560,
         maxHeight: 276,
         backgroundColor: theme.palette.background.paper,
-        boxShadow: "none",
-        backgroundImage: "none",
-        margin: "32px 12px 0px 12px",
+        boxShadow: 'none',
+        backgroundImage: 'none',
+        margin: '32px 12px 0px 12px',
       }}
       onMouseEnter={handleHoverCard}
       onMouseLeave={handleLeaveCard}
     >
-      <Box sx={{ position: "relative" }}>
+      <Box sx={{ position: 'relative' }}>
         <CardMedia
           children={<Image src={Branch1} alt="brand img" fill sizes="100%" />}
           sx={{
-            position: "relative",
-            height: "200px",
-            width: "100%",
-            borderRadius: "12px",
-            opacity: isExpandedCard ? 0.2 : "none",
+            position: 'relative',
+            height: '200px',
+            width: '100%',
+            borderRadius: '12px',
+            opacity: isExpandedCard ? 0.2 : 'none',
           }}
         />
         <Box
           hidden={!isExpandedCard}
           sx={{
-            position: "absolute",
-            width: "100%",
-            top: "40%",
-            textAlign: "center",
+            position: 'absolute',
+            width: '100%',
+            top: '40%',
+            textAlign: 'center',
           }}
         >
           <IconButton
             aria-label="product-edit-icon"
             data-testid="ProductCard_IconButton_edit"
-            children={useMemo(
-              () => (
-                <EditOutlinedIcon />
-              ),
-              [],
-            )}
+            children={EditIcon}
             sx={imgIconCommonStyle}
             onClick={handleEditCard}
           />
           <IconButton
             aria-label="product-delete-icon"
             data-testid="ProductCard_IconButton_delete"
-            children={useMemo(
-              () => (
-                <DeleteOutlineOutlinedIcon />
-              ),
-              [],
-            )}
+            children={DeleteIcon}
             sx={imgIconCommonStyle}
             onClick={handleDeleteCard}
           />
           <IconButton
             aria-label="product-view-icon"
             data-testid="ProductCard_IconButton_view"
-            children={useMemo(
-              () => (
-                <ArrowForwardOutlinedIcon />
-              ),
-              [],
-            )}
+            children={ViewIcon}
             sx={imgIconCommonStyle}
             onClick={handleViewCard}
           />
         </Box>
       </Box>
-      <CardContent sx={{ display: "flex", flexDirection: "column" }}>
+      <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}
         >
           <Typography
