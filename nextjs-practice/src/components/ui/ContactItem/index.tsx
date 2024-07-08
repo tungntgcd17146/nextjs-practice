@@ -189,6 +189,7 @@ const ContactItem = ({
                   >
                     <Image
                       fill
+                      objectFit='cover'
                       src={item.img}
                       alt={item.imgTitle}
                       style={{ borderRadius: '12px' }}

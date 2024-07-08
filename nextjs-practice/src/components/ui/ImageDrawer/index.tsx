@@ -55,6 +55,7 @@ const ImageDrawer = ({
             borderRadius: '12px',
           }}
           fill
+          objectFit="cover"
           sizes="100%"
         />
       </Box>
@@ -84,6 +85,7 @@ const ImageDrawer = ({
                 borderRadius: '16px',
               }}
               fill
+              objectFit="cover"
               sizes="100%"
             />
           </Box>

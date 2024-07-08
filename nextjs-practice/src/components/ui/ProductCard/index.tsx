@@ -97,8 +97,6 @@ const ProductCard = ({
     <Card
       data-testid="ProductCard"
       sx={{
-        maxWidth: 560,
-        maxHeight: 276,
         backgroundColor: theme.palette.background.paper,
         boxShadow: 'none',
         backgroundImage: 'none',
@@ -109,12 +107,18 @@ const ProductCard = ({
     >
       <Box sx={{ position: 'relative' }}>
         <CardMedia
-          children={<Image src={Branch1} alt="brand img" fill sizes="100%" />}
+          children={
+            <Image
+              style={{ borderRadius: '12px' }}
+              src={Branch1}
+              alt="brand img"
+              objectFit="cover"
+              fill
+            />
+          }
           sx={{
-            position: 'relative',
             height: '200px',
             width: '100%',
-            borderRadius: '12px',
             opacity: isExpandedCard ? 0.2 : 'none',
           }}
         />
