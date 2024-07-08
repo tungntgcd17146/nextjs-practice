@@ -25,7 +25,9 @@ const BackgroundImage = () => {
           src={CoverPhotoMobile}
           alt="CoverPhotoMobile.webp"
           fill
-          objectFit="cover"
+          style={{
+            objectFit: 'cover',
+          }}
           sizes="100%"
         />
       </div>
@@ -45,7 +47,9 @@ const BackgroundImage = () => {
         src={CoverPhoto}
         alt="CoverPhoto.webp"
         fill
-        objectFit="cover"
+        style={{
+          objectFit: 'cover',
+        }}
         sizes="100%"
       />
     </div>

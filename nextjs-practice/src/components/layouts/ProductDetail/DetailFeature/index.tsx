@@ -21,10 +21,9 @@ const DetailFeature = ({ productFeatures }: Props) => {
   const theme = useTheme();
 
   return (
-    <Grid item xs={12} lg={5}>
-      <Grid
+    <Box sx={{ width: '385px' }}>
+      <Box
         display="flex"
-        flexDirection="row"
         sx={{ marginTop: '32px', marginBottom: '12px' }}
       >
         <Chip
@@ -45,7 +44,7 @@ const DetailFeature = ({ productFeatures }: Props) => {
         >
           Features
         </Typography>
-      </Grid>
+      </Box>
 
       {productFeatures.map((item, index) => (
         <Box key={index}>
@@ -72,7 +71,7 @@ const DetailFeature = ({ productFeatures }: Props) => {
           />
         </Box>
       ))}
-    </Grid>
+    </Box>
   );
 };
 

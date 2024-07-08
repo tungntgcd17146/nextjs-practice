@@ -4,12 +4,11 @@ import { Suspense, memo } from 'react';
 
 //mui
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material';
 import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 
 //components
-import Header from '@/src/components/layouts/ProductDetail/Header';
 import SocialInfo from '@/src/components/layouts/ProductDetail/SocialInfo';
 import ProductDetailDark from '@/public/assets/ProductDetailImgDark.webp';
 import ProductDetailLight from '@/public/assets/ProductDetailImgLight.webp';
@@ -39,64 +38,58 @@ const ProductDetail = ({ productId }: Props) => {
   const { isDarkMode } = useMode();
 
   return (
-    <Box>
-      {/* Header */}
-      <Header />
+    <Box
+      sx={{
+        padding: '24px',
+      }}
+      display="flex"
+      flexDirection="row"
+      justifyContent="center"
+      alignItems="flex-start"
+    >
       <Grid
-        container
         sx={{
-          padding: '24px',
+          backgroundColor: theme.palette.background.paper,
+          borderRadius: '8px',
+          width: '1000px',
+          padding: '16px',
         }}
         display="flex"
-        flexDirection="row"
-        justifyContent="center"
-        alignItems="flex-start"
+        flexDirection="column"
+        md={isDesktop ? undefined : 10}
+        item
       >
-        <Grid
-          sx={{
-            backgroundColor: theme.palette.background.paper,
-            borderRadius: '8px',
-            width: '1000px',
-            padding: '16px',
-          }}
+        <Suspense fallback={<DetailContentSkeleton />}>
+          <DetailContentWrapper productId={productId} />
+        </Suspense>
+        <ImageDrawer
+          image={isDarkMode ? ProductDetailDark : ProductDetailLight}
+          alt="product detail"
+        />
+        <Box
           display="flex"
-          flexDirection="column"
-          md={isDesktop ? undefined : 10}
-          item
+          flexDirection="row"
+          justifyContent="space-between"
         >
-          <Suspense fallback={<DetailContentSkeleton />}>
-            <DetailContentWrapper productId={productId} />
+          <Suspense fallback={<DetailOverviewSkeleton />}>
+            <DetailOverviewWrapper />
           </Suspense>
-          <ImageDrawer
-            image={isDarkMode ? ProductDetailDark : ProductDetailLight}
-            alt="product detail"
-          />
-          <Grid
-            container
-            display="flex"
-            flexDirection="row"
-            justifyContent="space-between"
-          >
-            <Suspense fallback={<DetailOverviewSkeleton />}>
-              <DetailOverviewWrapper />
-            </Suspense>
 
-            <Suspense fallback={<DetailFeatureSkeleton />}>
-              <DetailFeatureWrapper />
-            </Suspense>
-          </Grid>
-          {/* Divider */}
-          <Divider
-            sx={{
-              marginTop: '64px',
-              marginBottom: '64px',
-              color: theme.palette.grey[100],
-            }}
-          />
-        </Grid>
-
-        {!isMobile && <SocialInfo />}
+          <Suspense fallback={<DetailFeatureSkeleton />}>
+            <DetailFeatureWrapper />
+          </Suspense>
+        </Box>
+        {/* Divider */}
+        <Divider
+          sx={{
+            marginTop: '64px',
+            marginBottom: '64px',
+            color: theme.palette.grey[100],
+          }}
+        />
       </Grid>
+
+      {!isMobile && <SocialInfo />}
     </Box>
   );
 };

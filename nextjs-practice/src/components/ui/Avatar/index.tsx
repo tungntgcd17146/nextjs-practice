@@ -86,15 +86,27 @@ const Avatar = ({
         {...rest}
       >
         {imgWidth && imgHeight ? (
-          <Box sx={{ width: imgWidth, height: imgHeight }}>
-            <Image fill objectFit="cover" alt={alt} src={imgNextSrc} />
+          <Box
+            sx={{ width: imgWidth, height: imgHeight, position: 'relative' }}
+          >
+            <Image
+              fill
+              sizes="100%"
+              style={{
+                objectFit: 'cover',
+              }}
+              alt={alt}
+              src={imgNextSrc}
+            />
           </Box>
         ) : (
           <Image
             alt={alt}
             src={imgNextSrc}
             fill
-            objectFit="cover"
+            style={{
+              objectFit: 'cover',
+            }}
             sizes="100%"
           />
         )}
@@ -113,15 +125,27 @@ const Avatar = ({
     >
       <MuiAvatar sx={{ ...avtCommonStyle, ...sx }} {...rest}>
         {imgWidth && imgHeight ? (
-          <Box sx={{ width: imgWidth, height: imgHeight }}>
-            <Image fill objectFit="cover" alt={alt} src={imgNextSrc} />
+          <Box
+            sx={{ width: imgWidth, height: imgHeight, position: 'relative' }}
+          >
+            <Image
+              fill
+              sizes="100%"
+              style={{
+                objectFit: 'cover',
+              }}
+              alt={alt}
+              src={imgNextSrc}
+            />
           </Box>
         ) : (
           <Image
             alt={alt}
             src={imgNextSrc}
             fill
-            objectFit="cover"
+            style={{
+              objectFit: 'cover',
+            }}
             sizes="100%"
           />
         )}

@@ -51,12 +51,14 @@ const ImageDrawer = ({
             handleImage();
           }}
           style={{
+            objectFit: 'cover',
             cursor: 'pointer',
             borderRadius: '12px',
           }}
           fill
-          objectFit="cover"
           sizes="100%"
+          loading="eager"
+          priority
         />
       </Box>
       <Modal
@@ -81,12 +83,10 @@ const ImageDrawer = ({
               data-testid="ImageDrawer_Img_Modal"
               src={image}
               alt={alt}
-              style={{
-                borderRadius: '16px',
-              }}
+              style={{ objectFit: 'cover', borderRadius: '16px' }}
               fill
-              objectFit="cover"
               sizes="100%"
+              loading="eager"
             />
           </Box>
         </Fade>

@@ -51,7 +51,7 @@ const DetailContentSkeleton = () => {
         <Skeleton width="60%" />
       </Typography>
 
-      <Grid
+      <Box
         display="flex"
         flexDirection="row"
         alignItems="center"
@@ -65,7 +65,7 @@ const DetailContentSkeleton = () => {
         />
         <Skeleton variant="text" width={100} sx={{ marginLeft: '12px' }} />
         <Skeleton variant="text" width={60} sx={{ marginLeft: '12px' }} />
-      </Grid>
+      </Box>
     </>
   );
 };

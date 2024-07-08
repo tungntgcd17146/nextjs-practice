@@ -11,7 +11,6 @@ import Box from '@mui/material/Box';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import Typography from '@mui/material/Typography';
 
 //components
 import Rating from '@/src/components/ui/Rating';
@@ -109,11 +108,11 @@ const ProductCard = ({
         <CardMedia
           children={
             <Image
-              style={{ borderRadius: '12px' }}
+              style={{ borderRadius: '12px', objectFit: 'cover' }}
               src={Branch1}
               alt="brand img"
-              objectFit="cover"
               fill
+              sizes="100%"
             />
           }
           sx={{
@@ -162,12 +161,19 @@ const ProductCard = ({
             justifyContent: 'space-between',
           }}
         >
-          <Typography
-            variant="subtitle1"
-            sx={{ color: theme.palette.text.secondary }}
+          <p
+            style={{
+              fontSize: '15px',
+              fontStyle: 'normal',
+              fontWeight: '600',
+              lineHeight: '24px' /* 160% */,
+              letterSpacing: '-0.15px',
+              color: theme.palette.text.secondary,
+              margin: 0,
+            }}
           >
             {productName} ({productCategory})
-          </Typography>
+          </p>
 
           <Chip price={productPrice} variant="filled" />
         </Box>
