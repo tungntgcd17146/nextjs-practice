@@ -30,11 +30,14 @@ import { navigationItems } from '@/src/mocks/sideNavigation';
 import MenuPopup from '@/src/components/layouts/MenuPopup';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
+interface Props {
+  logout: () => Promise<void>;
+}
 const iconButtonStyles = (theme: Theme) => ({
   ':hover': { color: theme.palette.text.secondary },
 });
 
-const Header = () => {
+const Header = ({ logout }: Props) => {
   const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);
   const [searchIconAnchorEl, setSearchIconAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -232,7 +235,11 @@ const Header = () => {
           alt="Customer1"
           onClick={handleClickAvatar}
         />
-        <MenuPopup anchorEl={menuAnchorEl} onCloseModal={handleCloseMenu} />
+        <MenuPopup
+          anchorEl={menuAnchorEl}
+          onCloseModal={handleCloseMenu}
+          logout={logout}
+        />
       </div>
     </Box>
   );

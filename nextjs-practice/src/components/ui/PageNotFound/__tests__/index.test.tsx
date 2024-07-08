@@ -2,18 +2,29 @@
 import {
   describe,
   expect,
+  fireEvent,
   it,
-  vi,
   render,
   screen,
 } from '@/src/utils/testUtils';
+import { vi } from 'vitest';
 import NotFoundPage, { Props } from '..';
 
 import * as useScreenWidth from '@/src/hooks/useScreenWidth';
+import { BASE_REDIRECT_URL } from '@/src/constants/common';
 
 const defaultProp = {
   onClick: vi.fn(),
 } as Props;
+
+// Mock useRouter implementation using vi.mock
+const mockRouter = {
+  push: vi.fn(), // Mock push function as needed
+};
+
+vi.mock('next/navigation', () => ({
+  useRouter: () => mockRouter, // Mock useRouter to return your mockRouter object
+}));
 
 const setup = (overrideProps = {}) => {
   const props = {
@@ -57,15 +68,18 @@ describe('NotFoundPage Test', () => {
     expect(screen.queryByTestId('NotFoundPage_Button')).toBeFalsy();
   });
 
-  // it('re-direct home page when click go home button correctly', () => {
-  //   vi.spyOn(useScreenWidth, 'default').mockReturnValue({ isTablet: false, isDesktop: false } as any)
-  //   const spyNavigate = vi.mocked(useNavigate).mockReturnValue(vi.fn() as any)
-  //   setup()
+  it('re-direct home page when click go home button correctly', () => {
+    vi.spyOn(useScreenWidth, 'default').mockReturnValue({
+      isTablet: false,
+      isDesktop: false,
+    } as any);
+    setup();
 
-  //   fireEvent.click(screen.getByTestId('NotFoundPage_Button'))
+    fireEvent.click(screen.getByTestId('NotFoundPage_Button'));
 
-  //   expect(spyNavigate).toBeCalled()
-  // })
+    expect(defaultProp.onClick).toBeCalled();
+    expect(mockRouter.push).toBeCalledWith(BASE_REDIRECT_URL);
+  });
 
   it('render NotFoundPage with custom content correctly', () => {
     vi.spyOn(useScreenWidth, 'default').mockReturnValue({

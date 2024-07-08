@@ -7,10 +7,11 @@ import { ChipProps, Chip as MuiChip, useTheme } from '@mui/material';
 
 export interface Props extends ChipProps {
   price?: number;
+  text?: string;
   sx?: React.CSSProperties;
 }
 
-const Chip = ({ price, sx, ...rest }: Props) => {
+const Chip = ({ price, text = '', sx, ...rest }: Props) => {
   const theme = useTheme();
 
   const generateLabel = useMemo(() => {
@@ -19,9 +20,9 @@ const Chip = ({ price, sx, ...rest }: Props) => {
     } else if (price! > 0) {
       return `${price}$`;
     } else {
-      return '';
+      return text;
     }
-  }, [price]);
+  }, [price, text]);
 
   return (
     <MuiChip

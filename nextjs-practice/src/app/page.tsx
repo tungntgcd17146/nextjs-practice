@@ -1,5 +1,5 @@
-import Login from '@/src/components/forms/Login';
+import LoginWrapper from '@/src/components/forms/Login/LoginWrapper';
 
 export default function Page() {
-  return <Login />;
+  return <LoginWrapper />;
 }

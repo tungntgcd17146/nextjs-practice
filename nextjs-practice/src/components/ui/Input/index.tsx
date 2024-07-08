@@ -53,7 +53,7 @@ const Input = ({
         <IconButton
           disabled
           aria-label="search"
-          data-testid="SearchInput_SearchIcon"
+          data-testid="Input_Start_Icon"
           children={startIcon}
           sx={{ ...defaultStartIconStyles, ...startIconStyles }}
         />
@@ -61,13 +61,13 @@ const Input = ({
       <InputBase
         required
         onChange={onChange}
-        data-testid="SearchInput_InputBase"
+        data-testid="Input_InputBase"
         sx={{ width: '100%', height: '100%', fontSize: '15px', ...sx }}
         {...rest}
       />
       {endHelper && (
         <div
-          data-testid="SearchInput_EndHelper"
+          data-testid="Input_EndHelper"
           onClick={onClickEndHelper}
           style={{
             fontSize: '16px',

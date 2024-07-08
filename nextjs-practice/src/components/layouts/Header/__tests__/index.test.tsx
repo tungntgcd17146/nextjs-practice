@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  vi,
   fireEvent,
   render,
   screen,
@@ -9,11 +8,30 @@ import {
   expect,
   it,
 } from '@/src/utils/testUtils';
+import { beforeEach, vi } from 'vitest';
 import * as useScreenWidth from '@/src/hooks/useScreenWidth';
 import { ModeProvider } from '@/src/contexts/modeContext/ModeContext';
 import Header from '..';
+import { usePathname } from 'next/navigation';
+import { useMode } from '@/src/contexts/modeContext/useModeContext';
 
-const defaultProp = {};
+// Mocking hooks and modules
+vi.mock('next/navigation', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...(actual as object),
+    usePathname: vi.fn(),
+    useRouter: vi.fn(),
+  };
+});
+
+vi.mock('@/src/contexts/modeContext/useModeContext', () => ({
+  useMode: vi.fn(),
+}));
+
+const defaultProp = {
+  logout: vi.fn(),
+};
 
 const setup = (overrideProps = {}) => {
   const props = {
@@ -29,6 +47,12 @@ const setup = (overrideProps = {}) => {
 };
 
 describe('Header Test', () => {
+  beforeEach(() => {
+    vi.mocked(usePathname).mockReturnValue('/shop');
+    (useMode as any).mockReturnValue({ isDarkMode: true });
+    vi.clearAllMocks();
+  });
+
   it('render header on mobile', async () => {
     vi.spyOn(useScreenWidth, 'default').mockReturnValue({
       isMobile: true,

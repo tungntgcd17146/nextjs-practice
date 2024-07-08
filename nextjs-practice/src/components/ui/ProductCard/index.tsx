@@ -89,6 +89,10 @@ const ProductCard = ({
     [id, onViewCard],
   );
 
+  const EditIcon = useMemo(() => <EditOutlinedIcon />, []);
+  const ViewIcon = useMemo(() => <ArrowForwardOutlinedIcon />, []);
+  const DeleteIcon = useMemo(() => <DeleteOutlineOutlinedIcon />, []);
+
   return (
     <Card
       data-testid="ProductCard"
@@ -126,36 +130,21 @@ const ProductCard = ({
           <IconButton
             aria-label="product-edit-icon"
             data-testid="ProductCard_IconButton_edit"
-            children={useMemo(
-              () => (
-                <EditOutlinedIcon />
-              ),
-              [],
-            )}
+            children={EditIcon}
             sx={imgIconCommonStyle}
             onClick={handleEditCard}
           />
           <IconButton
             aria-label="product-delete-icon"
             data-testid="ProductCard_IconButton_delete"
-            children={useMemo(
-              () => (
-                <DeleteOutlineOutlinedIcon />
-              ),
-              [],
-            )}
+            children={DeleteIcon}
             sx={imgIconCommonStyle}
             onClick={handleDeleteCard}
           />
           <IconButton
             aria-label="product-view-icon"
             data-testid="ProductCard_IconButton_view"
-            children={useMemo(
-              () => (
-                <ArrowForwardOutlinedIcon />
-              ),
-              [],
-            )}
+            children={ViewIcon}
             sx={imgIconCommonStyle}
             onClick={handleViewCard}
           />

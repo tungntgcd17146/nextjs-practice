@@ -1,7 +1,6 @@
 'use client';
 
 import { memo } from 'react';
-import { useFormState } from 'react-dom';
 
 //mui
 import Box from '@mui/material/Box';
@@ -31,19 +30,25 @@ import { useMode } from '@/src/contexts/modeContext/useModeContext';
 //next js
 import Link from 'next/link';
 
-import { authenticate, googleSignin } from '@/src/lib/actions';
 import { BASE_SIGNUP_URL } from '@/src/constants/common';
+import { useFormState } from 'react-dom';
 
-export interface Props {}
+export interface Props {
+  googleSignin: () => void;
+  userAuthenticate: (
+    prevState: string | undefined,
+    formData: FormData,
+  ) => Promise<'Invalid credentials.' | 'Something went wrong.' | undefined>;
+}
 
-const Login = () => {
+const Login = ({ googleSignin, userAuthenticate }: Props) => {
   const theme = useTheme();
   const { isDarkMode } = useMode();
   const { isMobile } = useScreenWidth();
 
-  const logo = isDarkMode ? LightLogo : DarkLogo;
+  const [errorMessage, formAction] = useFormState(userAuthenticate, undefined);
 
-  const [errorMessage, formAction] = useFormState(authenticate, undefined);
+  const logo = isDarkMode ? LightLogo : DarkLogo;
 
   return (
     <Box

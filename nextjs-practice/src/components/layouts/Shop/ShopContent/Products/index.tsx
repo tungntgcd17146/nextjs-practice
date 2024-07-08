@@ -6,6 +6,9 @@ import { memo, useCallback, useState, useMemo, useEffect } from 'react';
 import ProductCard from '@/src/components/ui/ProductCard';
 import Grid from '@mui/material/Grid';
 
+//components
+import CardSkeleton from '@/src/components/ui/CardSkeleton';
+
 //helper
 import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { Product, ProductQueryParams } from '@/src/types/product';
@@ -146,16 +149,20 @@ const Products = ({
 
           return (
             <Grid key={id} sm={6} lg={4} item>
-              <ProductCard
-                id={id}
-                productName={productName}
-                productCategory={productCategory}
-                productPrice={productPrice}
-                productRating={productRating}
-                productRatingCount={productRatingCount}
-                popularity={popularity}
-                onViewCard={handleClickViewCard}
-              />
+              {isLoading ? (
+                <CardSkeleton />
+              ) : (
+                <ProductCard
+                  id={id}
+                  productName={productName}
+                  productCategory={productCategory}
+                  productPrice={productPrice}
+                  productRating={productRating}
+                  productRatingCount={productRatingCount}
+                  popularity={popularity}
+                  onViewCard={handleClickViewCard}
+                />
+              )}
             </Grid>
           );
         })}

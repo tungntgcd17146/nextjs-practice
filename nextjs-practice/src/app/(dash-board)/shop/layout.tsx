@@ -17,7 +17,7 @@ import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { ShopProvider } from '@/src/contexts/shopContext/ShopContext';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { isMobile, isTablet, isDesktop } = useScreenWidth();
+  const { isMobile} = useScreenWidth();
   const theme = useTheme();
 
   return (
@@ -27,7 +27,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         sx={{
           flexGrow: 1,
           p: 3,
-          marginLeft: isTablet ? '80px' : isDesktop ? '330px' : '0px',
           padding: '0px',
         }}
         display="flex"

@@ -18,6 +18,7 @@ export interface Props {
   isSelected?: boolean;
   go?: string;
   isShowText?: boolean;
+  endHelper?: React.ReactNode;
 }
 
 export const listItemButtonStyles = (theme: Theme) => ({
@@ -44,6 +45,7 @@ const NavItem = ({
   isSelected,
   isShowText,
   go,
+  endHelper,
 }: Props) => {
   const router = useRouter();
 
@@ -77,6 +79,7 @@ const NavItem = ({
             primary={text}
           />
         )}
+        {endHelper}
       </ListItemButton>
     </ListItem>
   );

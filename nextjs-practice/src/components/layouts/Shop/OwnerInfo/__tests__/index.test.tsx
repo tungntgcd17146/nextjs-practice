@@ -23,6 +23,12 @@ const setup = (overrideProps = {}) => {
 
 describe('OwnerInfo Test', () => {
   it('render OwnerInfo correctly', () => {
+    vi.spyOn(useScreenWidth, 'default').mockReturnValue({
+      isMobile: true,
+      isTablet: false,
+      isDesktop: false,
+      matchedBreakpoint: false,
+    } as any);
     setup();
 
     expect(screen.getByText('Chelsie Haley')).toBeTruthy();
@@ -33,9 +39,10 @@ describe('OwnerInfo Test', () => {
 
   it('click follow button call onClickFollow prop correctly', async () => {
     vi.spyOn(useScreenWidth, 'default').mockReturnValue({
-      isMobile: true,
+      isMobile: false,
       isTablet: false,
       isDesktop: false,
+      matchedBreakpoint: true,
     } as any);
     setup();
 

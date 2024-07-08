@@ -14,7 +14,7 @@ const setup = (overrideProps = {}) => {
   return render(<LoadingProgress {...props} />);
 };
 
-describe('Loading Test', () => {
+describe('LoadingProgress Test', () => {
   it('render Loading correctly', () => {
     setup();
 

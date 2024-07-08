@@ -23,11 +23,18 @@ const setup = (overrideProps = {}) => {
 };
 
 describe('Input Test', () => {
-  it('render Input with icon and Input correctly', () => {
+  it('render Input correctly', () => {
     setup();
 
-    expect(screen.getByTestId('Input_SearchIcon')).toBeTruthy();
     expect(screen.getByTestId('Input_InputBase')).toBeTruthy();
+  });
+
+  it('render Input with start icon correctly', () => {
+    setup({
+      startIcon: 'search',
+    });
+
+    expect(screen.getByTestId('Input_Start_Icon')).toBeTruthy();
   });
 
   it('render Input with EndHelper button correctly', () => {

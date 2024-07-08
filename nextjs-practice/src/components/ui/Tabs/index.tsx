@@ -13,7 +13,6 @@ import { useRouter } from 'next/navigation';
 
 export interface Props {
   onTabClick?: (event: React.MouseEvent<HTMLElement>) => void;
-  //onTabsChange?: (event: React.SyntheticEvent, newValue: number) => void;
   tabItems: NavigateItem[];
   tabSelected: number;
   sx?: React.CSSProperties;

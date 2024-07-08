@@ -6,8 +6,8 @@ import {
   describe,
   expect,
   it,
-  vi,
 } from '@/src/utils/testUtils';
+import { vi } from 'vitest';
 import NavItem, { Props } from '..';
 
 import * as useScreenWidth from '@/src/hooks/useScreenWidth';
@@ -20,6 +20,15 @@ const defaultProp = {
   onNavItemClick: vi.fn(),
   isShowText: true,
 } as Props;
+
+// Mock useRouter implementation using vi.mock
+const mockRouter = {
+  push: vi.fn(), // Mock push function as needed
+};
+
+vi.mock('next/navigation', () => ({
+  useRouter: () => mockRouter, // Mock useRouter to return your mockRouter object
+}));
 
 const setup = (overrideProps = {}) => {
   const props = {

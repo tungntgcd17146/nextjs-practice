@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useCallback, useState, useMemo } from 'react';
+import { memo, useCallback, useState, useMemo, useEffect } from 'react';
 import { Theme } from '@mui/material';
 
 //MUI
@@ -39,6 +39,9 @@ const filterIcon = <FilterAltOutlinedIcon />;
 
 const ContentHeader = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [selectedValueFromUrl, setSelectedValueFromUrl] = useState<string>(
+    selectOption[0].value,
+  );
 
   const { totalProducts, showingProducts } = useShopContext();
 
@@ -46,16 +49,25 @@ const ContentHeader = () => {
   const router = useRouter();
   const pathname = usePathname();
 
+  //update filter by select value from url
+  useEffect(() => {
+    const popularity = searchParams.get('popularity');
+
+    if (popularity) {
+      setSelectedValueFromUrl(popularity as string);
+    }
+  }, [searchParams]);
+
   //Tab state for init selected from route
   const tabSelected = useMemo(
     () =>
       pathname === TabsNavigation.PRODUCTS
         ? TabsValue.PRODUCTS
         : pathname === TabsNavigation.FOLLOWERS
-          ? TabsValue.FOLLOWERS
-          : pathname === TabsNavigation.FOLLOWING
-            ? TabsValue.FOLLOWING
-            : TabsValue.PRODUCTS,
+        ? TabsValue.FOLLOWERS
+        : pathname === TabsNavigation.FOLLOWING
+        ? TabsValue.FOLLOWING
+        : TabsValue.PRODUCTS,
     [pathname],
   );
 
@@ -180,6 +192,7 @@ const ContentHeader = () => {
         >
           <Grid item xs={10}>
             <Select
+              selectedValue={selectedValueFromUrl}
               options={selectOption}
               onChange={handleSelectFilterByPopularity}
             />

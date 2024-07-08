@@ -6,8 +6,8 @@ import {
   describe,
   expect,
   it,
-  vi,
 } from '@/src/utils/testUtils';
+import { vi } from 'vitest';
 import Tabs, { Props } from '..';
 import * as useScreenWidth from '@/src/hooks/useScreenWidth';
 
@@ -15,7 +15,6 @@ import { tabItems } from '@/src/mocks/shopTab';
 
 const defaultProp = {
   onTabClick: vi.fn(),
-  onTabsChange: vi.fn(),
   tabItems: tabItems,
   tabSelected: 0,
 } as Props;
@@ -28,6 +27,15 @@ const setup = (overrideProps = {}) => {
 
   return render(<Tabs {...props} />);
 };
+
+// Mock useRouter implementation using vi.mock
+const mockRouter = {
+  push: vi.fn(), // Mock push function as needed
+};
+
+vi.mock('next/navigation', () => ({
+  useRouter: () => mockRouter, // Mock useRouter to return your mockRouter object
+}));
 
 describe('Tabs Test', () => {
   it('render Tab number correctly', () => {
@@ -59,6 +67,5 @@ describe('Tabs Test', () => {
     fireEvent.click(tabClicking);
 
     expect(defaultProp.onTabClick).toBeCalled();
-    //expect(defaultProp.onTabsChange).toBeCalled();
   });
 });

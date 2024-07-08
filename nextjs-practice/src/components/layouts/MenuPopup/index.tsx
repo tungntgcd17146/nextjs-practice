@@ -17,14 +17,15 @@ import Divider from '@mui/material/Divider';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { themes } from '@/src/themes';
 import { menuItems } from '@/src/mocks/menuPopup';
-import { logout } from '@/src/lib/actions';
+import Chip from '@/src/components/ui/Chip';
 
 export interface Props {
   onCloseModal: () => void;
   anchorEl: HTMLElement | null;
+  logout: () => Promise<void>;
 }
 
-const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
+const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
   //disable apply and reset button when all value is default
   const theme = useTheme();
   const { isMobile } = useScreenWidth();
@@ -37,6 +38,7 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
   }, [onCloseModal]);
 
   const handleLogout = async () => {
+    handleNavItemClick();
     // Perform logout logic here
     await logout();
   };
@@ -44,6 +46,7 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
   return (
     <>
       <Backdrop
+        data-testid="Menu_Backdrop"
         sx={{
           color: themes.colors.white[500],
           zIndex: theme.zIndex.drawer + 1,
@@ -52,7 +55,7 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
         onClick={onCloseModal}
       />
       <Popover
-        data-testid="ProductFilter_Popover"
+        data-testid="Menu_Popover"
         slotProps={{
           paper: {
             sx: isMobile
@@ -95,16 +98,25 @@ const MenuPopup = ({ anchorEl, onCloseModal }: Props) => {
                   text={text}
                   index={index}
                   isShowText={true}
+                  endHelper={
+                    <Chip
+                      text="Teaser"
+                      sx={{
+                        borderRadius: '6px',
+                        color: theme.palette.text.secondary,
+                        height: '32px',
+                      }}
+                    />
+                  }
                 />
               );
             })}
             <ListItemButton
-              data-testid="NavItem_ListItemButton"
+              data-testid="Logout_ItemButton"
               sx={listItemButtonStyles}
               onClick={handleLogout}
             >
               <ListItemText
-                data-testid="NavItem_ListItemText"
                 sx={{ fontSize: '15px', marginLeft: '12px' }}
                 primary="logout"
               />
