@@ -30,7 +30,9 @@ const SideBar = () => {
       alignItems="center"
     >
       <Image
-        style={{ width: '180px', height: '170px', marginTop: '350px' }}
+        style={{ marginTop: '350px' }}
+        width={180}
+        height={170}
         src={SignupImg}
         alt="sign up"
       />

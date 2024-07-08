@@ -79,6 +79,25 @@ describe('Server Auth Utils', () => {
 
       expect(bcrypt.hash).toHaveBeenCalledWith(signupForm.password, 10);
     });
+
+    it('should POST request to API with NetworkError', async () => {
+      const signupForm = {
+        email: 'test@example.com',
+        password: 'password123',
+      };
+
+      const hashedPassword = '$2b$10$hashedpassword';
+
+      (vi.spyOn(bcrypt, 'hash') as any).mockResolvedValueOnce(hashedPassword);
+      (vi.spyOn(global, 'fetch') as any).mockResolvedValueOnce({
+        ok: false,
+        json: vi.fn().mockResolvedValueOnce({}),
+      });
+
+      await signup(signupForm);
+
+      expect(bcrypt.hash).toHaveBeenCalledWith(signupForm.password, 10);
+    });
   });
 
   describe('logout', () => {

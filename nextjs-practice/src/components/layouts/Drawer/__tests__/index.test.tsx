@@ -1,11 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { fireEvent, render, screen } from '@/src/utils/testUtils';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Drawer, { Props } from '..';
 
 import * as useScreenWidth from '@/src/hooks/useScreenWidth';
 import { ModeProvider } from '@/src/contexts/modeContext/ModeContext';
 import { navigationItems } from '@/src/mocks/sideNavigation';
+import { usePathname } from 'next/navigation';
+import { useMode } from '@/src/contexts/modeContext/useModeContext';
+
+// Mocking hooks and modules
+vi.mock('next/navigation', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...(actual as object),
+    usePathname: vi.fn(),
+    useRouter: vi.fn(),
+  };
+});
+
+vi.mock('@/src/contexts/modeContext/useModeContext', () => ({
+  useMode: vi.fn(),
+}));
 
 const defaultProp = {
   isOpen: true,
@@ -29,10 +45,19 @@ const setup = (overrideProps = {}) => {
 };
 
 describe('Drawer Test', () => {
-  it('should render correct header include close button on mobile', () => {
+  beforeEach(() => {
+    vi.mocked(usePathname).mockReturnValue('/shop');
+    (useMode as any).mockReturnValue({ isDarkMode: true });
+    vi.clearAllMocks();
+  });
+
+  it('should render correct header on dark mode include close button on mobile', () => {
+    vi.mocked(usePathname).mockReturnValue('/shop');
+    (useMode as any).mockReturnValue({ isDarkMode: true });
     vi.spyOn(useScreenWidth, 'default').mockReturnValue({
       isTablet: false,
       isDesktop: false,
+      isMobile: true,
     } as any);
     setup();
 
@@ -44,6 +69,7 @@ describe('Drawer Test', () => {
       isTablet: false,
       isDesktop: false,
     } as any);
+    (useMode as any).mockReturnValue({ isDarkMode: false });
     setup();
 
     expect(screen.getByTestId('Drawer_CloseIcon')).toBeTruthy();

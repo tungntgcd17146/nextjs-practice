@@ -1,11 +1,12 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
 //components
-import ProductsWrapper from '@/src/components/layouts/Shop/ShopContent/Products/ProductsWrapper';
-import LoadingProgress from '@/src/components/ui/LoadingProgress';
+import Products from '@/src/components/layouts/Shop/ShopContent/Products';
 
 //services
 import { PRODUCTS_PER_PAGE } from '@/src/constants/common';
+import { fetchProducts } from '@/src/services/productsService';
+
 import { ProductQueryParams } from '@/src/types/product';
 import { convertArrayToQueryObject } from '@/src/utils/convert';
 
@@ -54,9 +55,34 @@ export default async function Page({
     ...convertArrayToQueryObject(categories),
   };
 
+  const fetchAllProducts = async (queryParams: ProductQueryParams) => {
+    const pageNumbers = Array.from(
+      { length: queryParams._page },
+      (_, i) => i + 1,
+    );
+
+    const allProductsPromises = pageNumbers.map(() =>
+      fetchProducts(queryParams),
+    );
+
+    const allProductsResults = await Promise.all(allProductsPromises);
+
+    const initialItems = allProductsResults.flatMap((result) => result.data);
+
+    // Assuming all pages will have the same totalCount value in the response headers
+    const totalCount =
+      allProductsResults.length > 0 ? allProductsResults[0].countItems : 0;
+
+    return { initialItems, totalCount };
+  };
+
+  const { initialItems, totalCount } = await fetchAllProducts(queryParams);
+
   return (
-    <Suspense fallback={<LoadingProgress />}>
-      <ProductsWrapper queryParams={queryParams} />
-    </Suspense>
+    <Products
+      products={initialItems}
+      totalCount={totalCount}
+      queryParams={queryParams}
+    />
   );
 }

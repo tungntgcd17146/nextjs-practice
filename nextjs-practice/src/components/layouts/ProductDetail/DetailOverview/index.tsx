@@ -19,7 +19,7 @@ const DetailOverview = ({ productOverviews }: Props) => {
   const theme = useTheme();
 
   return (
-    <Grid item xs={12} lg={6}>
+    <Grid data-testid="Detail_Overview" item xs={12} lg={6}>
       <Grid
         display="flex"
         flexDirection="row"

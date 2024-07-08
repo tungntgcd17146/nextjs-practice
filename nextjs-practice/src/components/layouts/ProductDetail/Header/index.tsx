@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 
 export interface Props {}
 
-const SocialInfo = () => {
+const Header = () => {
   const theme = useTheme();
   const router = useRouter();
 
@@ -52,4 +52,4 @@ const SocialInfo = () => {
   );
 };
 
-export default SocialInfo;
+export default Header;

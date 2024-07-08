@@ -5,7 +5,7 @@ import { themes } from '@/src/themes';
 
 const DetailFeatureSkeleton = () => {
   return (
-    <Grid item xs={12} lg={6}>
+    <Grid data-testid="Detail_Feature_Skeleton" item xs={12} lg={6}>
       <Grid
         display="flex"
         flexDirection="row"

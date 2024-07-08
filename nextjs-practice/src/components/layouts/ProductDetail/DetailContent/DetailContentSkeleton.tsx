@@ -8,6 +8,7 @@ const DetailContentSkeleton = () => {
   return (
     <>
       <Grid
+        data-testid="Detail_Content_Skeleton"
         container
         sx={{ marginBottom: '32px' }}
         display="flex"

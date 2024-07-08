@@ -7,7 +7,7 @@ import { themes } from '@/src/themes';
 
 const DetailOverviewSkeleton = () => {
   return (
-    <Grid item xs={12} lg={6}>
+    <Grid data-testid="Detail_Overview_Skeleton" item xs={12} lg={6}>
       <Grid
         display="flex"
         flexDirection="row"

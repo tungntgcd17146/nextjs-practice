@@ -38,6 +38,7 @@ const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
   }, [onCloseModal]);
 
   const handleLogout = async () => {
+    handleNavItemClick();
     // Perform logout logic here
     await logout();
   };
@@ -45,6 +46,7 @@ const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
   return (
     <>
       <Backdrop
+        data-testid="Menu_Backdrop"
         sx={{
           color: themes.colors.white[500],
           zIndex: theme.zIndex.drawer + 1,
@@ -53,7 +55,7 @@ const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
         onClick={onCloseModal}
       />
       <Popover
-        data-testid="ProductFilter_Popover"
+        data-testid="Menu_Popover"
         slotProps={{
           paper: {
             sx: isMobile
@@ -110,12 +112,11 @@ const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
               );
             })}
             <ListItemButton
-              data-testid="NavItem_ListItemButton"
+              data-testid="Logout_ItemButton"
               sx={listItemButtonStyles}
               onClick={handleLogout}
             >
               <ListItemText
-                data-testid="NavItem_ListItemText"
                 sx={{ fontSize: '15px', marginLeft: '12px' }}
                 primary="logout"
               />

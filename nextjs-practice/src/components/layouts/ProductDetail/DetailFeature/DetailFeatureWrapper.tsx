@@ -5,6 +5,7 @@ import DetailFeature from '@/src/components/layouts/ProductDetail/DetailFeature'
 import { fetchProductFeature } from '@/src/services/productsService';
 
 export interface Props {}
+
 const DetailOverviewWrapper = async () => {
   const { data: productFeatures } = await fetchProductFeature();
 

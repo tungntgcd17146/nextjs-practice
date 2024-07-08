@@ -20,6 +20,8 @@ const defaultProp = {
   avtBackground: themes.colors.yellow[600],
   onClick: vi.fn(),
   size: 'small',
+  imgWidth: 48,
+  imgHeight: 48,
 } as unknown as Props;
 
 const setup = (overrideProps = {}) => {

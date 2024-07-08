@@ -60,7 +60,7 @@ const Signup = () => {
         color="primary"
         onClick={handleClose}
       >
-        <CloseIcon fontSize="small" />
+        <CloseIcon data-testid="Close_Icon" fontSize="small" />
       </IconButton>
     </>
   );

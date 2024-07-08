@@ -57,6 +57,7 @@ const InfiniteScroll = ({
 
   return (
     <Box
+      data-testid="InfiniteScroll"
       sx={{
         overflowY: 'auto',
         maxHeight: maxHeight,

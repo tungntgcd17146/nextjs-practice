@@ -14,7 +14,7 @@ import PageNotFound from '@/src/components/ui/PageNotFound';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { UserContact } from '@/src/types/contact';
 
-interface Props {
+export interface Props {
   contacts: UserContact[];
 }
 
