@@ -33,7 +33,7 @@ interface Props {
 }
 
 const ProductDetail = ({ productId }: Props) => {
-  const { isMobile, isDesktop } = useScreenWidth();
+  const { isDesktop } = useScreenWidth();
   const theme = useTheme();
   const { isDarkMode } = useMode();
 
@@ -68,7 +68,15 @@ const ProductDetail = ({ productId }: Props) => {
         />
         <Box
           display="flex"
-          flexDirection="row"
+          sx={{
+            flexDirection: {
+              xs: 'column',
+              sm: 'column',
+              md: 'column',
+              lg: 'row',
+              xl: 'row',
+            },
+          }}
           justifyContent="space-between"
         >
           <Suspense fallback={<DetailOverviewSkeleton />}>
@@ -89,7 +97,9 @@ const ProductDetail = ({ productId }: Props) => {
         />
       </Grid>
 
-      {!isMobile && <SocialInfo />}
+      <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
+        <SocialInfo />
+      </Box>
     </Box>
   );
 };

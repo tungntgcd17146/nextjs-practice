@@ -38,7 +38,13 @@ const DetailContent = ({ product }: Props) => {
   return (
     <>
       <Box
-        sx={{ marginBottom: '32px' }}
+        sx={{
+          marginBottom: '32px',
+          flexDirection: {
+            xs: 'column',
+            md: 'row',
+          },
+        }}
         display="flex"
         justifyContent="space-between"
       >
@@ -54,6 +60,13 @@ const DetailContent = ({ product }: Props) => {
         <Box
           display="flex"
           flexDirection="row"
+          sx={{
+            justifyContent: {
+              xs: 'flex-start',
+              md: 'flex-start',
+              lg: 'flex-end',
+            }
+          }}
           justifyContent={!isMobile ? 'flex-end' : 'flex-start'}
         >
           <Button

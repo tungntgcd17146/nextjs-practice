@@ -12,7 +12,6 @@ import SideBar from '@/src/components/forms/Signup/SideBar';
 import SignupFields from './SignupFields';
 
 //utils
-import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { signup } from '@/src/lib/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,7 +22,6 @@ import { SignupFormInputs } from '@/src/types/forms';
 export interface Props {}
 
 const Signup = () => {
-  const { isMobile } = useScreenWidth();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -122,7 +120,7 @@ const Signup = () => {
         action={snackbarAction}
       />
       {/*Sign Up Side bar */}
-      {!isMobile && <SideBar />}
+      {<SideBar />}
 
       {/* Content */}
       <SignupFields

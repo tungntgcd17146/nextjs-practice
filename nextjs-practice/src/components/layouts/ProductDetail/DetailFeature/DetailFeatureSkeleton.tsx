@@ -5,7 +5,15 @@ import { themes } from '@/src/themes';
 
 const DetailFeatureSkeleton = () => {
   return (
-    <Box sx={{ width: '40%' }} data-testid="Detail_Feature_Skeleton">
+    <Box
+      sx={{
+        width: {
+          lg: '100%',
+          xl: '40%',
+        },
+      }}
+      data-testid="Detail_Feature_Skeleton"
+    >
       <Box
         display="flex"
         flexDirection="row"

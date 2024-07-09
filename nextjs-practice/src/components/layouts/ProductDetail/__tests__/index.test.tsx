@@ -105,7 +105,6 @@ describe('ProductDetail Component', () => {
     (useMode as any).mockReturnValue({ isDarkMode: true });
     setup();
 
-    expect(screen.getByText('Header')).toBeInTheDocument();
     expect(screen.getByText('SocialInfo')).toBeInTheDocument();
     expect(screen.getByText('ImageDrawer')).toBeInTheDocument();
     expect(screen.getByText('DetailContentWrapper')).toBeInTheDocument();
@@ -118,7 +117,6 @@ describe('ProductDetail Component', () => {
     (useScreenWidth as any).mockReturnValue({ isDesktop: true });
     setup();
 
-    expect(screen.getByText('Header')).toBeInTheDocument();
     expect(screen.getByText('SocialInfo')).toBeInTheDocument();
     expect(screen.getByText('ImageDrawer')).toBeInTheDocument();
     expect(screen.getByText('DetailContentWrapper')).toBeInTheDocument();

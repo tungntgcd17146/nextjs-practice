@@ -21,11 +21,15 @@ const DetailFeature = ({ productFeatures }: Props) => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ width: '385px' }}>
-      <Box
-        display="flex"
-        sx={{ marginTop: '32px', marginBottom: '12px' }}
-      >
+    <Box
+      sx={{
+        width: {
+          lg: '100%',
+          xl: '385px',
+        },
+      }}
+    >
+      <Box display="flex" sx={{ marginTop: '32px', marginBottom: '12px' }}>
         <Chip
           sx={{
             borderRadius: '6px',

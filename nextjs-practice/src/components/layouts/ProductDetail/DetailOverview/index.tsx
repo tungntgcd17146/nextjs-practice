@@ -18,7 +18,15 @@ const DetailOverview = ({ productOverviews }: Props) => {
   const theme = useTheme();
 
   return (
-    <Box data-testid="Detail_Overview" sx={{ width: '485px' }}>
+    <Box
+      data-testid="Detail_Overview"
+      sx={{
+        width: {
+          lg: '100%',
+          xl: '485px',
+        },
+      }}
+    >
       <Box display="flex" sx={{ marginTop: '32px', marginBottom: '12px' }}>
         <Chip
           sx={{
