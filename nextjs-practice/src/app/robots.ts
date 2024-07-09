@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://nextjs-practice-training.vercel.app/sitemap.xml',
+    sitemap: `${process.env.NEXT_PUBLIC_URL}/sitemap.xml`,
   };
 }

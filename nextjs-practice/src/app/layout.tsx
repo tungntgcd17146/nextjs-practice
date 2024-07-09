@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: 'Products Dashboard',
   },
   description: 'Product Dashboard page, built using App Router.',
-  metadataBase: new URL('https://nextjs-practice-training.vercel.app'),
+  metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
 };
 
 export default function RootLayout({
