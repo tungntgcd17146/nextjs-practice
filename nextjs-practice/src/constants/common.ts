@@ -7,3 +7,6 @@ export const BASE_SIGNUP_URL = '/signup';
 
 export const FOLLOWING_CONTACT_QUERY = 'following';
 export const FOLLOWERS_CONTACT_QUERY = 'followers';
+
+export const SITEMAP_URL = '/sitemap.xml';
+export const ROBOTS_URL = '/robots.txt';

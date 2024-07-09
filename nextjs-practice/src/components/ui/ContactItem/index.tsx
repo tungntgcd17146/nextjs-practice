@@ -112,7 +112,7 @@ const ContactItem = ({
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ color: themes.colors.gray[600] }}
+                sx={{ color: theme.palette.text.primary }}
               >
                 Products
               </Typography>
@@ -137,7 +137,7 @@ const ContactItem = ({
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ color: themes.colors.gray[600] }}
+                sx={{ color: theme.palette.text.primary }}
               >
                 Followers
               </Typography>
@@ -189,6 +189,7 @@ const ContactItem = ({
                   >
                     <Image
                       fill
+                      objectFit="cover"
                       src={item.img}
                       alt={item.imgTitle}
                       style={{ borderRadius: '12px' }}

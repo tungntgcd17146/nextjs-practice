@@ -3,6 +3,8 @@ import {
   BASE_REDIRECT_URL,
   BASE_LOGIN_URL,
   BASE_SIGNUP_URL,
+  SITEMAP_URL,
+  ROBOTS_URL,
 } from '@/src/constants/common';
 import { NextResponse } from 'next/server';
 
@@ -15,9 +17,22 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       const isOnLoginPage = nextUrl.pathname === BASE_LOGIN_URL;
       const isOnSignupPage = nextUrl.pathname === BASE_SIGNUP_URL;
+      const isOnSitemap = nextUrl.pathname === SITEMAP_URL;
+      const isOnRobots = nextUrl.pathname === ROBOTS_URL;
 
       if (!isOnLoginPage) {
-        if ((isLoggedIn && !isOnSignupPage) || (!isLoggedIn && isOnSignupPage))
+        if (
+          // User is logged in and:
+          // - Not on the registration page, either
+          // - Currently on sitemap page, or
+          // - Currently on robots page
+          (isLoggedIn && (!isOnSignupPage || isOnSitemap || isOnRobots)) ||
+          // User is not logged in and:
+          // - Currently on the registration page, or
+          // - Currently on sitemap page, or
+          // - Currently on robots page
+          (!isLoggedIn && (isOnSignupPage || isOnSitemap || isOnRobots))
+        )
           return true;
 
         return false; // Redirect unauthenticated users to login page
@@ -28,7 +43,7 @@ export const authConfig = {
 
         if (callbackUrl) {
           const decodedCallbackUrl = decodeURIComponent(callbackUrl);
-          
+
           return NextResponse.redirect(decodedCallbackUrl);
         } else {
           return NextResponse.redirect(new URL(BASE_REDIRECT_URL, nextUrl));

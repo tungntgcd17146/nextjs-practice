@@ -29,6 +29,7 @@ import { navigationItems } from '@/src/mocks/sideNavigation';
 //types
 import MenuPopup from '@/src/components/layouts/MenuPopup';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { TabsNavigation } from '@/src/types/navigation';
 
 interface Props {
   logout: () => Promise<void>;
@@ -49,12 +50,9 @@ const Header = ({ logout }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const {
-    isMobile,
-    isTablet,
-    isDesktop,
-    matchedBreakpoint: isDownLg,
-  } = useScreenWidth({ down: 'lg' });
+  const { isMobile, matchedBreakpoint: isDownLg } = useScreenWidth({
+    down: 'lg',
+  });
   const theme = useTheme();
 
   useEffect(() => {
@@ -121,13 +119,20 @@ const Header = ({ logout }: Props) => {
     setIsOpenDrawer(true);
   }, [setIsOpenDrawer]);
 
-  const isShopProductsPage = useMemo(() => pathname === '/shop', [pathname]);
+  const isShopProductsPage = useMemo(
+    () => pathname === TabsNavigation.PRODUCTS,
+    [pathname],
+  );
 
   return (
     <Box
       data-testid="Header"
       sx={{
-        marginLeft: isTablet ? '80px' : isDesktop ? '330px' : '0px',
+        ml: {
+          xs: '0px',
+          md: '80px',
+          xl: '330px',
+        },
         padding: '24px',
         height: '96px',
         display: 'flex',
@@ -137,14 +142,31 @@ const Header = ({ logout }: Props) => {
         backgroundColor: theme.palette.background.paper,
       }}
     >
-      {isMobile ? (
-        <IconButton
-          aria-label="open"
-          data-testid="Header_MenuIcon"
-          children={<DragHandleIcon />}
-          onClick={handleOpenDrawer}
-        />
-      ) : (
+      <IconButton
+        sx={{
+          display: {
+            xs: 'block',
+            md: 'none',
+            lg: 'none',
+            xl: 'none',
+          },
+        }}
+        aria-label="open"
+        data-testid="Header_MenuIcon"
+        children={<DragHandleIcon />}
+        onClick={handleOpenDrawer}
+      />
+      <Box
+        sx={{
+          display: {
+            xs: 'none',
+            sm: 'none',
+            md: 'block',
+            lg: 'block',
+            xl: 'block',
+          },
+        }}
+      >
         <Input
           disabled={isShopProductsPage}
           value={searchInput}
@@ -157,7 +179,7 @@ const Header = ({ logout }: Props) => {
           placeholder="Search or type a command"
           endHelper="⌘ F"
         />
-      )}
+      </Box>
       <Drawer
         data-testid="Header_Drawer"
         isOpen={isOpenDrawer}
@@ -166,7 +188,7 @@ const Header = ({ logout }: Props) => {
         listItems={navigationItems}
       />
 
-      <div
+      <Box
         style={{
           display: 'flex',
           flexDirection: 'row',
@@ -177,6 +199,7 @@ const Header = ({ logout }: Props) => {
         {isMobile && (
           <>
             <IconButton
+              id="search-mobile"
               aria-label="search-mobile"
               data-testid="Header_SearchInputIcon_Mobile"
               onClick={handleClickMobileSearchIcon}
@@ -240,7 +263,7 @@ const Header = ({ logout }: Props) => {
           onCloseModal={handleCloseMenu}
           logout={logout}
         />
-      </div>
+      </Box>
     </Box>
   );
 };

@@ -10,7 +10,13 @@ const DetailContentSkeleton = () => {
       <Grid
         data-testid="Detail_Content_Skeleton"
         container
-        sx={{ marginBottom: '32px' }}
+        sx={{
+          marginBottom: '32px',
+          flexDirection: {
+            xs: 'column',
+            md: 'row',
+          },
+        }}
         display="flex"
         justifyContent="space-between"
       >
@@ -51,11 +57,13 @@ const DetailContentSkeleton = () => {
         <Skeleton width="60%" />
       </Typography>
 
-      <Grid
+      <Box
         display="flex"
-        flexDirection="row"
+        sx={{
+          marginBottom: '32px',
+          flexDirection: 'row',
+        }}
         alignItems="center"
-        sx={{ marginBottom: '32px' }}
       >
         <Skeleton
           variant="circular"
@@ -65,7 +73,7 @@ const DetailContentSkeleton = () => {
         />
         <Skeleton variant="text" width={100} sx={{ marginLeft: '12px' }} />
         <Skeleton variant="text" width={60} sx={{ marginLeft: '12px' }} />
-      </Grid>
+      </Box>
     </>
   );
 };

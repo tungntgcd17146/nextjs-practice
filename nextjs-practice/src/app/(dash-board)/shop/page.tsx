@@ -9,6 +9,11 @@ import { fetchProducts } from '@/src/services/productsService';
 
 import { ProductQueryParams } from '@/src/types/product';
 import { convertArrayToQueryObject } from '@/src/utils/convert';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Shop',
+};
 
 export default async function Page({
   searchParams,
@@ -61,8 +66,11 @@ export default async function Page({
       (_, i) => i + 1,
     );
 
-    const allProductsPromises = pageNumbers.map(() =>
-      fetchProducts(queryParams),
+    const allProductsPromises = pageNumbers.map((item) =>
+      fetchProducts({
+        ...queryParams,
+        _page: item,
+      }),
     );
 
     const allProductsResults = await Promise.all(allProductsPromises);

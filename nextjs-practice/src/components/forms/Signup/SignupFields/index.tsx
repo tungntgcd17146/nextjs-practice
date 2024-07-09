@@ -88,7 +88,7 @@ const SignupFields = ({
         sx={{
           height: '100vh',
           width: isMobile ? '100%' : '350px',
-          marginTop: '370px',
+          marginTop: isMobile ? '270px' : '370px',
         }}
         display="flex"
         flexDirection="column"
@@ -100,6 +100,7 @@ const SignupFields = ({
           Sign up
         </Typography>
 
+        {/* Header */}
         <HeaderContent />
 
         <form onSubmit={handleSubmit(onSubmit)}>

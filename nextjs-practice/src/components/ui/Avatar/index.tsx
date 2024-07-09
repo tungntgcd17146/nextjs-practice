@@ -3,6 +3,7 @@ import { memo } from 'react';
 //mui
 import Badge from '@mui/material/Badge';
 import { AvatarProps, Avatar as MuiAvatar, styled } from '@mui/material';
+import Box from '@mui/material/Box';
 
 import Image from 'next/image';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
@@ -85,14 +86,29 @@ const Avatar = ({
         {...rest}
       >
         {imgWidth && imgHeight ? (
+          <Box
+            sx={{ width: imgWidth, height: imgHeight, position: 'relative' }}
+          >
+            <Image
+              fill
+              sizes="100%"
+              style={{
+                objectFit: 'cover',
+              }}
+              alt={alt}
+              src={imgNextSrc}
+            />
+          </Box>
+        ) : (
           <Image
-            width={imgWidth}
-            height={imgHeight}
             alt={alt}
             src={imgNextSrc}
+            fill
+            style={{
+              objectFit: 'cover',
+            }}
+            sizes="100%"
           />
-        ) : (
-          <Image alt={alt} src={imgNextSrc} fill sizes="100%" />
         )}
       </MuiAvatar>
     );
@@ -109,14 +125,29 @@ const Avatar = ({
     >
       <MuiAvatar sx={{ ...avtCommonStyle, ...sx }} {...rest}>
         {imgWidth && imgHeight ? (
+          <Box
+            sx={{ width: imgWidth, height: imgHeight, position: 'relative' }}
+          >
+            <Image
+              fill
+              sizes="100%"
+              style={{
+                objectFit: 'cover',
+              }}
+              alt={alt}
+              src={imgNextSrc}
+            />
+          </Box>
+        ) : (
           <Image
-            width={imgWidth}
-            height={imgHeight}
             alt={alt}
             src={imgNextSrc}
+            fill
+            style={{
+              objectFit: 'cover',
+            }}
+            sizes="100%"
           />
-        ) : (
-          <Image alt={alt} src={imgNextSrc} fill sizes="100%" />
         )}
       </MuiAvatar>
     </StyledBadge>
