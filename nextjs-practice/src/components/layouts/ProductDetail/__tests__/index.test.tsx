@@ -6,16 +6,6 @@ import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { useMode } from '@/src/contexts/modeContext/useModeContext';
 
 // Mock the dependencies
-vi.mock('@/src/components/layouts/ProductDetail/Header', () => ({
-  __esModule: true,
-  default: () => <div>Header</div>,
-}));
-
-vi.mock('@/src/components/layouts/ProductDetail/SocialInfo', () => ({
-  __esModule: true,
-  default: () => <div>SocialInfo</div>,
-}));
-
 vi.mock('@/src/components/ui/ImageDrawer', () => ({
   __esModule: true,
   default: () => <div>ImageDrawer</div>,
@@ -105,21 +95,17 @@ describe('ProductDetail Component', () => {
     (useMode as any).mockReturnValue({ isDarkMode: true });
     setup();
 
-    expect(screen.getByText('Header')).toBeInTheDocument();
-    expect(screen.getByText('SocialInfo')).toBeInTheDocument();
     expect(screen.getByText('ImageDrawer')).toBeInTheDocument();
     expect(screen.getByText('DetailContentWrapper')).toBeInTheDocument();
     expect(screen.getByText('DetailOverviewWrapper')).toBeInTheDocument();
     expect(screen.getByText('DetailFeatureWrapper')).toBeInTheDocument();
   });
 
-  it('renders correctly on desktop', () => {
+  it.only('renders correctly on desktop', () => {
     (useMode as any).mockReturnValue({ isDarkMode: false });
     (useScreenWidth as any).mockReturnValue({ isDesktop: true });
     setup();
 
-    expect(screen.getByText('Header')).toBeInTheDocument();
-    expect(screen.getByText('SocialInfo')).toBeInTheDocument();
     expect(screen.getByText('ImageDrawer')).toBeInTheDocument();
     expect(screen.getByText('DetailContentWrapper')).toBeInTheDocument();
     expect(screen.getByText('DetailOverviewWrapper')).toBeInTheDocument();

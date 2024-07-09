@@ -48,7 +48,7 @@ export const defaultTheme = (isDarkMode: boolean) =>
               paper: '#FCFCFC',
             },
             text: {
-              primary: '#6F767E',
+              primary: '#535360', //'#6F767E' by design
               secondary: '#1A1D1F',
             },
             grey: {

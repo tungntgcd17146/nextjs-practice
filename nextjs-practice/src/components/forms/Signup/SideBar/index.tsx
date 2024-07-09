@@ -21,6 +21,12 @@ const SideBar = () => {
   return (
     <Box
       sx={{
+        textAlign: 'center',
+        display: {
+          xs: 'none',
+          sm: 'none',
+          md: 'block',
+        },
         backgroundColor: theme.palette.background.default,
         padding: '24px',
         width: '400px',
@@ -35,6 +41,7 @@ const SideBar = () => {
         height={170}
         src={SignupImg}
         alt="sign up"
+        loading="eager"
       />
       <Typography
         sx={{

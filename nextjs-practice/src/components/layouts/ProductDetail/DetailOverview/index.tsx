@@ -1,3 +1,5 @@
+'use client';
+
 //component
 import Chip from '@/src/components/ui/Chip';
 
@@ -7,9 +9,8 @@ import { FeatureProduct } from '@/src/types/product';
 
 //mui
 import { useTheme } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-
+import Box from '@mui/material/Box';
 
 export interface Props {
   productOverviews: FeatureProduct[];
@@ -19,12 +20,16 @@ const DetailOverview = ({ productOverviews }: Props) => {
   const theme = useTheme();
 
   return (
-    <Grid data-testid="Detail_Overview" item xs={12} lg={6}>
-      <Grid
-        display="flex"
-        flexDirection="row"
-        sx={{ marginTop: '32px', marginBottom: '12px' }}
-      >
+    <Box
+      data-testid="Detail_Overview"
+      sx={{
+        width: {
+          lg: '100%',
+          xl: '485px',
+        },
+      }}
+    >
+      <Box display="flex" sx={{ marginTop: '32px', marginBottom: '12px' }}>
         <Chip
           sx={{
             borderRadius: '6px',
@@ -43,7 +48,7 @@ const DetailOverview = ({ productOverviews }: Props) => {
         >
           Overview
         </Typography>
-      </Grid>
+      </Box>
       {productOverviews.map((item, index) => (
         <Typography
           key={index}
@@ -53,7 +58,7 @@ const DetailOverview = ({ productOverviews }: Props) => {
           {item.text}
         </Typography>
       ))}
-    </Grid>
+    </Box>
   );
 };
 

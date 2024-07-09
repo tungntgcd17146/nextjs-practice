@@ -52,7 +52,7 @@ const OwnerInfo = ({
         item
         xs={12}
         sm={12}
-        lg={6}
+        lg={7}
         display="flex"
         flexDirection="row"
         sx={{ marginBottom: '12px' }}
@@ -92,7 +92,7 @@ const OwnerInfo = ({
         item
         xs={12}
         sm={12}
-        lg={6}
+        lg={5}
         display="flex"
         flexDirection="row"
         justifyContent={matchedBreakpoint ? 'space-between' : 'flex-end'}
@@ -102,8 +102,8 @@ const OwnerInfo = ({
             aria-label="personal-twitter"
             sx={
               matchedBreakpoint
-                ? { marginRight: '32px' }
-                : { marginLeft: '32px' }
+                ? { marginRight: '20px' }
+                : { marginLeft: '20px' }
             }
             children={<TwitterIcon />}
           />
@@ -111,8 +111,8 @@ const OwnerInfo = ({
             aria-label="personal-facebook"
             sx={
               matchedBreakpoint
-                ? { marginRight: '32px' }
-                : { marginLeft: '32px' }
+                ? { marginRight: '20px' }
+                : { marginLeft: '20px' }
             }
             children={<FacebookIcon />}
           />
@@ -120,8 +120,8 @@ const OwnerInfo = ({
             aria-label="personal-instagram"
             sx={
               matchedBreakpoint
-                ? { marginRight: '32px' }
-                : { marginLeft: '32px' }
+                ? { marginRight: '20px' }
+                : { marginLeft: '20px' }
             }
             children={<InstagramIcon />}
           />
@@ -133,7 +133,7 @@ const OwnerInfo = ({
           onClick={onClickFollow}
           children="Follow"
           color="primary"
-          sx={{ width: '120px', marginLeft: '32px' }}
+          sx={{ width: '120px', marginLeft: '20px' }}
         />
       </Grid>
 

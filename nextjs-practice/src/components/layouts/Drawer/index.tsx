@@ -96,6 +96,8 @@ const Drawer = ({
                 children={<CloseIcon />}
                 onClick={onClose}
                 size="large"
+                id="close-drawer"
+                aria-label="close-drawer"
               />
             )}
 
@@ -134,6 +136,8 @@ const Drawer = ({
             size="large"
             sx={{ color: theme.palette.text.primary }}
             onClick={onOpen}
+            id="open-drawer"
+            aria-label="open-drawer"
           />
         )}
         <Divider
@@ -175,8 +179,8 @@ const Drawer = ({
             isTablet && !isOpen
               ? '80px'
               : isDesktop || isLargerDrawerOnTablet
-                ? '330px'
-                : '100%',
+              ? '330px'
+              : '100%',
         },
       }}
       anchor={isMobile ? 'right' : 'left'}

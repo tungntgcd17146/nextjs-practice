@@ -1,3 +1,5 @@
+'use client';
+
 import { memo } from 'react';
 
 //component
@@ -8,24 +10,22 @@ import Avatar from '@/src/components/ui/Avatar';
 import Customer1 from '@/public/assets/customer1.webp';
 
 //utils
-import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { themes } from '@/src/themes';
 import { Product } from '@/src/types/product';
 
 //mui
 import { useTheme } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 interface Props {
   product: Product;
 }
 const DetailContent = ({ product }: Props) => {
   const theme = useTheme();
-  const { isMobile } = useScreenWidth();
 
   const {
     productName,
@@ -37,30 +37,36 @@ const DetailContent = ({ product }: Props) => {
 
   return (
     <>
-      <Grid
-        container
-        sx={{ marginBottom: '32px' }}
+      <Box
+        sx={{
+          marginBottom: '32px',
+          flexDirection: {
+            xs: 'column',
+            md: 'row',
+          },
+        }}
         display="flex"
         justifyContent="space-between"
       >
-        <Grid item xs={12} md={6}>
-          <Tabs
-            sx={{ marginBottom: '16px' }}
-            tabItems={[
-              { text: 'Product', isSelected: true },
-              { text: 'Comments', isDisabled: true },
-            ]}
-            tabSelected={0}
-          />
-        </Grid>
+        <Tabs
+          sx={{ marginBottom: '16px' }}
+          tabItems={[
+            { text: 'Product', isSelected: true },
+            { text: 'Comments', isDisabled: true },
+          ]}
+          tabSelected={0}
+        />
 
-        <Grid
-          item
-          xs={12}
-          md={6}
+        <Box
           display="flex"
           flexDirection="row"
-          justifyContent={!isMobile ? 'flex-end' : 'flex-start'}
+          sx={{
+            justifyContent: {
+              xs: 'flex-start',
+              md: 'flex-start',
+              lg: 'flex-end',
+            },
+          }}
         >
           <Button
             aria-label="favorite"
@@ -89,8 +95,8 @@ const DetailContent = ({ product }: Props) => {
             sx={{ borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px' }}
             endIcon={<FileDownloadIcon />}
           />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
 
       {/* Content */}
       {/* Header */}
@@ -107,12 +113,7 @@ const DetailContent = ({ product }: Props) => {
         Elegant product mockup for your next project
       </Typography>
 
-      <Grid
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        sx={{ marginBottom: '32px' }}
-      >
+      <Box display="flex" alignItems="center" sx={{ marginBottom: '32px' }}>
         <Avatar
           imgNextSrc={Customer1}
           sx={{ marginRight: '12px', marginLeft: '12px' }}
@@ -131,7 +132,7 @@ const DetailContent = ({ product }: Props) => {
           ratingPoint={productRating}
           counter={productRatingCount}
         />
-      </Grid>
+      </Box>
     </>
   );
 };

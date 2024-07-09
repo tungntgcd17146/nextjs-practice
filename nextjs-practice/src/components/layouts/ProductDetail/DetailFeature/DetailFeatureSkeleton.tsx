@@ -1,12 +1,20 @@
 import React from 'react';
 import { Skeleton } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import { themes } from '@/src/themes';
 
 const DetailFeatureSkeleton = () => {
   return (
-    <Grid data-testid="Detail_Feature_Skeleton" item xs={12} lg={6}>
-      <Grid
+    <Box
+      sx={{
+        width: {
+          lg: '100%',
+          xl: '40%',
+        },
+      }}
+      data-testid="Detail_Feature_Skeleton"
+    >
+      <Box
         display="flex"
         flexDirection="row"
         sx={{ marginTop: '32px', marginBottom: '12px' }}
@@ -23,7 +31,7 @@ const DetailFeatureSkeleton = () => {
           height={32}
           sx={{ marginLeft: '12px' }}
         />
-      </Grid>
+      </Box>
       {[...Array(3)].map((_, index) => (
         <Skeleton
           key={index}
@@ -33,7 +41,7 @@ const DetailFeatureSkeleton = () => {
           sx={{ marginBottom: '16px' }}
         />
       ))}
-    </Grid>
+    </Box>
   );
 };
 

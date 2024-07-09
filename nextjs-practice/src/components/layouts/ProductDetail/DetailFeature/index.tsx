@@ -1,3 +1,5 @@
+'use client';
+
 //component
 import Chip from '@/src/components/ui/Chip';
 
@@ -21,12 +23,15 @@ const DetailFeature = ({ productFeatures }: Props) => {
   const theme = useTheme();
 
   return (
-    <Grid item xs={12} lg={5}>
-      <Grid
-        display="flex"
-        flexDirection="row"
-        sx={{ marginTop: '32px', marginBottom: '12px' }}
-      >
+    <Box
+      sx={{
+        width: {
+          lg: '100%',
+          xl: '385px',
+        },
+      }}
+    >
+      <Box display="flex" sx={{ marginTop: '32px', marginBottom: '12px' }}>
         <Chip
           sx={{
             borderRadius: '6px',
@@ -45,7 +50,7 @@ const DetailFeature = ({ productFeatures }: Props) => {
         >
           Features
         </Typography>
-      </Grid>
+      </Box>
 
       {productFeatures.map((item, index) => (
         <Box key={index}>
@@ -72,7 +77,7 @@ const DetailFeature = ({ productFeatures }: Props) => {
           />
         </Box>
       ))}
-    </Grid>
+    </Box>
   );
 };
 

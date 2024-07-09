@@ -1,42 +1,50 @@
-import { memo } from 'react';
-
 //img
 import CoverPhoto from '@/public/assets/CoverPhoto.webp';
 import CoverPhotoMobile from '@/public/assets/CoverPhotoMobile.webp';
 
+import Box from '@mui/material/Box';
+
 import Image from 'next/image';
 
-import useScreenWidth from '@/src/hooks/useScreenWidth';
-
-const BackgroundImage = () => {
-  const { isMobile } = useScreenWidth();
-
-  if (isMobile) {
-    return (
-      <div
+const BackgroundImage = () => (
+  <>
+    <Box
+      sx={{
+        width: '100%',
+        height: '252px',
+        position: 'relative',
+        display: {
+          xs: 'block',
+          md: 'block',
+          lg: 'none',
+          xl: 'none',
+        },
+      }}
+    >
+      <Image
+        data-testid="BackgroundImage_Mobile"
+        src={CoverPhotoMobile}
+        alt="CoverPhotoMobile.webp"
+        fill
         style={{
-          width: '100%',
-          height: '252px',
-          position: 'relative',
+          objectFit: 'cover',
         }}
-      >
-        <Image
-          data-testid="BackgroundImage_Mobile"
-          src={CoverPhotoMobile}
-          alt="CoverPhotoMobile.webp"
-          fill
-          sizes="100%"
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div
-      style={{
+        sizes="100%"
+        loading="eager"
+        priority
+      />
+    </Box>
+    <Box
+      sx={{
         width: '100%',
         height: '400px',
         position: 'relative',
+        display: {
+          xs: 'none',
+          md: 'none',
+          lg: 'block',
+          xl: 'block',
+        },
       }}
     >
       <Image
@@ -44,10 +52,15 @@ const BackgroundImage = () => {
         src={CoverPhoto}
         alt="CoverPhoto.webp"
         fill
+        style={{
+          objectFit: 'cover',
+        }}
         sizes="100%"
+        loading="eager"
+        priority
       />
-    </div>
-  );
-};
+    </Box>
+  </>
+);
 
-export default memo(BackgroundImage);
+export default BackgroundImage;
