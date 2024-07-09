@@ -66,8 +66,11 @@ export default async function Page({
       (_, i) => i + 1,
     );
 
-    const allProductsPromises = pageNumbers.map(() =>
-      fetchProducts(queryParams),
+    const allProductsPromises = pageNumbers.map((item) =>
+      fetchProducts({
+        ...queryParams,
+        _page: item,
+      }),
     );
 
     const allProductsResults = await Promise.all(allProductsPromises);

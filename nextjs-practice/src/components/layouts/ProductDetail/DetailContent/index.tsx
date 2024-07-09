@@ -1,3 +1,5 @@
+'use client';
+
 import { memo } from 'react';
 
 //component
@@ -8,7 +10,6 @@ import Avatar from '@/src/components/ui/Avatar';
 import Customer1 from '@/public/assets/customer1.webp';
 
 //utils
-import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { themes } from '@/src/themes';
 import { Product } from '@/src/types/product';
 
@@ -25,7 +26,6 @@ interface Props {
 }
 const DetailContent = ({ product }: Props) => {
   const theme = useTheme();
-  const { isMobile } = useScreenWidth();
 
   const {
     productName,
@@ -65,9 +65,8 @@ const DetailContent = ({ product }: Props) => {
               xs: 'flex-start',
               md: 'flex-start',
               lg: 'flex-end',
-            }
+            },
           }}
-          justifyContent={!isMobile ? 'flex-end' : 'flex-start'}
         >
           <Button
             aria-label="favorite"

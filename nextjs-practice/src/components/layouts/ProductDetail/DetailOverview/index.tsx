@@ -1,3 +1,5 @@
+'use client';
+
 //component
 import Chip from '@/src/components/ui/Chip';
 
