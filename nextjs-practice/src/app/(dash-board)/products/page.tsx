@@ -4,10 +4,6 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Products',
   description: 'Products Dashboard',
-  openGraph: {
-    title: 'Products',
-    description: 'Products Dashboard',
-  },
 };
 
 export default function Page() {

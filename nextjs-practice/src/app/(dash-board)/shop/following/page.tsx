@@ -6,10 +6,6 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Following',
   description: 'People you are following',
-  openGraph: {
-    title: 'Following',
-    description: 'People you are following',
-  },
 };
 
 export default async function Page({

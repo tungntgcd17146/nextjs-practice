@@ -5,11 +5,16 @@ import {
   BASE_SIGNUP_URL,
   SITEMAP_URL,
   ROBOTS_URL,
+  OPENGRAPH_IMAGE_URL,
 } from '@/src/constants/common';
 import { NextResponse } from 'next/server';
 
 const isSpecialPage = (pathname: string) => {
-  return pathname === SITEMAP_URL || pathname === ROBOTS_URL;
+  return (
+    pathname === SITEMAP_URL ||
+    pathname === ROBOTS_URL ||
+    pathname.startsWith(OPENGRAPH_IMAGE_URL)
+  );
 };
 
 const handleLoggedInUser = (nextUrl: URL) => {
