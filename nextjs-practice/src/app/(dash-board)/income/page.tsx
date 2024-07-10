@@ -3,6 +3,11 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Income',
+  description: 'Income Dashboard',
+  openGraph: {
+    title: 'Income',
+    description: 'Income Dashboard',
+  },
 };
 
 export default function Page() {

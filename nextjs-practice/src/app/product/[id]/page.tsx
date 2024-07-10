@@ -3,6 +3,11 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Product Detail',
+  description: 'Product Detail page, detail feature and overview of Product.',
+  openGraph: {
+    title: 'Product Detail',
+    description: 'Product Detail page, detail feature and overview of Product.',
+  },
 };
 
 //components

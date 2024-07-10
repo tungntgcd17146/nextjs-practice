@@ -1,7 +1,16 @@
 import Contacts from '@/src/components/layouts/Shop/ShopContent/Contacts';
 import { FOLLOWERS_CONTACT_QUERY } from '@/src/constants/common';
 import { fetchContacts } from '@/src/services/contactsService';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: 'Follower',
+  description: 'People who are following you',
+  openGraph: {
+    title: 'Follower',
+    description: 'People who are following you',
+  },
+};
 export default async function Page({
   searchParams,
 }: {
