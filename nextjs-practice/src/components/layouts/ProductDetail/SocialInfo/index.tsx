@@ -13,7 +13,6 @@ import Avatar from '@/src/components/ui/Avatar';
 import User1 from '@/public/assets/User1.webp';
 import Figma from '@/public/assets/figma.webp';
 
-
 export interface Props {}
 
 const SocialInfo = () => {
@@ -27,7 +26,7 @@ const SocialInfo = () => {
       item
     >
       <Avatar
-        sx={{ marginBottom: '24px' }}
+        sx={{ marginBottom: '24px', pointerEvents: 'none' }}
         avtBackground={themes.colors.yellow[500]}
         imgNextSrc={User1}
         alt={'User1'}
@@ -41,6 +40,7 @@ const SocialInfo = () => {
             width: '20px',
             height: '32px',
           },
+          pointerEvents: 'none',
         }}
         badgeSx={
           {
@@ -71,6 +71,7 @@ const SocialInfo = () => {
           ':hover': {
             backgroundColor: 'none',
           },
+          pointerEvents: 'none',
         }}
         children={<FavoriteOutlinedIcon />}
       />

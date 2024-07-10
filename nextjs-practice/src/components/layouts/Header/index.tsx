@@ -224,6 +224,7 @@ const Header = ({ logout }: Props) => {
 
         {!isDownLg && (
           <Button
+            disabled
             aria-label="create"
             sx={{ width: '120px' }}
             startIcon={<AddIcon />}
@@ -232,6 +233,7 @@ const Header = ({ logout }: Props) => {
           />
         )}
         <IconButton
+          disabled
           aria-label="chat-icon"
           badgeContent={0}
           children={<ChatBubbleOutlineIcon />}
@@ -239,6 +241,7 @@ const Header = ({ logout }: Props) => {
           sx={iconButtonStyles}
         />
         <IconButton
+          disabled
           aria-label="notification-icon"
           badgeContent={0}
           children={<NotificationsNoneIcon />}

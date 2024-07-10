@@ -89,6 +89,7 @@ const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
                 />
               ) : (
                 <NavItem
+                  disabled
                   onNavItemClick={handleNavItemClick}
                   go={go}
                   key={index}

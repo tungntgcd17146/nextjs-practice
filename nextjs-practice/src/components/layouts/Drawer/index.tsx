@@ -145,6 +145,7 @@ const Drawer = ({
         />
         <List>
           <NavItem
+            disabled
             icon={useMemo(
               () => (
                 <HelpOutlineIcon />

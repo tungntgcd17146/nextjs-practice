@@ -99,6 +99,7 @@ const OwnerInfo = ({
       >
         <Box>
           <IconButton
+            disabled
             aria-label="personal-twitter"
             sx={
               matchedBreakpoint
@@ -108,6 +109,7 @@ const OwnerInfo = ({
             children={<TwitterIcon />}
           />
           <IconButton
+            disabled
             aria-label="personal-facebook"
             sx={
               matchedBreakpoint
@@ -117,6 +119,7 @@ const OwnerInfo = ({
             children={<FacebookIcon />}
           />
           <IconButton
+            disabled
             aria-label="personal-instagram"
             sx={
               matchedBreakpoint
@@ -128,6 +131,7 @@ const OwnerInfo = ({
         </Box>
 
         <Button
+          disabled
           aria-label="follow-button"
           data-testid="OwnerInfo_Follow_Button"
           onClick={onClickFollow}

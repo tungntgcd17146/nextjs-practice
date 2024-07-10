@@ -19,6 +19,7 @@ export interface Props {
   go?: string;
   isShowText?: boolean;
   endHelper?: React.ReactNode;
+  disabled?: boolean;
 }
 
 export const listItemButtonStyles = (theme: Theme) => ({
@@ -46,6 +47,7 @@ const NavItem = ({
   isShowText,
   go,
   endHelper,
+  disabled
 }: Props) => {
   const router = useRouter();
 
@@ -63,6 +65,7 @@ const NavItem = ({
         data-testid="NavItem_ListItemButton"
         selected={isSelected}
         sx={listItemButtonStyles}
+        disabled={disabled}
       >
         {icon && (
           <ListItemIcon
