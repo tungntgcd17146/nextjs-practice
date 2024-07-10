@@ -12,7 +12,7 @@ import { beforeEach, vi } from 'vitest';
 import * as useScreenWidth from '@/src/hooks/useScreenWidth';
 import { ModeProvider } from '@/src/contexts/modeContext/ModeContext';
 import Header from '..';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useMode } from '@/src/contexts/modeContext/useModeContext';
 
 // Mocking hooks and modules
@@ -22,6 +22,7 @@ vi.mock('next/navigation', async (importOriginal) => {
     ...(actual as object),
     usePathname: vi.fn(),
     useRouter: vi.fn(),
+    useSearchParams: vi.fn(),
   };
 });
 
@@ -49,6 +50,7 @@ const setup = (overrideProps = {}) => {
 describe('Header Test', () => {
   beforeEach(() => {
     vi.mocked(usePathname).mockReturnValue('/shop');
+    vi.mocked(useSearchParams).mockReturnValue({ get: vi.fn() } as any);
     (useMode as any).mockReturnValue({ isDarkMode: true });
     vi.clearAllMocks();
   });

@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useCallback, useState, useMemo, useEffect } from 'react';
+import { memo, useCallback, useState, useMemo } from 'react';
 import { Theme } from '@mui/material';
 
 //MUI
@@ -38,25 +38,18 @@ const filterButtonStyles = (theme: Theme) => ({
 const filterIcon = <FilterAltOutlinedIcon />;
 
 const ContentHeader = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedValueFromUrl, setSelectedValueFromUrl] = useState<string>(
-    selectOption[0].value,
-  );
-
-  const { totalProducts, showingProducts } = useShopContext();
-
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  //update filter by select value from url
-  useEffect(() => {
-    const popularity = searchParams.get('popularity');
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-    if (popularity) {
-      setSelectedValueFromUrl(popularity as string);
-    }
-  }, [searchParams]);
+  const { totalProducts, showingProducts } = useShopContext();
+
+  const selectedValueFromUrl = useMemo(
+    () => searchParams.get('popularity') || selectOption[0].value,
+    [searchParams],
+  );
 
   //Tab state for init selected from route
   const tabSelected = useMemo(

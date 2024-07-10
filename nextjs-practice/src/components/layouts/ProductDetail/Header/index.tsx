@@ -32,6 +32,7 @@ const Header = () => {
       justifyContent="space-between"
     >
       <Button
+        disabled
         aria-label="edit-product"
         data-testid="ProductDetail_EditButton"
         children="Edit product"

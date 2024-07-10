@@ -3,7 +3,6 @@ import { memo } from 'react';
 import { ButtonProps, Button as MuiButton, useTheme } from '@mui/material';
 
 export interface Props extends ButtonProps {
-  children?: React.ReactNode;
   endIcon?: React.ReactNode;
   startIcon?: React.ReactNode;
   sx?: React.CSSProperties;
@@ -14,7 +13,6 @@ export interface Props extends ButtonProps {
 }
 
 const Button = ({
-  children,
   color = 'primary',
   endIcon,
   startIcon,
@@ -105,9 +103,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       {...rest}
-    >
-      {children}
-    </MuiButton>
+    />
   );
 };
 

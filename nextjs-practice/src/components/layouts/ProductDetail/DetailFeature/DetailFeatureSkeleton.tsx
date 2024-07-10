@@ -32,15 +32,24 @@ const DetailFeatureSkeleton = () => {
           sx={{ marginLeft: '12px' }}
         />
       </Box>
-      {[...Array(3)].map((_, index) => (
-        <Skeleton
-          key={index}
-          variant="text"
-          width="100%"
-          height={24}
-          sx={{ marginBottom: '16px' }}
-        />
-      ))}
+      <Skeleton
+        variant="text"
+        width="100%"
+        height={24}
+        sx={{ marginBottom: '16px' }}
+      />
+      <Skeleton
+        variant="text"
+        width="100%"
+        height={24}
+        sx={{ marginBottom: '16px' }}
+      />
+      <Skeleton
+        variant="text"
+        width="100%"
+        height={24}
+        sx={{ marginBottom: '16px' }}
+      />
     </Box>
   );
 };

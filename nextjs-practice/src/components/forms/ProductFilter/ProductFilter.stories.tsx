@@ -22,6 +22,7 @@ export const ProductFilterBase: Story = {
   args: {
     totalProducts: 100,
     showingProducts: 10,
+    onCloseModal: () => {},
     onSubmit: () => {},
     onReset: () => {},
     anchorEl: (<button />) as unknown as HTMLElement,

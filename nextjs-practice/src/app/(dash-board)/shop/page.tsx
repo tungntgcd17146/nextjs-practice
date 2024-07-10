@@ -13,6 +13,12 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Shop',
+  description: 'Shop page, built using App Router.',
+  openGraph: {
+    title: 'Shop dashboard',
+    description: 'Shop dashboard, Provide technical products.',
+  },
+  keywords: ['Shop', 'products', 'technical'],
 };
 
 export default async function Page({
@@ -77,7 +83,8 @@ export default async function Page({
 
     const initialItems = allProductsResults.flatMap((result) => result.data);
 
-    // Assuming all pages will have the same totalCount value in the response headers
+    // All pages will have the same totalCount value in the response headers
+    // Get the first item in the array to get the totalCount
     const totalCount =
       allProductsResults.length > 0 ? allProductsResults[0].countItems : 0;
 

@@ -1,4 +1,4 @@
-import type { NextAuthConfig } from 'next-auth';
+import type { NextAuthConfig, Session } from 'next-auth';
 import {
   BASE_REDIRECT_URL,
   BASE_LOGIN_URL,
@@ -8,49 +8,49 @@ import {
 } from '@/src/constants/common';
 import { NextResponse } from 'next/server';
 
+const isSpecialPage = (pathname: string) => {
+  return pathname === SITEMAP_URL || pathname === ROBOTS_URL;
+};
+
+const handleLoggedInUser = (nextUrl: URL) => {
+  const searchParams = new URLSearchParams(nextUrl.search);
+  const callbackUrl = searchParams.get('callbackUrl');
+
+  if (callbackUrl) {
+    const decodedCallbackUrl = decodeURIComponent(callbackUrl);
+    return NextResponse.redirect(decodedCallbackUrl);
+  } else {
+    return NextResponse.redirect(new URL(BASE_REDIRECT_URL, nextUrl));
+  }
+};
+
+const isAuthorized = (auth: Session | null, nextUrl: URL) => {
+  const isLoggedIn = !!auth?.user;
+  const isOnLoginPage = nextUrl.pathname === BASE_LOGIN_URL;
+  const isOnSignupPage = nextUrl.pathname === BASE_SIGNUP_URL;
+  const isOnSpecialPage = isSpecialPage(nextUrl.pathname);
+
+  if (isOnLoginPage) {
+    return isLoggedIn ? handleLoggedInUser(nextUrl) : false;
+  }
+
+  if (
+    (isLoggedIn && (!isOnSignupPage || isOnSpecialPage)) ||
+    (!isLoggedIn && (isOnSignupPage || isOnSpecialPage))
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
 export const authConfig = {
   pages: {
     signIn: BASE_LOGIN_URL,
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isOnLoginPage = nextUrl.pathname === BASE_LOGIN_URL;
-      const isOnSignupPage = nextUrl.pathname === BASE_SIGNUP_URL;
-      const isOnSitemap = nextUrl.pathname === SITEMAP_URL;
-      const isOnRobots = nextUrl.pathname === ROBOTS_URL;
-
-      if (!isOnLoginPage) {
-        if (
-          // User is logged in and:
-          // - Not on the registration page, either
-          // - Currently on sitemap page, or
-          // - Currently on robots page
-          (isLoggedIn && (!isOnSignupPage || isOnSitemap || isOnRobots)) ||
-          // User is not logged in and:
-          // - Currently on the registration page, or
-          // - Currently on sitemap page, or
-          // - Currently on robots page
-          (!isLoggedIn && (isOnSignupPage || isOnSitemap || isOnRobots))
-        )
-          return true;
-
-        return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        // Parse the search parameters
-        const searchParams = new URLSearchParams(nextUrl.search);
-        const callbackUrl = searchParams.get('callbackUrl');
-
-        if (callbackUrl) {
-          const decodedCallbackUrl = decodeURIComponent(callbackUrl);
-
-          return NextResponse.redirect(decodedCallbackUrl);
-        } else {
-          return NextResponse.redirect(new URL(BASE_REDIRECT_URL, nextUrl));
-        }
-      }
-
-      return false;
+      return isAuthorized(auth, nextUrl);
     },
   },
   trustHost: true,

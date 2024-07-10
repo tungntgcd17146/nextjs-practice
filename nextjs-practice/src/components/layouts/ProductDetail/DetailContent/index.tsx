@@ -49,7 +49,7 @@ const DetailContent = ({ product }: Props) => {
         justifyContent="space-between"
       >
         <Tabs
-          sx={{ marginBottom: '16px' }}
+          sx={{ marginBottom: '16px', pointerEvents: 'none' }}
           tabItems={[
             { text: 'Product', isSelected: true },
             { text: 'Comments', isDisabled: true },
@@ -72,7 +72,7 @@ const DetailContent = ({ product }: Props) => {
             aria-label="favorite"
             children="32"
             color="inherit"
-            sx={{ marginRight: '16px' }}
+            sx={{ marginRight: '16px', pointerEvents: 'none' }}
             startIcon={
               <FavoriteOutlinedIcon sx={{ color: themes.colors.red[500] }} />
             }
@@ -80,15 +80,18 @@ const DetailContent = ({ product }: Props) => {
 
           <Button
             aria-label="product-price"
-            children={`$${productPrice}`}
             color="primary"
             sx={{
               borderTopRightRadius: '0px',
               borderBottomRightRadius: '0px',
+              pointerEvents: 'none',
             }}
             endIcon={<Divider orientation="vertical" />}
-          />
+          >
+            {`$${productPrice}`}
+          </Button>
           <Button
+            disabled
             aria-label="download"
             children="Download"
             color="primary"
@@ -99,7 +102,6 @@ const DetailContent = ({ product }: Props) => {
       </Box>
 
       {/* Content */}
-      {/* Header */}
       <Typography
         variant="h5"
         sx={{ marginBottom: '12px', color: theme.palette.text.secondary }}

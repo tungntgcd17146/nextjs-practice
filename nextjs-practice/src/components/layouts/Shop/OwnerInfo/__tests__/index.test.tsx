@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { fireEvent, render, screen } from '@/src/utils/testUtils';
+import { render, screen } from '@/src/utils/testUtils';
 import { describe, expect, it, vi } from 'vitest';
 import OwnerInfo from '../';
 import * as useScreenWidth from '@/src/hooks/useScreenWidth';
@@ -37,7 +37,7 @@ describe('OwnerInfo Test', () => {
     ).toBeTruthy();
   });
 
-  it('click follow button call onClickFollow prop correctly', async () => {
+  it('render follow button with disable correctly', async () => {
     vi.spyOn(useScreenWidth, 'default').mockReturnValue({
       isMobile: false,
       isTablet: false,
@@ -46,8 +46,10 @@ describe('OwnerInfo Test', () => {
     } as any);
     setup();
 
-    fireEvent.click(screen.getByTestId('OwnerInfo_Follow_Button'));
-
-    expect(defaultProp.onClickFollow).toBeCalled();
+    expect(
+      screen
+        .getByTestId('OwnerInfo_Follow_Button')
+        .getAttributeNode('disabled'),
+    ).toBeTruthy();
   });
 });

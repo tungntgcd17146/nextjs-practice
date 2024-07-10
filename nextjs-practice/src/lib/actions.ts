@@ -26,8 +26,8 @@ export async function authenticate(
   }
 }
 
-export async function signup(signupForm: { email: string; password: string }) {
-  const { email, password } = signupForm;
+export async function signup(newUser: { email: string; password: string }) {
+  const { email, password } = newUser;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
