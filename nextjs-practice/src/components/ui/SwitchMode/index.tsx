@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 
 //mui
 import { styled, useTheme } from '@mui/material';
@@ -13,7 +13,7 @@ import { useMode } from '@/src/contexts/modeContext/useModeContext';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
 
 export interface Props {
-  isLargerDrawerOnTablet: boolean;
+  shouldIconButton: boolean;
   customWidth?: string;
 }
 
@@ -42,42 +42,28 @@ const commonButtonIconStyle = {
 };
 
 const SwitchMode = ({
-  isLargerDrawerOnTablet,
+  shouldIconButton,
   customWidth = '100%',
 }: Props) => {
   const { toggleMode, isDarkMode } = useMode();
-  //TODO: should add constant for state type
-  const [mode, setMode] = useState<'dark' | 'light'>();
   const { isTablet } = useScreenWidth();
   const theme = useTheme();
 
-  //set mode state when component mounting
-  useEffect(() => {
-    if (isDarkMode) {
-      setMode('dark');
-    } else {
-      setMode('light');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const handleToggleMode = () => {
-    if (mode === 'light') {
-      toggleMode(true), setMode('dark');
+    if (!isDarkMode) {
+      toggleMode(true);
     } else {
-      toggleMode(false), setMode('light');
+      toggleMode(false);
     }
   };
 
-  if (isTablet && !isLargerDrawerOnTablet) {
+  if (isTablet && shouldIconButton) {
     return (
       <IconButton
         aria-label="dark-mode-icon"
         data-testid="SwitchMode_IconButton"
         size="medium"
-        children={
-          mode === 'light' ? <LightModeIcon /> : <DarkModeOutlinedIcon />
-        }
+        children={!isDarkMode ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
         onClick={handleToggleMode}
         sx={{
           boxShadow:
@@ -94,7 +80,7 @@ const SwitchMode = ({
 
   return (
     <ToggleButtonGroup
-      value={mode}
+      value={isDarkMode ? 'dark' : 'light'}
       exclusive
       aria-label="text alignment"
       sx={{
@@ -120,7 +106,7 @@ const SwitchMode = ({
     >
       <CustomToggleButton
         data-testid="SwitchMode_CustomToggleButton_lightMode"
-        selected={mode === 'light'}
+        selected={!isDarkMode}
         onClick={handleToggleMode}
         sx={commonToggleButtonStyle}
         value="light"
@@ -131,7 +117,7 @@ const SwitchMode = ({
       </CustomToggleButton>
       <CustomToggleButton
         data-testid="SwitchMode_CustomToggleButton_darkMode"
-        selected={mode === 'dark'}
+        selected={isDarkMode}
         onClick={handleToggleMode}
         sx={{
           ...commonToggleButtonStyle,

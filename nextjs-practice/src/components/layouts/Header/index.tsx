@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
 
 //mui
@@ -39,29 +39,24 @@ const iconButtonStyles = (theme: Theme) => ({
 });
 
 const Header = ({ logout }: Props) => {
-  const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);
-  const [searchIconAnchorEl, setSearchIconAnchorEl] =
-    useState<null | HTMLElement>(null);
-  const [searchInput, setSearchInput] = useState('');
-
-  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
-
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+
+  const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);
+  const [searchIconAnchorEl, setSearchIconAnchorEl] =
+    useState<null | HTMLElement>(null);
+
+  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
+
+  const [searchInput, setSearchInput] = useState(
+    searchParams.get('query') || '',
+  );
 
   const { isMobile, matchedBreakpoint: isDownLg } = useScreenWidth({
     down: 'lg',
   });
   const theme = useTheme();
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    const query = params.get('query');
-    if (!query) {
-      setSearchInput('');
-    }
-  }, [searchParams]);
 
   const handleClickMobileSearchIcon = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {

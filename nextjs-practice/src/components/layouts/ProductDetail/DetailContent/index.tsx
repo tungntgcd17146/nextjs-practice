@@ -80,14 +80,15 @@ const DetailContent = ({ product }: Props) => {
 
           <Button
             aria-label="product-price"
-            children={`$${productPrice}`}
             color="primary"
             sx={{
               borderTopRightRadius: '0px',
               borderBottomRightRadius: '0px',
             }}
             endIcon={<Divider orientation="vertical" />}
-          />
+          >
+            {`$${productPrice}`}
+          </Button>
           <Button
             aria-label="download"
             children="Download"
@@ -99,7 +100,6 @@ const DetailContent = ({ product }: Props) => {
       </Box>
 
       {/* Content */}
-      {/* Header */}
       <Typography
         variant="h5"
         sx={{ marginBottom: '12px', color: theme.palette.text.secondary }}

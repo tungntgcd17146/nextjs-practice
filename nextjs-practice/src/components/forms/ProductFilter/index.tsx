@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState, useMemo } from 'react';
+import { memo, useCallback, useState, useMemo } from 'react';
 
 //mui
 import Popover from '@mui/material/Popover';
@@ -29,11 +29,11 @@ import {
 import { FilterValue } from '@/src/types/product';
 
 export interface Props {
-  onSubmit?: (filterValue: FilterValue) => void;
-  onReset?: () => void;
-  totalProducts?: number;
-  showingProducts?: number;
-  onCloseModal?: (filterValue: FilterValue) => void;
+  onSubmit: (filterValue: FilterValue) => void;
+  onReset: () => void;
+  totalProducts: number;
+  showingProducts: number;
+  onCloseModal: (filterValue: FilterValue) => void;
   anchorEl: HTMLElement | null;
 }
 
@@ -66,33 +66,30 @@ const ProductFilter = ({
   const [rangeSlideMinValue, setRangeSlideMinValue] = useState(0);
   const [rangeSlideMaxValue, setRangeSlideMaxValue] = useState(0);
 
-  const [isDisableActionButton, setIsDisableActionButton] = useState(true);
-
   //disable apply and reset button when all value is default
   const theme = useTheme();
   const { isMobile } = useScreenWidth();
 
-  useEffect(() => {
-    //when all value is default disable apply button
-    setIsDisableActionButton(
+  //when all value is default disable apply button
+  const isDisableActionButton = useMemo(() => {
+    return (
       searchInput === '' &&
-        categoryValue.length === 0 &&
-        selectedSortByValue === sortBySelect[0].value &&
-        selectedRatingValue === ratingSelect[0].value &&
-        rangeSlideMinValue === 0 &&
-        rangeSlideMaxValue === 0,
+      categoryValue.length === 0 &&
+      selectedSortByValue === sortBySelect[0].value &&
+      selectedRatingValue === ratingSelect[0].value &&
+      rangeSlideMinValue === 0 &&
+      rangeSlideMaxValue === 0
     );
   }, [
-    searchInput,
-    categoryValue,
-    selectedSortByValue,
-    selectedRatingValue,
-    rangeSlideMinValue,
+    categoryValue.length,
     rangeSlideMaxValue,
+    rangeSlideMinValue,
+    searchInput,
+    selectedRatingValue,
+    selectedSortByValue,
   ]);
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popper' : undefined;
 
   const handleReset = useCallback(() => {
     setSearchInput('');
@@ -141,8 +138,7 @@ const ProductFilter = ({
 
   const handleCheckboxChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      const isChecked = event.target.checked;
+      const { value, checked: isChecked } = event.target;
 
       if (isChecked) {
         setCategoryValue([...categoryValue, value]);
@@ -174,8 +170,11 @@ const ProductFilter = ({
   }, []);
 
   const handleRangeSliderChange = useCallback((value: number[]) => {
-    setRangeSlideMinValue(value[0]); //min value
-    setRangeSlideMaxValue(value[1]); //max value
+    const minValue = value[0];
+    const maxValue = value[1];
+
+    setRangeSlideMinValue(minValue);
+    setRangeSlideMaxValue(maxValue);
   }, []);
 
   return (
@@ -202,7 +201,6 @@ const ProductFilter = ({
               : { borderRadius: '16px' },
           },
         }}
-        id={id}
         open={open}
         anchorEl={isMobile ? null : anchorEl}
         onClose={handleCloseModal}

@@ -31,14 +31,13 @@ const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
   const { isMobile } = useScreenWidth();
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popper' : undefined;
 
   const handleNavItemClick = useCallback(() => {
     onCloseModal();
   }, [onCloseModal]);
 
   const handleLogout = async () => {
-    handleNavItemClick();
+    onCloseModal();
     // Perform logout logic here
     await logout();
   };
@@ -66,7 +65,6 @@ const MenuPopup = ({ anchorEl, onCloseModal, logout }: Props) => {
               : { borderRadius: '16px', width: '280px', padding: '16px' },
           },
         }}
-        id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={onCloseModal}

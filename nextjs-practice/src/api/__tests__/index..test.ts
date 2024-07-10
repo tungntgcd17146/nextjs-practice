@@ -2,7 +2,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { get } from '../index';
 
-describe('get', () => {
+describe('API get function', () => {
   const mockApiUrl = 'https://mockapi.com';
 
   beforeEach(() => {

@@ -158,7 +158,7 @@ const Drawer = ({
         </List>
 
         {/* switchMode */}
-        <SwitchMode isLargerDrawerOnTablet={isLargerDrawerOnTablet} />
+        <SwitchMode shouldIconButton={!isLargerDrawerOnTablet} />
       </Grid>
     </Grid>
   );

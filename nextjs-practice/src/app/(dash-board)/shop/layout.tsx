@@ -13,11 +13,9 @@ import OwnerInfo from '@/src/components/layouts/Shop/OwnerInfo';
 import ContentHeader from '@/src/components/layouts/Shop/ContentHeader';
 
 //utils
-import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { ShopProvider } from '@/src/contexts/shopContext/ShopContext';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { isMobile} = useScreenWidth();
   const theme = useTheme();
 
   return (
@@ -46,7 +44,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               backgroundColor: theme.palette.background.paper,
               borderRadius: '8px',
               position: 'relative',
-              marginTop: isMobile ? '-200px' : '-154px',
+              marginTop: {
+                xs: '-200px',
+                md: '-154px',
+              },
             }}
           >
             <OwnerInfo

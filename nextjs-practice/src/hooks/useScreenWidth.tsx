@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable react-hooks/rules-of-hooks */
 import * as React from 'react';
 
 import { useTheme, Theme } from '@mui/material/styles';
@@ -56,20 +55,24 @@ const useScreenWidth = ({ only, up, down }: Options = {}): UseScreenWidth => {
   const isTablet = useMediaQuery(theme.breakpoints.between('md', 'xl'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
 
+  const onlyBreakpoint = useMediaQuery(theme.breakpoints.only(only!));
+  const upBreakpoint = useMediaQuery(theme.breakpoints.up(up!));
+  const downBreakpoint = useMediaQuery(theme.breakpoints.down(down!));
+  const betweenBreakpoints = useMediaQuery(
+    theme.breakpoints.between(up!, down!),
+  );
+
   // Set matching breakpoints from hook's arguments
   const [matchedBreakpoint, setMatchedBreakpoint] =
     React.useState<boolean>(false);
 
-  const onlyBP = only ? useMediaQuery(theme.breakpoints.only(only)) : false;
+  const onlyBP = only ? onlyBreakpoint : false;
 
-  const largerValue = up ? useMediaQuery(theme.breakpoints.up(up)) : false;
+  const largerValue = up ? upBreakpoint : false;
 
-  const smallerValue = down
-    ? useMediaQuery(theme.breakpoints.down(down))
-    : false;
+  const smallerValue = down ? downBreakpoint : false;
 
-  const betweenValue =
-    up && down ? useMediaQuery(theme.breakpoints.between(up, down)) : false;
+  const betweenValue = up && down ? betweenBreakpoints : false;
 
   const exactBreakpoint: boolean = !!(only && onlyBP);
   const matchedLarger: boolean = !!(up && largerValue);

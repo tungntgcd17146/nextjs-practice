@@ -7,7 +7,7 @@ import * as useScreenWidth from '@/src/hooks/useScreenWidth';
 import { ModeProvider } from '@/src/contexts/modeContext/ModeContext';
 
 const defaultProp = {
-  isLargerDrawerOnTablet: false,
+  shouldIconButton: false,
   customWidth: '300px',
 } as Props;
 
@@ -38,11 +38,12 @@ describe('SwitchMode Test', () => {
   });
 
   it('render SwitchMode mini size on tablet correctly', () => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.spyOn(useScreenWidth, 'default').mockReturnValue({
       isTablet: true,
     } as any);
-    setup();
+    setup({
+      shouldIconButton: true,
+    });
 
     expect(screen.getByTestId('SwitchMode_IconButton')).toBeTruthy();
   });
