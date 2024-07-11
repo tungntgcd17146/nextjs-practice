@@ -21,6 +21,6 @@ type Story = StoryObj<typeof meta>;
 export const LoginBase: Story = {
   args: {
     googleSignin: () => {},
-    userAuthenticate: async () => "Invalid credentials.",
+    userAuthenticate: async () => 'Invalid credentials.',
   },
 };

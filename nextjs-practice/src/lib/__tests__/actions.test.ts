@@ -4,7 +4,7 @@ import { vi } from 'vitest';
 import { authenticate, signup, logout, googleSignin } from '../actions';
 import { signIn, signOut } from '@/src/auth';
 import { AuthError } from 'next-auth';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import * as authModule from '@/src/auth';
 
 vi.mock('bcrypt');

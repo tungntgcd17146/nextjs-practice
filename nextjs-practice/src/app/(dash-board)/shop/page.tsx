@@ -14,10 +14,6 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Shop',
   description: 'Shop page, built using App Router.',
-  openGraph: {
-    title: 'Shop dashboard',
-    description: 'Shop dashboard, Provide technical products.',
-  },
   keywords: ['Shop', 'products', 'technical'],
 };
 

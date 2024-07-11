@@ -10,3 +10,5 @@ export const FOLLOWERS_CONTACT_QUERY = 'followers';
 
 export const SITEMAP_URL = '/sitemap.xml';
 export const ROBOTS_URL = '/robots.txt';
+export const OPENGRAPH_IMAGE_URL = '/opengraph-image.jpg';
+export const WEB_MANIFEST_URL = '/manifest.webmanifest';

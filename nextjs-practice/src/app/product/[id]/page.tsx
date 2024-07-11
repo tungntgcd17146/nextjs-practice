@@ -19,10 +19,6 @@ import DetailFeatureWrapper from '@/src/components/layouts/ProductDetail/DetailF
 export const metadata: Metadata = {
   title: 'Product Detail',
   description: 'Product Detail page, detail feature and overview of Product.',
-  openGraph: {
-    title: 'Product Detail',
-    description: 'Product Detail page, detail feature and overview of Product.',
-  },
 };
 
 export default async function Page({ params }: { params: { id: string } }) {

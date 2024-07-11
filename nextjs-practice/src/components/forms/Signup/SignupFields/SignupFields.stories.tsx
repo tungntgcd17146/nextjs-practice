@@ -1,29 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import SignupFields from '.';
-import { SignupFormInputs } from '@/src/types/forms';
-import { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
-
-// Create mock functions
-const mockRegister: UseFormRegister<SignupFormInputs> = (name) => ({
-  name,
-  onBlur: async () => {},
-  onChange: async () => {},
-  ref: () => {},
-});
-
-const mockHandleSubmit: UseFormHandleSubmit<SignupFormInputs> =
-  (onSubmit) => async (e) => {
-    e?.preventDefault();
-    const mockEvent = {
-      preventDefault: () => {},
-    } as unknown as React.BaseSyntheticEvent;
-    const formValues = {
-      email: 'mock@example.com',
-      password: 'mockPassword',
-    };
-    await onSubmit(formValues, mockEvent);
-  };
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -43,13 +20,7 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const SignupFieldsBase: Story = {
   args: {
-    onSubmit: () => {},
-    errors: {},
-    submitLoading: false,
-    isMatchedConfirmPassword: true,
-    onChangePassword: () => {},
-    onChangeConfirmPassword: () => {},
-    register: mockRegister,
-    handleSubmit: mockHandleSubmit,
+    setSnackbarMessage: () => {},
+    setOpenSnackbar: () => {},
   },
 };

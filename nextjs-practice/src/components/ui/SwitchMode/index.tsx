@@ -41,10 +41,7 @@ const commonButtonIconStyle = {
   marginRight: '8px',
 };
 
-const SwitchMode = ({
-  shouldIconButton,
-  customWidth = '100%',
-}: Props) => {
+const SwitchMode = ({ shouldIconButton, customWidth = '100%' }: Props) => {
   const { toggleMode, isDarkMode } = useMode();
   const { isTablet } = useScreenWidth();
   const theme = useTheme();

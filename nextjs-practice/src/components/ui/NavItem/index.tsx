@@ -47,7 +47,7 @@ const NavItem = ({
   isShowText,
   go,
   endHelper,
-  disabled
+  disabled,
 }: Props) => {
   const router = useRouter();
 
