@@ -70,6 +70,7 @@ const Input = ({
           data-testid="Input_EndHelper"
           onClick={onClickEndHelper}
           style={{
+            pointerEvents: 'none', // Disable click event for now
             fontSize: '16px',
             backgroundColor: theme.palette.grey[200],
             color: theme.palette.text.secondary,

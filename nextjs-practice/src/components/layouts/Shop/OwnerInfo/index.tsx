@@ -63,6 +63,7 @@ const OwnerInfo = ({
           imgNextSrc={avatar}
           alt="Customer1"
           BadgeIcon={BadgeAddIcon}
+          sx={{ pointerEvents: 'none' }}
           badgeSx={{ marginRight: '16px' }}
         />
         <Grid item display="flex" flexDirection="column">

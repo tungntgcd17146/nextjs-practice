@@ -157,6 +157,7 @@ const ContactItem = ({
                 onClick={handleClickFollow}
               />
               <Button
+                disabled
                 aria-label="message-user"
                 data-testid="ContactItem_MessageButton"
                 children="Message"

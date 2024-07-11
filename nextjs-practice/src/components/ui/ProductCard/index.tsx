@@ -131,6 +131,7 @@ const ProductCard = ({
           }}
         >
           <IconButton
+            disabled //not use for now
             aria-label="product-edit-icon"
             data-testid="ProductCard_IconButton_edit"
             children={EditIcon}
@@ -138,6 +139,7 @@ const ProductCard = ({
             onClick={handleEditCard}
           />
           <IconButton
+            disabled //not use for now
             aria-label="product-delete-icon"
             data-testid="ProductCard_IconButton_delete"
             children={DeleteIcon}
