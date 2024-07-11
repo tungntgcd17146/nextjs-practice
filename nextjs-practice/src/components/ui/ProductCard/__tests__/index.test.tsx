@@ -54,31 +54,27 @@ describe('ProductCard Test', () => {
     fireEvent.mouseLeave(cardItem);
   });
 
-  it('call onEditCard when click icon edit button', () => {
+  it('disable icon edit button', () => {
     setup();
 
     const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 
-    fireEvent.click(screen.getByTestId('ProductCard_IconButton_edit'));
-
-    expect(defaultProp.onEditCard).toBeCalled();
+    expect(screen.getByTestId('ProductCard_IconButton_edit').getAttributeNode('disabled')).toBeTruthy();
   });
 
-  it('call onEditCard when click icon delete button', () => {
+  it('disable icon delete button', () => {
     setup();
 
     const cardItem = screen.getByTestId('ProductCard');
 
     fireEvent.mouseEnter(cardItem);
 
-    fireEvent.click(screen.getByTestId('ProductCard_IconButton_delete'));
-
-    expect(defaultProp.onDeleteCard).toBeCalled();
+    expect(screen.getByTestId('ProductCard_IconButton_delete').getAttributeNode('disabled')).toBeTruthy();
   });
 
-  it('call onEditCard when click icon view button', () => {
+  it('call onViewCard when click icon view button', () => {
     setup();
 
     const cardItem = screen.getByTestId('ProductCard');
