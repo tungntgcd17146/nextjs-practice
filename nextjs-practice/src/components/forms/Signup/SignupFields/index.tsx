@@ -1,3 +1,5 @@
+import { useState, useCallback } from 'react';
+
 //mui
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -19,40 +21,87 @@ import Logo from '@/src/components/ui/Logo';
 import { useMode } from '@/src/contexts/modeContext/useModeContext';
 import { BASE_LOGIN_URL } from '@/src/constants/common';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
-import {
-  FieldErrors,
-  SubmitHandler,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from 'react-hook-form';
+
+//utils
+import { signup } from '@/src/lib/actions';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signInSchema } from '@/src/lib/validation';
+import { fetchUserByEmail } from '@/src/services/userAuthService';
 import { SignupFormInputs } from '@/src/types/forms';
 
 export interface Props {
-  onSubmit: SubmitHandler<SignupFormInputs>;
-  handleSubmit: UseFormHandleSubmit<SignupFormInputs, undefined>;
-  register: UseFormRegister<SignupFormInputs>;
-  errors: FieldErrors<SignupFormInputs>;
-  submitLoading: boolean;
-  isMatchedConfirmPassword: boolean;
-  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeConfirmPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setSnackbarMessage: React.Dispatch<React.SetStateAction<string>>;
+  setOpenSnackbar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SignupFields = ({
-  onSubmit,
-  handleSubmit,
-  register,
-  errors,
-  submitLoading,
-  isMatchedConfirmPassword,
-  onChangePassword,
-  onChangeConfirmPassword,
-}: Props) => {
+const SignupFields = ({ setSnackbarMessage, setOpenSnackbar }: Props) => {
   const theme = useTheme();
   const { isMobile } = useScreenWidth();
   const { isDarkMode } = useMode();
 
+  const [submitLoading, setSubmitLoading] = useState(false);
+
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm<SignupFormInputs>({
+    resolver: zodResolver(signInSchema),
+  });
+
+  const onSubmit: SubmitHandler<SignupFormInputs> = async (formData) => {
+    const { email, password } = formData;
+    setSubmitLoading(true);
+
+    const { data: users } = await fetchUserByEmail({ email });
+
+    const [user] = users;
+
+    if (user) {
+      setSnackbarMessage('Email already exists');
+      setSubmitLoading(false);
+      setOpenSnackbar(true);
+      return;
+    }
+
+    if (isMatchedConfirmPassword) {
+      try {
+        await signup({ email, password });
+        setSubmitLoading(false);
+        setSnackbarMessage('Register user success');
+        setOpenSnackbar(true);
+        // Clear form fields on successful signup
+        reset();
+      } catch (error) {
+        setSnackbarMessage('Register user failed');
+        setSubmitLoading(false);
+        setOpenSnackbar(true);
+      }
+    }
+  };
+
+  const handleChangePassword = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(event.target.value);
+    },
+    [],
+  );
+
+  const handleChangeConfirmPassword = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setConfirmPassword(event.target.value);
+    },
+    [],
+  );
+
   const logo = isDarkMode ? LightLogo : DarkLogo;
+
+  const isMatchedConfirmPassword = password === confirmPassword;
 
   return (
     <Box
@@ -127,7 +176,7 @@ const SignupFields = ({
             sx={{ marginLeft: '12px' }}
             placeholder="Your password"
             inputProps={{ ...register('password') }}
-            onChange={onChangePassword}
+            onChange={handleChangePassword}
           />
           {errors.password && (
             <Typography sx={{ color: 'red', marginBottom: '12px' }}>
@@ -142,7 +191,7 @@ const SignupFields = ({
             startIconStyles={{ color: theme.palette.text.primary }}
             sx={{ marginLeft: '12px' }}
             placeholder="Confirm your password"
-            onChange={onChangeConfirmPassword}
+            onChange={handleChangeConfirmPassword}
           />
           {!isMatchedConfirmPassword && (
             <Typography sx={{ color: 'red', marginBottom: '12px' }}>

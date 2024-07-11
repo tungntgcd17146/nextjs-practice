@@ -1,7 +1,7 @@
 import { authConfig } from './auth.config';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { fetchUserByEmail } from '@/src/services/userAuthService';
 import { signInSchema } from '@/src/lib/validation';
 import Google from 'next-auth/providers/google';

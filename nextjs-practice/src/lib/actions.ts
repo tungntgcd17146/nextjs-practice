@@ -3,9 +3,10 @@
 //next-auth
 import { signIn, signOut } from '@/src/auth';
 import { AuthError } from 'next-auth';
-import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import { USER_AUTHENTICATION_URL } from '@/src/constants/url';
+
+import bcrypt from 'bcryptjs';
 
 export async function authenticate(
   prevState: string | undefined,
