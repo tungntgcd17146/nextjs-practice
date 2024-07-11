@@ -78,13 +78,11 @@ describe('ContactItem Test', () => {
     expect(actionButton.textContent).toEqual('Following');
   });
 
-  it('call onClickMessageButton when click MessageButton button', () => {
+  it('disable MessageButton button', () => {
     setup();
 
     const actionButton = screen.getByTestId('ContactItem_MessageButton');
 
-    fireEvent.click(actionButton);
-
-    expect(defaultProp.onClickMessageButton).toBeCalled();
+    expect(actionButton.getAttributeNode('disabled')).toBeTruthy();
   });
 });
