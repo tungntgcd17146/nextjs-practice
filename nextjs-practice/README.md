@@ -3,7 +3,7 @@
 ## Overview
 
 - The document will describe in detail the technical stack and how init this source.
-- Design for Products Shop: [link](https://www.figma.com/design/WZCuDfoVSQkG8pEMWzqvR3/Core---Dashboard-Builder-(Copy)?node-id=0-1&t=Rze3fxqKfK4LEQWz-0)
+- Design for Products Shop: [link](<https://www.figma.com/design/WZCuDfoVSQkG8pEMWzqvR3/Core---Dashboard-Builder-(Copy)?node-id=0-1&t=Rze3fxqKfK4LEQWz-0>)
 
 ## Technical
 
@@ -15,7 +15,6 @@
 - Material UI: v5
 - storybook: v8
 - vitest: v1
-
 
 ## Editor
 
@@ -62,9 +61,8 @@ src
 ## Target
 
 - Learn and practice with Next.js
-- Next-auth for users authentication and authorized 
+- Next-auth for users authentication and authorized
 - Optimizing Page Speed Score Performance
-
 
 ## Getting Started
 

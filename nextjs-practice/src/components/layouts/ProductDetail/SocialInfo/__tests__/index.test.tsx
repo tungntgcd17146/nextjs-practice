@@ -21,6 +21,8 @@ describe('SocialInfo Component', () => {
     render(<SocialInfo />);
 
     // Check if IconButton is rendered
-    expect(screen.getByRole('button', { name: /like-product/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /like-product/i }),
+    ).toBeInTheDocument();
   });
 });
