@@ -31,14 +31,14 @@ import MenuPopup from '@/src/components/layouts/MenuPopup';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { TabsNavigation } from '@/src/types/navigation';
 
-interface Props {
-  logout: () => Promise<void>;
-}
+//actions
+import { logout } from '@/src/lib/actions';
+
 const iconButtonStyles = (theme: Theme) => ({
   ':hover': { color: theme.palette.text.secondary },
 });
 
-const Header = ({ logout }: Props) => {
+const Header = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
