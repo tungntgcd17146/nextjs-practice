@@ -15,7 +15,6 @@ export default defineConfig({
         '**/*.stories.@(js|jsx|ts|tsx)',
         '**/*.mdx',
         '**/node_modules/**',
-        '**/.storybook/**',
         '**/.next/**',
         '**/.eslintrc.json',
         '**/*.config.@(js|jsx|ts|tsx)',
@@ -26,10 +25,14 @@ export default defineConfig({
         '**/materialTheme.ts',
         '**/themes.ts',
 
+        //ignore storybook files
+        '**/.storybook/**',
+        '**/storybook-static/**',
+
         //skip test for app route
         '**/src/app/**',
 
-        //ship test for next auth for now
+        //ship test for next auth setup files
         '**/auth.ts',
         '**/middleware.ts',
       ],

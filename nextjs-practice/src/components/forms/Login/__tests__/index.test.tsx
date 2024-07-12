@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import Login, { Props } from '../'; // Update the import path based on your project structure
+import Login from '../'; // Update the import path based on your project structure
 import { useFormState, useFormStatus } from 'react-dom';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
 import { useMode } from '@/src/contexts/modeContext/useModeContext';
 import { ModeProvider } from '@/src/contexts/modeContext/ModeContext';
+import { googleSignin } from '@/src/lib/actions';
 
 // Mock dependencies
 vi.mock('react-dom', async (importOriginal) => {
@@ -17,6 +18,12 @@ vi.mock('react-dom', async (importOriginal) => {
   };
 });
 
+// Mock the actions
+vi.mock('@/src/lib/actions', () => ({
+  authenticate: vi.fn(),
+  googleSignin: vi.fn(),
+}));
+
 vi.mock('@/src/hooks/useScreenWidth', () => ({
   default: vi.fn(),
 }));
@@ -25,13 +32,10 @@ vi.mock('@/src/contexts/modeContext/useModeContext', () => ({
   useMode: vi.fn(),
 }));
 
-const mockGoogleSignin = vi.fn();
-const mockUserAuthenticate = vi.fn();
-
-const setup = (props: Props) => {
+const setup = () => {
   render(
     <ModeProvider>
-      <Login {...props} />
+      <Login />
     </ModeProvider>,
   );
 };
@@ -46,10 +50,7 @@ describe('Login Component', () => {
   });
 
   it('renders the component correctly', () => {
-    setup({
-      googleSignin: mockGoogleSignin,
-      userAuthenticate: mockUserAuthenticate,
-    });
+    setup();
 
     expect(screen.getByText('Sign up with Open account')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Your email')).toBeInTheDocument();
@@ -57,24 +58,18 @@ describe('Login Component', () => {
   });
 
   it('calls googleSignin when Google button is clicked', () => {
-    setup({
-      googleSignin: mockGoogleSignin,
-      userAuthenticate: mockUserAuthenticate,
-    });
+    setup();
 
     const googleButton = screen.getByLabelText('close-reset');
     fireEvent.click(googleButton);
 
-    expect(mockGoogleSignin).toHaveBeenCalled();
+    expect(googleSignin).toHaveBeenCalled();
   });
 
   it('displays error message on invalid credentials', async () => {
     (useFormState as any).mockReturnValue(['Invalid credentials.', vi.fn()]);
 
-    setup({
-      googleSignin: mockGoogleSignin,
-      userAuthenticate: mockUserAuthenticate,
-    });
+    setup();
 
     const submitButton = screen.getByTestId('LoginButton');
     fireEvent.click(submitButton);
@@ -88,10 +83,7 @@ describe('Login Component', () => {
     (useFormState as any).mockReturnValue([null, vi.fn()]);
     (useFormStatus as any).mockReturnValue({ pending: true });
 
-    setup({
-      googleSignin: mockGoogleSignin,
-      userAuthenticate: mockUserAuthenticate,
-    });
+    setup();
 
     fireEvent.change(screen.getByPlaceholderText('Your email'), {
       target: { value: 'test@example.com' },

@@ -30,19 +30,11 @@ vi.mock('@/src/contexts/modeContext/useModeContext', () => ({
   useMode: vi.fn(),
 }));
 
-const defaultProp = {
-  logout: vi.fn(),
-};
-
-const setup = (overrideProps = {}) => {
-  const props = {
-    ...defaultProp,
-    ...overrideProps,
-  };
+const setup = () => {
 
   return render(
     <ModeProvider>
-      <Header {...props} />
+      <Header />
     </ModeProvider>,
   );
 };

@@ -1,11 +1,11 @@
-import HeaderWrapper from '@/src/components/layouts/Header/HeaderWrapper';
+import Header from '@/src/components/layouts/Header';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Grid sx={{ display: 'flex', flexDirection: 'column' }}>
-      <HeaderWrapper />
+      <Header />
 
       <Box
         sx={{

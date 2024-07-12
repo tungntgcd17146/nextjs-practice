@@ -10,6 +10,7 @@ import useScreenWidth from '@/src/hooks/useScreenWidth';
 const mockRouter = {
   push: vi.fn(),
 };
+
 vi.mock('next/navigation', () => ({
   useRouter: () => mockRouter,
 }));

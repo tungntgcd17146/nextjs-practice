@@ -21,7 +21,7 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-interface Props {
+export interface Props {
   product: Product;
 }
 const DetailContent = ({ product }: Props) => {

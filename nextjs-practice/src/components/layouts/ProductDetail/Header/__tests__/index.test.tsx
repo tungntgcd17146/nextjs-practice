@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import Header from '@/src/components/layouts/ProductDetail/Header';
@@ -10,20 +9,6 @@ const mockRouter = {
 };
 vi.mock('next/navigation', () => ({
   useRouter: () => mockRouter,
-}));
-
-vi.mock('@/src/components/ui/IconButton', () => ({
-  __esModule: true,
-  default: ({ children, ...props }: any) => (
-    <button {...props}>{children}</button>
-  ),
-}));
-
-vi.mock('@/src/components/ui/Button', () => ({
-  __esModule: true,
-  default: ({ children, ...props }: any) => (
-    <button {...props}>{children}</button>
-  ),
 }));
 
 describe('Header Component', () => {

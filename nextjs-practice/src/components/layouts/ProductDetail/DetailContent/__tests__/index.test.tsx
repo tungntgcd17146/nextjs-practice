@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen } from '@/src/utils/testUtils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import DetailContent from '../';
+import DetailContent, { Props } from '../';
 import * as useScreenWidth from '@/src/hooks/useScreenWidth';
 import { usePathname } from 'next/navigation';
 import { useMode } from '@/src/contexts/modeContext/useModeContext';
@@ -22,14 +22,15 @@ vi.mock('@/src/contexts/modeContext/useModeContext', () => ({
   useMode: vi.fn(),
 }));
 
-const defaultProp: any = {
+const defaultProp: Props = {
   product: {
-    productId: '123',
+    id: 123,
     productName: 'Haley',
     productCategory: 'UI Kit',
     productPrice: 100,
     productRating: 4.5,
     productRatingCount: 100,
+    popularity: 'Most Popular',
   },
 };
 
@@ -84,7 +85,9 @@ describe('DetailContent Test', () => {
         data: defaultProp.product,
       })),
     }));
-    render(await DetailContentWrapper(defaultProp.product.productId));
+    render(
+      await DetailContentWrapper(defaultProp.product.id.toString() as any),
+    );
 
     expect(screen.getByText('Fleet - Haley UI Kit')).toBeTruthy();
   });

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen } from '@testing-library/react';
 import DetailFeature from '@/src/components/layouts/ProductDetail/DetailFeature';
 import { describe, expect, it } from 'vitest';
