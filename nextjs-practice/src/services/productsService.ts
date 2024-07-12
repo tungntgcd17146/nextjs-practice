@@ -21,9 +21,17 @@ export const fetchProductById = async (id: string) => {
 export const fetchProductOverview = async (
   queryParams?: ProductQueryParams,
 ) => {
-  return await get<FeatureProduct[]>(PRODUCT_OVERVIEW_URL, queryParams);
+  return await get<FeatureProduct[]>(PRODUCT_OVERVIEW_URL, queryParams, {
+    next: {
+      revalidate: 60, // 1 minute revalidation
+    },
+  });
 };
 
 export const fetchProductFeature = async (queryParams?: ProductQueryParams) => {
-  return await get<FeatureProduct[]>(PRODUCT_FEATURE_URL, queryParams);
+  return await get<FeatureProduct[]>(PRODUCT_FEATURE_URL, queryParams, {
+    next: {
+      revalidate: 60, // 1 minute revalidation
+    },
+  });
 };
