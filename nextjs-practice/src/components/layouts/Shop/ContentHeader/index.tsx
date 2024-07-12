@@ -24,6 +24,19 @@ import { useShopContext } from '@/src/contexts/shopContext/useShopContext';
 import { FilterValue } from '@/src/types/product';
 import { ShopSelect } from '@/src/types/shopFilter';
 
+//constants
+import { DEFAULT_RATING_VALUE } from '@/src/constants/filterModal';
+import {
+  MAX_PRICE_RANGE_QUERY_KEY,
+  MIN_PRICE_RANGE_QUERY_KEY,
+  PAGE_QUERY_KEY,
+  POPULARITY_QUERY_KEY,
+  RATING_QUERY_KEY,
+  SEARCH_QUERY_KEY,
+  SORT_BY_QUERY_KEY,
+  CATEGORIES_QUERY_KEY,
+} from '@/src/constants/queryKey';
+
 const filterButtonStyles = (theme: Theme) => ({
   marginLeft: '16px',
   boxShadow: `0 0 0 2px ${theme.palette.text.primary} inset`,
@@ -47,7 +60,7 @@ const ContentHeader = () => {
   const { totalProducts, showingProducts } = useShopContext();
 
   const selectedValueFromUrl = useMemo(
-    () => searchParams.get('popularity') || selectOption[0].value,
+    () => searchParams.get(POPULARITY_QUERY_KEY) || selectOption[0].value,
     [searchParams],
   );
 
@@ -64,6 +77,20 @@ const ContentHeader = () => {
     [pathname],
   );
 
+  const setOrDeleteParam = (
+    params: URLSearchParams,
+    key: string,
+    value: string,
+    defaultValue?: string,
+  ) => {
+    //if value is not equal default value and value is not empty
+    if (value && value !== defaultValue) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+  };
+
   const generateProductsFilterURL = useCallback(
     (formData: FilterValue) => {
       const {
@@ -76,30 +103,42 @@ const ContentHeader = () => {
       } = formData;
 
       const params = new URLSearchParams(searchParams);
-      params.delete('page');
-      query ? params.set('query', query) : params.delete('query');
-      sortBy !== sortBySelect[0].name
-        ? params.set('sortBy', sortBy)
-        : params.delete('sortBy');
+
+      //reset to first page when filter is applied
+      params.delete(PAGE_QUERY_KEY);
+
+      // Set search query
+      setOrDeleteParam(params, SEARCH_QUERY_KEY, query);
+
+      // Set sort by query param
+      setOrDeleteParam(params, SORT_BY_QUERY_KEY, sortBy, sortBySelect[0].name);
+
+      // Set rating query param
+      setOrDeleteParam(params, RATING_QUERY_KEY, rating, DEFAULT_RATING_VALUE);
 
       // Join categories array into a comma-separated string
       if (categories.length > 0) {
-        params.set('categories', categories.join(','));
+        params.set(CATEGORIES_QUERY_KEY, categories.join(','));
       } else {
-        params.delete('categories');
+        params.delete(CATEGORIES_QUERY_KEY);
       }
 
-      minPriceRange === 0 && maxPriceRange === minPriceRange
-        ? params.delete('minPriceRange')
-        : params.set('minPriceRange', minPriceRange.toString());
+      const isDefaultRange =
+        minPriceRange === 0 && maxPriceRange === minPriceRange;
 
+      //delete min price value on search param when
+      //minPriceRange is equal 0 (just set max value)
+      //min and max values are equal by default = 0 (delete both)
+      isDefaultRange || minPriceRange === 0
+        ? params.delete(MIN_PRICE_RANGE_QUERY_KEY)
+        : params.set(MIN_PRICE_RANGE_QUERY_KEY, minPriceRange.toString());
+
+      //delete max price value on search param when
+      //min and max value larger than 0 and min max value are equal (just set min value)
+      //min and max values are equal by default = 0 (just set min value)
       maxPriceRange > 0 && minPriceRange !== maxPriceRange
-        ? params.set('maxPriceRange', maxPriceRange.toString())
-        : params.delete('maxPriceRange');
-
-      Number(rating) > 1
-        ? params.set('rating', rating)
-        : params.delete('rating');
+        ? params.set(MAX_PRICE_RANGE_QUERY_KEY, maxPriceRange.toString())
+        : params.delete(MAX_PRICE_RANGE_QUERY_KEY);
 
       return router.push(`${pathname}?${params.toString()}`);
     },
@@ -112,12 +151,15 @@ const ContentHeader = () => {
       const selectValue = event.target.value;
 
       //reset page query param
-      params.delete('page');
+      params.delete(PAGE_QUERY_KEY);
 
       //not set popularity query param when select all option
-      selectValue !== ShopSelect.ALL
-        ? params.set('popularity', selectValue)
-        : params.delete('popularity');
+      setOrDeleteParam(
+        params,
+        POPULARITY_QUERY_KEY,
+        selectValue,
+        ShopSelect.ALL,
+      );
 
       router.push(`${pathname}?${params.toString()}`);
     },
@@ -150,13 +192,15 @@ const ContentHeader = () => {
 
   const handleResetFilterModal = useCallback(() => {
     const params = new URLSearchParams(searchParams);
-    params.delete('page');
-    params.delete('query');
-    params.delete('sortBy');
-    params.delete('categories');
-    params.delete('minPriceRange');
-    params.delete('maxPriceRange');
-    params.delete('rating');
+
+    //reset page query param and all other query params on filter modal
+    params.delete(PAGE_QUERY_KEY);
+    params.delete(SEARCH_QUERY_KEY);
+    params.delete(SORT_BY_QUERY_KEY);
+    params.delete(CATEGORIES_QUERY_KEY);
+    params.delete(MIN_PRICE_RANGE_QUERY_KEY);
+    params.delete(MAX_PRICE_RANGE_QUERY_KEY);
+    params.delete(RATING_QUERY_KEY);
 
     router.push(`${pathname}?${params.toString()}`);
   }, [pathname, router, searchParams]);
