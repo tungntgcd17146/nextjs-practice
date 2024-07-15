@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import useScreenWidth from '@/src/hooks/useScreenWidth';
 
 //mui
@@ -57,6 +57,14 @@ const Header = () => {
     down: 'lg',
   });
   const theme = useTheme();
+
+  useEffect(() => {
+    const query = searchParams.get('query');
+
+    if (!query) {
+      setSearchInput('');
+    }
+  }, [searchParams]);
 
   const handleClickMobileSearchIcon = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
