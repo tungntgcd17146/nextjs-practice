@@ -40,15 +40,13 @@ const SignupFields = ({ setSnackbarMessage, setOpenSnackbar }: Props) => {
   const { isMobile } = useScreenWidth();
   const { isDarkMode } = useMode();
 
-  const [submitLoading, setSubmitLoading] = useState(false);
-
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<SignupFormInputs>({
     resolver: zodResolver(signInSchema),
@@ -56,7 +54,6 @@ const SignupFields = ({ setSnackbarMessage, setOpenSnackbar }: Props) => {
 
   const onSubmit: SubmitHandler<SignupFormInputs> = async (formData) => {
     const { email, password } = formData;
-    setSubmitLoading(true);
 
     const { data: users } = await fetchUserByEmail({ email });
 
@@ -64,7 +61,6 @@ const SignupFields = ({ setSnackbarMessage, setOpenSnackbar }: Props) => {
 
     if (user) {
       setSnackbarMessage('Email already exists');
-      setSubmitLoading(false);
       setOpenSnackbar(true);
       return;
     }
@@ -72,14 +68,12 @@ const SignupFields = ({ setSnackbarMessage, setOpenSnackbar }: Props) => {
     if (isMatchedConfirmPassword) {
       try {
         await signup({ email, password });
-        setSubmitLoading(false);
         setSnackbarMessage('Register user success');
         setOpenSnackbar(true);
         // Clear form fields on successful signup
         reset();
       } catch (error) {
         setSnackbarMessage('Register user failed');
-        setSubmitLoading(false);
         setOpenSnackbar(true);
       }
     }
@@ -202,10 +196,10 @@ const SignupFields = ({ setSnackbarMessage, setOpenSnackbar }: Props) => {
           <Button
             sx={{ marginBottom: '32px', width: '100%' }}
             aria-label="apply-button"
-            children={submitLoading ? 'Loading...' : 'Continue'}
+            children={isSubmitting ? 'Loading...' : 'Continue'}
             color="primary"
             type="submit"
-            disabled={submitLoading || !isMatchedConfirmPassword}
+            disabled={isSubmitting || !isMatchedConfirmPassword}
           />
 
           <Typography sx={{ marginBottom: '32px' }} variant="body1">

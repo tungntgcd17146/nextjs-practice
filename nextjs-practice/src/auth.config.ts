@@ -60,6 +60,10 @@ export const authConfig = {
       return isAuthorized(auth, nextUrl);
     },
   },
+  session: {
+    //strategy: 'jwt', // jwt for default or 'database adapter'
+    maxAge: 60 * 60 * 24, // 1 day, default 30 days
+  },
   trustHost: true,
   providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig;
